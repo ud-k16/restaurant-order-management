@@ -3,7 +3,9 @@ import { createContext, useContext, useState } from "react";
 const OrderContext = createContext();
 
 const OrderContextProvider = ({ children }) => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    currentOrders: new Map(),
+  });
 
   return (
     <OrderContext.Provider value={{ ...state, setState }}>
