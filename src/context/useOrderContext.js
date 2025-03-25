@@ -3,12 +3,10 @@ import { createContext, useContext, useState } from "react";
 const OrderContext = createContext();
 
 const OrderContextProvider = ({ children }) => {
-  const [state, setState] = useState({
-    currentOrders: new Map(),
-  });
+  const [currentOrders, setCurrentOrders] = useState(new Map());
 
   return (
-    <OrderContext.Provider value={{ ...state, setState }}>
+    <OrderContext.Provider value={{ currentOrders, setCurrentOrders }}>
       {children}
     </OrderContext.Provider>
   );
