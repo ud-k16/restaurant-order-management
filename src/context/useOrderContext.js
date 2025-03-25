@@ -6,7 +6,7 @@ const OrderContextProvider = ({ children }) => {
   const [state, setState] = useState({});
 
   return (
-    <OrderContext.Provider value={{ ...state, setState, showError, hideError }}>
+    <OrderContext.Provider value={{ ...state, setState }}>
       {children}
     </OrderContext.Provider>
   );
