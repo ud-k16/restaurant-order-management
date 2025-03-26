@@ -61,23 +61,52 @@ const useOrders = () => {
 
   // function to delete Item to particular tableId
   const deleteItemFromTable = ({ tableId, productId }) => {
-    setCurrentOrders((prev) => {
-      //   retriving already available Items for the particular tableId
-      const availableItems = prev.get(tableId) || [];
-      //   deleting given time Item
-      const newItemSet = availableItems.filter(
-        (Item) => Item.product_id !== productId
-      );
-      //   updating the tableId and its Items
-      prev.set(tableId, newItemSet);
-      return new Map(prev);
-    });
+    try {
+      setCurrentOrders((prev) => {
+        //   retriving already available Items for the particular tableId
+        const availableItems = prev.get(tableId) || [];
+        //   deleting given time Item
+        const newItemSet = availableItems.filter(
+          (Item) => Item.product_id !== productId
+        );
+        //   updating the tableId and its Items
+        prev.set(tableId, newItemSet);
+        return new Map(prev);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
+  const decrementQuantity = ({ tableId, productId }) => {
+    // if quantity is Zero , logic is handled in the render that it should not call decrement
+    try {
+      setCurrentOrders((prev) => {
+        //   retriving already available Itemss for the particular tableId
+        const availableItems = prev.get(tableId) || [];
+        // checking if the item already present or not
+        const findIndex = availableItems.findIndex(
+          (value) => value.productId == productId
+        );
+        if (findIndex != -1) {
+          availableItems[findIndex] = {
+            ...availableItems[findIndex],
+            quantity: availableItems[findIndex].quantity - 1,
+          };
+        }
+        //   updating the tableId and its Items
+        prev.set(tableId, availableItems);
+        return new Map(prev);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {}, []);
   return {
     ...state,
     addItemToTable,
+    decrementQuantity,
     deleteItemFromTable,
   };
 };
