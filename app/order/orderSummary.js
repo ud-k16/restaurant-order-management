@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { useOrderContext } from "@/src/context/useOrderContext";
 import moderateScale from "@/src/utils/responsiveScale";
+import { Themes } from "../../src/utils/themes";
 import useOrders from "@/src/hooks/useOrders";
 import { useGlobalSearchParams } from "expo-router/build/hooks";
 import { Text } from "react-native";
@@ -83,6 +84,7 @@ const OrderSummary = () => {
           </View>
         );
       })}
+      <Text style={styles.confirmButton}>Confirm Order</Text>
     </View>
   );
 };
@@ -109,6 +111,17 @@ const styles = StyleSheet.create({
     flex: 2,
     textTransform: "capitalize",
     fontSize: moderateScale(16),
+  },
+  confirmButton: {
+    backgroundColor: Themes.primary,
+    color: Themes.white,
+    fontSize: moderateScale(16),
+    height: moderateScale(45),
+    textAlign: "center",
+    textAlignVertical: "center",
+    bottom: 0,
+    position: "absolute",
+    width: "100%",
   },
 });
 export default OrderSummary;
