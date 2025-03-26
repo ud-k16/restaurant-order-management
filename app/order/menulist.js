@@ -1,5 +1,5 @@
 import moderateScale from "@/src/utils/responsiveScale";
-import { View, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, StyleSheet, ScrollView, Pressable, Text } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
 import { useState } from "react";
@@ -9,30 +9,40 @@ const MenuList = () => {
   return (
     <View style={styles.container}>
       <ScrollView>{}</ScrollView>
-      <View
-        style={{
-          backgroundColor: Themes.primary,
-          paddingVertical: moderateScale(5),
-          height: moderateScale(40),
-        }}
-      >
-        <Pressable
-          style={styles.bottomArrowContainer}
-          onPress={toggleCategoryVisibility}
-        >
-          {!categoryVisible ? (
-            <AntDesign name="arrowup" size={35} color="black" />
-          ) : (
-            <AntDesign name="arrowdown" size={35} color="black" />
-          )}
-        </Pressable>
+      <View style={styles.bottomBar}>
+        <Text style={{ color: Themes.white, fontSize: moderateScale(16) }}>
+          Back
+        </Text>
+
+        <Text style={{ color: Themes.white, fontSize: moderateScale(16) }}>
+          View Orders
+        </Text>
       </View>
+      <Pressable
+        style={styles.bottomArrowContainer}
+        onPress={toggleCategoryVisibility}
+      >
+        {!categoryVisible ? (
+          <AntDesign name="arrowup" size={35} color="black" />
+        ) : (
+          <AntDesign name="arrowdown" size={35} color="black" />
+        )}
+      </Pressable>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  bottomBar: {
+    backgroundColor: Themes.primary,
+    paddingVertical: moderateScale(5),
+    height: moderateScale(40),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: moderateScale(10),
   },
   bottomArrowContainer: {
     alignSelf: "center",
