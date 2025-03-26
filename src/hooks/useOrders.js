@@ -5,6 +5,7 @@ import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 const useOrders = () => {
   const [state, setState] = useState({
     isLoading: false,
+
     snackBarVisibility: false,
     snackBarMessage: "Something went wrong",
     defaultErrorMessage: "Something went wrong",
@@ -18,7 +19,7 @@ const useOrders = () => {
       snackBarMessage: state.defaultErrorMessage,
     }));
   const { setCurrentOrders } = useOrderContext();
-  const { setItem: setLocalStorageOrders } = useAsyncStorage("ORDERS");
+  //   const { setItem: setLocalStorageOrders } = useAsyncStorage("ORDERS");
   // function to add items to particular tableId
   const addItemsOftableId = ({ tableId, payload }) => {
     // payload is an object with format {name:"",quantity:number,unitQuantityAmount:number}
