@@ -164,7 +164,7 @@ export const Menus = [
     name: "Veggies",
     items: [
       {
-        product_name: "oliven and peporini",
+        product_name: "oliven and peporini 3",
         available: null,
         price: 100,
       },
