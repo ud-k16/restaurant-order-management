@@ -14,6 +14,7 @@ import { useRef, useState } from "react";
 import { Menus } from "@/src/constants";
 import useOrders from "@/src/hooks/useOrders";
 import { useSearchParams } from "expo-router/build/hooks";
+import { Link } from "expo-router";
 const MenuList = () => {
   const { tableId } = useSearchParams();
   const [categoryVisible, setCategoryVisible] = useState(false);
@@ -67,9 +68,17 @@ const MenuList = () => {
           Back
         </Text>
 
-        <Text style={{ color: Themes.white, fontSize: moderateScale(16) }}>
+        <Link
+          style={{ color: Themes.white, fontSize: moderateScale(16) }}
+          href={{
+            pathname: "/order/orderSummary",
+            params: {
+              tableId,
+            },
+          }}
+        >
           View Orders
-        </Text>
+        </Link>
       </View>
       {categoryVisible && (
         <View style={styles.categoryContainer}>
