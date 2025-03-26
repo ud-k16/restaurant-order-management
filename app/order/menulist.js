@@ -33,16 +33,8 @@ const MenuList = () => {
           const { name, items } = item;
           return (
             <View>
-              <Text>{name}</Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  justifyContent: "space-between",
-                  rowGap: moderateScale(15),
-                  paddingHorizontal: moderateScale(20),
-                }}
-              >
+              <Text style={styles.categoryHeading}>{name}</Text>
+              <View style={styles.itemContainer}>
                 {items.map((value, index) => {
                   return (
                     <ItemCard
@@ -135,6 +127,20 @@ const styles = StyleSheet.create({
     color: Themes.white,
     fontSize: moderateScale(20),
   },
+  categoryHeading: {
+    marginVertical: moderateScale(10),
+    fontSize: moderateScale(20),
+    fontWeight: 500,
+    paddingHorizontal: moderateScale(18),
+  },
+  itemContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: moderateScale(15),
+    paddingHorizontal: moderateScale(20),
+  },
+
   dividerLine: {
     borderBottomWidth: moderateScale(1),
     borderBottomColor: Themes.white,
