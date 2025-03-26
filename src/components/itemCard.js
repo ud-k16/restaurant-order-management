@@ -51,6 +51,7 @@ const ItemCard = ({
             name="plus"
             size={24}
             color="black"
+            onPress={onAdd}
             style={{
               flex: 1,
               borderTopWidth: 1,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     borderWidth: moderateScale(1),
   },
   quantityTextStyle: {
-    backgroundColor: Themes.black,
+    backgroundColor: Themes.primary,
     borderRadius: moderateScale(20),
     color: Themes.white,
     alignSelf: "flex-end",
