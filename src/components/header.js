@@ -2,10 +2,16 @@ import { View, StyleSheet } from "react-native";
 import moderateScale from "../utils/responsiveScale";
 import { Themes } from "../utils/themes";
 import { Text } from "react-native";
+import { useHeaderContext } from "../context/useHeaderContext";
 const AppHeader = () => {
+  const { currentTable = "", currentPage } = useHeaderContext();
   return (
     <View style={styles.container}>
-      <Text style={styles.titleTextStyle}>{"Order Management"}</Text>
+      <Text style={styles.titleTextStyle}>
+        {currentPage
+          ? `${currentPage} Table No.${currentTable}`
+          : "Order Management"}
+      </Text>
     </View>
   );
 };
