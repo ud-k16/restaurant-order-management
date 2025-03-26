@@ -17,19 +17,28 @@ const MenuList = () => {
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {Menus.map(({ name, items, index }) => {
+      <FlatList
+        data={Menus}
+        renderItem={({ item }) => {
+          const { name, items } = item;
           return (
             <View>
               <Text>{name}</Text>
-              <FlatList
-                data={items}
-                renderItem={({ item }) => <ItemCard {...item} />}
-              />
+              <View
+                style={{
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                }}
+              >
+                {items.map((value, index) => {
+                  return <ItemCard {...value} key={index} />;
+                })}
+              </View>
             </View>
           );
-        })}
-      </ScrollView>
+        }}
+      />
+
       <View style={styles.bottomBar}>
         <Text style={{ color: Themes.white, fontSize: moderateScale(16) }}>
           Back
