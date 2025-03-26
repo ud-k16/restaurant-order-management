@@ -10,14 +10,16 @@ import {
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Menus } from "@/src/constants";
 const MenuList = () => {
   const [categoryVisible, setCategoryVisible] = useState(false);
+  const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   return (
     <View style={styles.container}>
       <FlatList
+        ref={flatlistRef}
         data={Menus}
         renderItem={({ item }) => {
           const { name, items } = item;
@@ -55,9 +57,16 @@ const MenuList = () => {
             data={Menus}
             ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
             renderItem={({ item }) => (
-              <View>
+              <Pressable
+                onPress={() => {
+                  toggleCategoryVisibility();
+                  if (flatlistRef?.current)
+                    flatlistRef.current.scrollToItem({ item, animated: true });
+                  else console.log("unable to scroll to index");
+                }}
+              >
                 <Text style={styles.categoryTextStyle}>{item.name}</Text>
-              </View>
+              </Pressable>
             )}
           />
         </View>
