@@ -46,6 +46,7 @@ const MenuList = () => {
                 {items.map((value, index) => {
                   return (
                     <ItemCard
+                      tableId={tableId}
                       productId={value.product_id}
                       productName={value.product_name}
                       key={index}

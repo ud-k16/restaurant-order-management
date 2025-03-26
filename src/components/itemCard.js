@@ -16,6 +16,7 @@ const ItemCard = ({
   onDecrement = () => {},
 }) => {
   const { currentOrders } = useOrderContext();
+  console.log("log in item card", currentOrders, "\n", tableId);
 
   const tableOrder = currentOrders.get(tableId);
   const isInOrder = tableOrder?.find((value) => value.productId == productId);
