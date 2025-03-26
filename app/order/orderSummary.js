@@ -29,7 +29,9 @@ const OrderSummary = () => {
                 deleteItemFromTable({ tableId, productId: value.productId });
               }}
             />
-            <Text style={styles.productNameStyle}>{value.productName}</Text>
+            <Text style={styles.productNameStyle} numberOfLines={1}>
+              {value.productName}
+            </Text>
             <View style={styles.displayStack2}>
               <Entypo
                 name="minus"
@@ -93,6 +95,7 @@ const styles = StyleSheet.create({
   productNameStyle: {
     flex: 2,
     textTransform: "capitalize",
+    fontSize: moderateScale(16),
   },
 });
 export default OrderSummary;
