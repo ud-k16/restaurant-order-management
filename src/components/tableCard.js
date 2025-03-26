@@ -1,11 +1,14 @@
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
+import { Link } from "expo-router";
 const TableCard = ({ tableId }) => {
   return (
-    <View style={styles.container}>
-      <Text>{tableId}</Text>
-    </View>
+    <Link href={{ pathname: "/order/menulist", params: { tableId } }}>
+      <View style={styles.container}>
+        <Text>{tableId}</Text>
+      </View>
+    </Link>
   );
 };
 const styles = StyleSheet.create({
