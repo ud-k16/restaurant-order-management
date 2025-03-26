@@ -9,8 +9,8 @@ const AppHeader = () => {
     <View style={styles.container}>
       <Text style={styles.titleTextStyle}>
         {currentPage
-          ? `${currentPage} Table No.${currentTable}`
-          : "Order Management"}
+          ? `${currentPage} ( Table No. ${currentTable} )`
+          : "  Order Management"}
       </Text>
     </View>
   );

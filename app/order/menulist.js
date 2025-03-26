@@ -10,21 +10,30 @@ import {
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Menus } from "@/src/constants";
 import useOrders from "@/src/hooks/useOrders";
 import { useGlobalSearchParams } from "expo-router/build/hooks";
-import { Link, router, useNavigation } from "expo-router";
+import { Link, router, useFocusEffect, useNavigation } from "expo-router";
+import { useHeaderContext } from "@/src/context/useHeaderContext";
 const MenuList = () => {
   const { tableId } = useGlobalSearchParams();
   const [categoryVisible, setCategoryVisible] = useState(false);
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   const { addItemToTable, decrementQuantity } = useOrders();
-  const navigation = useNavigation();
-  useEffect(() => {
-    navigation.setOptions({ title: tableId });
-  }, []);
+  const { setState: setHeaders } = useHeaderContext();
+  useFocusEffect(
+    useCallback(() => {
+      setHeaders({
+        currentPage: "Menu",
+        currentTable: tableId,
+      });
+      return () => {
+        setHeaders({ currentPage: "", currentTable: "" });
+      };
+    }, [])
+  );
   return (
     <View style={styles.container}>
       <FlatList

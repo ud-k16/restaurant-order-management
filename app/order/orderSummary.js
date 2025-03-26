@@ -6,20 +6,33 @@ import { useGlobalSearchParams } from "expo-router/build/hooks";
 import { Text } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { useCallback, useEffect } from "react";
+import { useHeaderContext } from "../../src/context/useHeaderContext";
+import { useFocusEffect } from "expo-router";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
   const { currentOrders } = useOrderContext();
   const { addItemToTable, decrementQuantity, deleteItemFromTable } =
     useOrders();
+  const { setState: setHeaders } = useHeaderContext();
 
   const tableOrder = currentOrders.get(tableId);
-  console.log(tableOrder);
-
+  useFocusEffect(
+    useCallback(() => {
+      setHeaders({
+        currentPage: "Verify",
+        currentTable: tableId,
+      });
+      return () => {
+        setHeaders({ currentPage: "", currentTable: "" });
+      };
+    }, [])
+  );
   return (
     <View style={styles.container}>
-      {tableOrder?.map((value) => {
+      {tableOrder?.map((value, index) => {
         return (
-          <View style={styles.displayStack1}>
+          <View style={styles.displayStack1} key={index}>
             <MaterialCommunityIcons
               name="delete-outline"
               size={24}
