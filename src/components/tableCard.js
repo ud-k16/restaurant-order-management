@@ -2,9 +2,12 @@ import { StyleSheet, Text, View } from "react-native";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { Link } from "expo-router";
-const TableCard = ({ tableId }) => {
+const TableCard = ({ tableId, onLongPress = () => {} }) => {
   return (
-    <Link href={{ pathname: "/order/menulist", params: { tableId } }}>
+    <Link
+      href={{ pathname: "/order/menulist", params: { tableId } }}
+      onLongPress={onLongPress}
+    >
       <View style={styles.container}>
         <Text>{tableId}</Text>
       </View>

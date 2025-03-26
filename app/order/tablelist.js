@@ -1,15 +1,55 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Modal } from "react-native";
 import { tableNames } from "../../src/constants";
 import TableCard from "../../src/components/tableCard";
 import moderateScale from "@/src/utils/responsiveScale";
+import { useOrderContext } from "@/src/context/useOrderContext";
+import { useState } from "react";
+import EmptyContent from "../EmptyContent";
+import { Themes } from "@/src/utils/themes";
+import AntDesign from "@expo/vector-icons/AntDesign";
+
 const TableList = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentTable, setCurrentTable] = useState("");
+  const { currentOrders } = useOrderContext();
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {tableNames.map((value, index) => {
-          return <TableCard tableId={value} key={index} />;
+          const onLongPress = () => {
+            setCurrentTable(value);
+            showModal();
+          };
+          return (
+            <TableCard tableId={value} key={index} onLongPress={onLongPress} />
+          );
         })}
       </ScrollView>
+      {modalVisible && (
+        <Modal style={styles.modalConatainer}>
+          <View
+            style={{
+              backgroundColor: Themes.primary,
+              height: moderateScale(50),
+              elevation: 6,
+              justifyContent: "center",
+              paddingHorizontal: moderateScale(10),
+            }}
+          >
+            <AntDesign
+              name="close"
+              size={24}
+              color={Themes.white}
+              onPress={hideModal}
+              style={{ alignSelf: "flex-end" }}
+            />
+          </View>
+          {currentOrders.get(currentTable) ? <View></View> : <EmptyContent />}
+        </Modal>
+      )}
     </View>
   );
 };
@@ -24,6 +64,12 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-evenly",
     rowGap: moderateScale(30),
+  },
+  modalConatainer: {
+    backgroundColor: Themes.white,
+    // width: "100%",
+    // height: "100%",
+    // position: "absolute",
   },
 });
 export default TableList;
