@@ -1,8 +1,16 @@
 import moderateScale from "@/src/utils/responsiveScale";
-import { View, StyleSheet, ScrollView, Pressable, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  Text,
+  FlatList,
+} from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
 import { useState } from "react";
+import { Menus } from "@/src/constants";
 const MenuList = () => {
   const [categoryVisible, setCategoryVisible] = useState(false);
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
@@ -18,6 +26,20 @@ const MenuList = () => {
           View Orders
         </Text>
       </View>
+      {categoryVisible && (
+        <View style={styles.categoryContainer}>
+          <FlatList
+            style={{ padding: moderateScale(10) }}
+            data={Menus}
+            ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
+            renderItem={({ item }) => (
+              <View>
+                <Text style={styles.categoryTextStyle}>{item.name}</Text>
+              </View>
+            )}
+          />
+        </View>
+      )}
       <Pressable
         style={styles.bottomArrowContainer}
         onPress={toggleCategoryVisibility}
@@ -35,6 +57,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  categoryContainer: {
+    position: "absolute",
+    bottom: 0,
+    alignSelf: "center",
+    width: "80%",
+    height: "80%",
+    backgroundColor: Themes.black,
+    paddingBottom: moderateScale(60),
+  },
+  categoryTextStyle: {
+    color: Themes.white,
+    fontSize: moderateScale(20),
+  },
+  dividerLine: {
+    borderBottomWidth: moderateScale(1),
+    borderBottomColor: Themes.white,
+    marginTop: moderateScale(5),
+    marginBottom: moderateScale(10),
+    width: "100%",
+  },
   bottomBar: {
     backgroundColor: Themes.primary,
     paddingVertical: moderateScale(5),
@@ -43,8 +85,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: moderateScale(10),
+    zIndex: 1000,
   },
   bottomArrowContainer: {
+    zIndex: 1000,
     alignSelf: "center",
     borderRadius: moderateScale(30),
     borderColor: Themes.black,
