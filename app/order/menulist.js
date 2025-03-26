@@ -1,4 +1,5 @@
 import moderateScale from "@/src/utils/responsiveScale";
+import ItemCard from "@/src/components/itemCard";
 import {
   View,
   StyleSheet,
@@ -16,7 +17,19 @@ const MenuList = () => {
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   return (
     <View style={styles.container}>
-      <ScrollView>{}</ScrollView>
+      <ScrollView>
+        {Menus.map(({ name, items, index }) => {
+          return (
+            <View>
+              <Text>{name}</Text>
+              <FlatList
+                data={items}
+                renderItem={({ item }) => <ItemCard {...item} />}
+              />
+            </View>
+          );
+        })}
+      </ScrollView>
       <View style={styles.bottomBar}>
         <Text style={{ color: Themes.white, fontSize: moderateScale(16) }}>
           Back
