@@ -73,7 +73,7 @@ const MenuList = () => {
             router.back();
           }}
         >
-          Back
+          Back To Tables
         </Text>
 
         <Link
