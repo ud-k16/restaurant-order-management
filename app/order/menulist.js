@@ -12,10 +12,14 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
 import { useRef, useState } from "react";
 import { Menus } from "@/src/constants";
+import useOrders from "@/src/hooks/useOrders";
+import { useSearchParams } from "expo-router/build/hooks";
 const MenuList = () => {
+  const { tableId } = useSearchParams();
   const [categoryVisible, setCategoryVisible] = useState(false);
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
+  const { addItemToTable, decrementQuantity } = useOrders();
   return (
     <View style={styles.container}>
       <FlatList
@@ -30,10 +34,27 @@ const MenuList = () => {
                 style={{
                   flexDirection: "row",
                   flexWrap: "wrap",
+                  justifyContent: "space-between",
+                  rowGap: moderateScale(15),
+                  paddingHorizontal: moderateScale(20),
                 }}
               >
                 {items.map((value, index) => {
-                  return <ItemCard {...value} key={index} />;
+                  return (
+                    <ItemCard
+                      productId={value.product_id}
+                      productName={value.product_name}
+                      key={index}
+                      onAdd={() => {
+                        addItemToTable({
+                          tableId,
+                          amountPerUnit: value.price,
+                          productName: value.product_name,
+                          productId: value.product_id,
+                        });
+                      }}
+                    />
+                  );
                 })}
               </View>
             </View>

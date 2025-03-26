@@ -7,196 +7,43 @@ export const Menus = [
         product_name: "oliven and peporini",
         available: null,
         price: 100,
+        product_id: 1,
       },
       {
         product_name: "m000023",
         available: null,
         price: 100,
+        product_id: 2,
       },
       {
         product_name: "m0000235",
         available: null,
         price: 100,
+        product_id: 3,
       },
       {
         product_name: "m00002354",
         available: null,
         price: 100,
+        product_id: 4,
       },
       {
         product_name: "oliven and peporini",
         available: null,
         price: 100,
+        product_id: 5,
       },
       {
-        product_name: "m00001",
+        product_name: "m00001666",
         available: null,
         price: 100,
+        product_id: 6,
       },
       {
-        product_name: "m00002",
+        product_name: "m00joppo002",
         available: null,
         price: 100,
-      },
-    ],
-  },
-  {
-    name: "Grill - Teller",
-    items: [
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m000023",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m0000235",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002354",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00001",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002",
-        available: null,
-        price: 100,
-      },
-    ],
-  },
-  {
-    name: "Cocktail",
-    items: [
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m000023",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m0000235",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002354",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00001",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002",
-        available: null,
-        price: 100,
-      },
-    ],
-  },
-  {
-    name: "Grill",
-    items: [
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m000023",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m0000235",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002354",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00001",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002",
-        available: null,
-        price: 100,
-      },
-    ],
-  },
-  {
-    name: "Veggies",
-    items: [
-      {
-        product_name: "oliven and peporini 3",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m000023",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m0000235",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002354",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "oliven and peporini",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00001",
-        available: null,
-        price: 100,
-      },
-      {
-        product_name: "m00002",
-        available: null,
-        price: 100,
+        product_id: 7,
       },
     ],
   },
