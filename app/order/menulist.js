@@ -67,7 +67,12 @@ const MenuList = () => {
       />
 
       <View style={styles.bottomBar}>
-        <Text style={{ color: Themes.white, fontSize: moderateScale(16) }}>
+        <Text
+          style={{ color: Themes.white, fontSize: moderateScale(16) }}
+          onPress={() => {
+            router.back();
+          }}
+        >
           Back
         </Text>
 
