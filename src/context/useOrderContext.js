@@ -4,9 +4,12 @@ const OrderContext = createContext();
 
 const OrderContextProvider = ({ children }) => {
   const [currentOrders, setCurrentOrders] = useState(new Map());
+  const [customers, setCustomers] = useState(new Map());
 
   return (
-    <OrderContext.Provider value={{ currentOrders, setCurrentOrders }}>
+    <OrderContext.Provider
+      value={{ currentOrders, setCurrentOrders, customers, setCustomers }}
+    >
       {children}
     </OrderContext.Provider>
   );
