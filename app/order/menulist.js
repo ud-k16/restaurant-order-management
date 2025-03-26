@@ -51,6 +51,12 @@ const MenuList = () => {
                           productId: value.product_id,
                         });
                       }}
+                      onDecrement={() => {
+                        decrementQuantity({
+                          tableId,
+                          productId: value.product_id,
+                        });
+                      }}
                     />
                   );
                 })}
