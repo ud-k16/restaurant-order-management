@@ -47,4 +47,51 @@ export const Menus = [
       },
     ],
   },
+  {
+    name: "Cock Tail",
+    items: [
+      {
+        product_name: "oliven and peporini",
+        available: null,
+        price: 100,
+        product_id: 8,
+      },
+      {
+        product_name: "m000023",
+        available: null,
+        price: 100,
+        product_id: 9,
+      },
+      {
+        product_name: "m0000235",
+        available: null,
+        price: 100,
+        product_id: 10,
+      },
+      {
+        product_name: "m00002354",
+        available: null,
+        price: 100,
+        product_id: 11,
+      },
+      {
+        product_name: "oliven and peporini",
+        available: null,
+        price: 100,
+        product_id: 12,
+      },
+      {
+        product_name: "Red Wine and Added Cashews and Some Nuts",
+        available: null,
+        price: 100,
+        product_id: 13,
+      },
+      {
+        product_name: "m00joppo002",
+        available: null,
+        price: 100,
+        product_id: 14,
+      },
+    ],
+  },
 ];

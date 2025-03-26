@@ -21,7 +21,7 @@ const MenuList = () => {
   const [categoryVisible, setCategoryVisible] = useState(false);
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
-  const { addItemToTable, decrementQuantity } = useOrders();
+  const { addItemToTable, decrementQuantity, deleteOrder } = useOrders();
   const { setState: setHeaders } = useHeaderContext();
   useFocusEffect(
     useCallback(() => {
@@ -79,10 +79,10 @@ const MenuList = () => {
         <Text
           style={{ color: Themes.white, fontSize: moderateScale(16) }}
           onPress={() => {
-            router.back();
+            deleteOrder({ tableId });
           }}
         >
-          Back To Tables
+          Clear Menu
         </Text>
 
         <Link
