@@ -6,6 +6,7 @@ import {
   useSearchParams,
 } from "expo-router/build/hooks";
 import { Text } from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
@@ -21,11 +22,36 @@ const OrderSummary = () => {
       {tableOrder.map((value) => {
         return (
           <View style={styles.displayStack1}>
-            <Text>{value.productName}</Text>
+            <Text style={styles.productNameStyle}>{value.productName}</Text>
+            <View style={styles.displayStack2}>
+              <Entypo
+                name="minus"
+                size={24}
+                color="black"
+                style={{
+                  textAlignVertical: "center",
+                  textAlign: "center",
+                }}
+                onPress={() => {}}
+              />
+              <Text style={{}}>{value.quantity}</Text>
+              <Entypo
+                name="plus"
+                size={24}
+                color="black"
+                onPress={() => {}}
+                style={{
+                  textAlignVertical: "center",
+                  textAlign: "center",
+                }}
+              />
+            </View>
+
             <MaterialCommunityIcons
               name="delete-outline"
               size={24}
               color="black"
+              style={{ flex: 1 }}
               onPress={() => {
                 deleteItemFromTable({ tableId, productId: value.productId });
               }}
@@ -44,6 +70,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+  },
+  displayStack2: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  productNameStyle: {
+    flex: 3,
   },
 });
 export default OrderSummary;
