@@ -94,14 +94,21 @@ const useOrders = () => {
         const findIndex = availableItems.findIndex(
           (value) => value.productId == productId
         );
-        if (findIndex != -1) {
+        if (findIndex != -1 && availableItems[findIndex].quantity > 1) {
           availableItems[findIndex] = {
             ...availableItems[findIndex],
             quantity: availableItems[findIndex].quantity - 1,
           };
+          //   updating the tableId and its Items
+          prev.set(tableId, availableItems);
+        } else if (availableItems[findIndex].quantity == 1) {
+          const newItemSet = availableItems.filter(
+            (Item) => Item.productId !== productId
+          );
+          //   updating the tableId and its Items
+          prev.set(tableId, newItemSet);
         }
-        //   updating the tableId and its Items
-        prev.set(tableId, availableItems);
+
         return new Map(prev);
       });
     } catch (error) {
