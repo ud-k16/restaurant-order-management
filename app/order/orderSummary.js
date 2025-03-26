@@ -19,7 +19,7 @@ const OrderSummary = () => {
 
   return (
     <View style={styles.container}>
-      {tableOrder.map((value) => {
+      {tableOrder?.map((value) => {
         return (
           <View style={styles.displayStack1}>
             <Text style={styles.productNameStyle}>{value.productName}</Text>
@@ -32,17 +32,21 @@ const OrderSummary = () => {
                   textAlignVertical: "center",
                   textAlign: "center",
                 }}
-                onPress={() => {}}
+                onPress={() => {
+                  decrementQuantity({ tableId, productId: value.productId });
+                }}
               />
               <Text style={{}}>{value.quantity}</Text>
               <Entypo
                 name="plus"
                 size={24}
                 color="black"
-                onPress={() => {}}
                 style={{
                   textAlignVertical: "center",
                   textAlign: "center",
+                }}
+                onPress={() => {
+                  addItemToTable({ tableId, productId: value.productId });
                 }}
               />
             </View>
