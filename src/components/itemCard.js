@@ -28,7 +28,9 @@ const ItemCard = ({
         {isInOrder && isInOrder.quantity}
       </Text>
 
-      <Text style={styles.productNameTextStyle}>{productName}</Text>
+      <Text style={styles.productNameTextStyle} numberOfLines={1}>
+        {productName}
+      </Text>
       {isInOrder && (
         <View style={styles.displayStack1}>
           <Entypo
@@ -80,9 +82,9 @@ const styles = StyleSheet.create({
   },
   productNameTextStyle: {
     padding: moderateScale(10),
-    fontSize: moderateScale(18),
+    fontSize: moderateScale(14),
     textTransform: "capitalize",
-    height: moderateScale(15),
+    height: moderateScale(44),
   },
   displayStack1: {
     height: moderateScale(40),
