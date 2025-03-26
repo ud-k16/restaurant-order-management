@@ -1,10 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import { useOrderContext } from "@/src/context/useOrderContext";
+import moderateScale from "@/src/utils/responsiveScale";
 import useOrders from "@/src/hooks/useOrders";
-import {
-  useGlobalSearchParams,
-  useSearchParams,
-} from "expo-router/build/hooks";
+import { useGlobalSearchParams } from "expo-router/build/hooks";
 import { Text } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -22,6 +20,15 @@ const OrderSummary = () => {
       {tableOrder?.map((value) => {
         return (
           <View style={styles.displayStack1}>
+            <MaterialCommunityIcons
+              name="delete-outline"
+              size={24}
+              color="black"
+              style={{ flex: 0.5 }}
+              onPress={() => {
+                deleteItemFromTable({ tableId, productId: value.productId });
+              }}
+            />
             <Text style={styles.productNameStyle}>{value.productName}</Text>
             <View style={styles.displayStack2}>
               <Entypo
@@ -36,7 +43,15 @@ const OrderSummary = () => {
                   decrementQuantity({ tableId, productId: value.productId });
                 }}
               />
-              <Text style={{}}>{value.quantity}</Text>
+              <Text
+                style={{
+                  borderWidth: moderateScale(2),
+                  paddingVertical: moderateScale(3),
+                  paddingHorizontal: moderateScale(10),
+                }}
+              >
+                {value.quantity}
+              </Text>
               <Entypo
                 name="plus"
                 size={24}
@@ -50,16 +65,6 @@ const OrderSummary = () => {
                 }}
               />
             </View>
-
-            <MaterialCommunityIcons
-              name="delete-outline"
-              size={24}
-              color="black"
-              style={{ flex: 1 }}
-              onPress={() => {
-                deleteItemFromTable({ tableId, productId: value.productId });
-              }}
-            />
           </View>
         );
       })}
@@ -69,19 +74,25 @@ const OrderSummary = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: moderateScale(15),
   },
   displayStack1: {
     flexDirection: "row",
     justifyContent: "space-evenly",
+    paddingHorizontal: moderateScale(10),
     alignItems: "center",
+    width: "100%",
+    height: moderateScale(40),
   },
   displayStack2: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    flex: 1,
   },
   productNameStyle: {
-    flex: 3,
+    flex: 2,
+    textTransform: "capitalize",
   },
 });
 export default OrderSummary;
