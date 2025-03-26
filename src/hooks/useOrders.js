@@ -65,13 +65,15 @@ const useOrders = () => {
 
   // function to delete Item to particular tableId
   const deleteItemFromTable = ({ tableId, productId }) => {
+    console.log("delete Item from Table", tableId, productId);
+
     try {
       setCurrentOrders((prev) => {
         //   retriving already available Items for the particular tableId
         const availableItems = prev.get(tableId) || [];
         //   deleting given time Item
         const newItemSet = availableItems.filter(
-          (Item) => Item.product_id !== productId
+          (Item) => Item.productId !== productId
         );
         //   updating the tableId and its Items
         prev.set(tableId, newItemSet);
@@ -106,12 +108,19 @@ const useOrders = () => {
       console.log(error);
     }
   };
+  const deleteOrder = ({ tableId }) => {
+    setCurrentOrders((prev) => {
+      prev.delete(tableId);
+      return new Map(prev);
+    });
+  };
   useEffect(() => {}, []);
   return {
     ...state,
     addItemToTable,
     decrementQuantity,
     deleteItemFromTable,
+    deleteOrder,
   };
 };
 export default useOrders;
