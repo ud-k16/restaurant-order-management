@@ -13,10 +13,13 @@ import { Themes } from "@/src/utils/themes";
 import { useRef, useState } from "react";
 import { Menus } from "@/src/constants";
 import useOrders from "@/src/hooks/useOrders";
-import { useSearchParams } from "expo-router/build/hooks";
+import {
+  useGlobalSearchParams,
+  useSearchParams,
+} from "expo-router/build/hooks";
 import { Link } from "expo-router";
 const MenuList = () => {
-  const { tableId } = useSearchParams();
+  const { tableId } = useGlobalSearchParams();
   const [categoryVisible, setCategoryVisible] = useState(false);
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);

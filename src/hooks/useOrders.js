@@ -28,6 +28,8 @@ const useOrders = () => {
     amountPerUnit,
   }) => {
     try {
+      console.log("Add to table : ", tableId, productId, productName);
+
       // {productId:number,productName:string,amountPerUnit:number}
       setCurrentOrders((prev) => {
         //   retriving already available Itemss for the particular tableId
