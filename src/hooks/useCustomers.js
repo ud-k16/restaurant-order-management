@@ -3,7 +3,10 @@ import { useOrderContext } from "../context/useOrderContext";
 // import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 const useCustomers = () => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    contactNumber: null,
+    customerName: "",
+  });
 
   const { setCustomers } = useOrderContext();
   //   const { setItem: setLocalStorageOrders } = useAsyncStorage("ORDERS");
@@ -52,6 +55,7 @@ const useCustomers = () => {
   useEffect(() => {}, []);
   return {
     ...state,
+    setState,
     addCustomerDataInTable,
   };
 };
