@@ -3,7 +3,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Themes } from "../utils/themes";
 import moderateScale from "../utils/responsiveScale";
 import useCustomers from "../hooks/useCustomers";
-const UserCard = () => {
+const UserCard = ({ hideModal = () => {} }) => {
   const { setState, contactNumber, customerName } = useCustomers();
   return (
     <View style={styles.container}>
@@ -34,8 +34,17 @@ const UserCard = () => {
           }
         />
         <View style={styles.displayStack1}>
-          <Text style={styles.buttonText}>Cancel</Text>
-          <Text style={styles.buttonText}>Place Order</Text>
+          <Text style={styles.buttonText} onPress={hideModal}>
+            Cancel
+          </Text>
+          <Text
+            style={[
+              styles.buttonText,
+              { backgroundColor: Themes.primary, color: Themes.white },
+            ]}
+          >
+            Place Order
+          </Text>
         </View>
       </View>
     </View>
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     width: "80%",
-    height: "40%",
+    // height: "40%",
     alignSelf: "center",
     backgroundColor: Themes.white,
     rowGap: moderateScale(30),
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    marginBottom: moderateScale(20),
   },
   buttonText: {
     width: moderateScale(100),
