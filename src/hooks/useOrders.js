@@ -5,11 +5,15 @@ import { useOrderContext } from "../context/useOrderContext";
 const useOrders = () => {
   const [state, setState] = useState({
     isLoading: false,
-
+    customerModelVisible: false,
     snackBarVisibility: false,
     snackBarMessage: "Something went wrong",
     defaultErrorMessage: "Something went wrong",
   });
+  const showCustomerModal = () =>
+    setState((prev) => ({ ...prev, customerModelVisible: true }));
+  const hideCustomerModal = () =>
+    setState((prev) => ({ ...prev, customerModelVisible: false }));
   const showSnackBar = () =>
     setState((prev) => ({ ...prev, snackBarVisibility: true }));
   const hideSnackBar = () =>
@@ -129,6 +133,8 @@ const useOrders = () => {
     decrementQuantity,
     deleteItemFromTable,
     deleteOrder,
+    showCustomerModal,
+    hideCustomerModal,
   };
 };
 export default useOrders;

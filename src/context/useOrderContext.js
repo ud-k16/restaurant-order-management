@@ -4,7 +4,17 @@ const OrderContext = createContext();
 
 const OrderContextProvider = ({ children }) => {
   const [currentOrders, setCurrentOrders] = useState(new Map());
-  const [customers, setCustomers] = useState(new Map());
+  const [customers, setCustomers] = useState(
+    new Map([
+      [
+        "T1",
+        {
+          contactNumber: 9999999999,
+          customerName: "Green Two Dot",
+        },
+      ],
+    ])
+  );
 
   return (
     <OrderContext.Provider

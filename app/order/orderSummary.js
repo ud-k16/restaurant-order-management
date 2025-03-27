@@ -1,4 +1,4 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Modal } from "react-native";
 import { useOrderContext } from "@/src/context/useOrderContext";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "../../src/utils/themes";
@@ -10,11 +10,18 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useCallback, useEffect } from "react";
 import { useHeaderContext } from "../../src/context/useHeaderContext";
 import { useFocusEffect } from "expo-router";
+import UserCard from "../../src/components/userCard";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
   const { currentOrders } = useOrderContext();
-  const { addItemToTable, decrementQuantity, deleteItemFromTable } =
-    useOrders();
+  const {
+    customerModelVisible,
+    showCustomerModal,
+    hideCustomerModal,
+    addItemToTable,
+    decrementQuantity,
+    deleteItemFromTable,
+  } = useOrders();
   const { setState: setHeaders } = useHeaderContext();
 
   const tableOrder = currentOrders.get(tableId);
@@ -84,7 +91,12 @@ const OrderSummary = () => {
           </View>
         );
       })}
-      <Text style={styles.confirmButton}>Confirm Order</Text>
+      <Modal visible={customerModelVisible} onRequestClose={hideCustomerModal}>
+        <UserCard hideModal={hideCustomerModal} />
+      </Modal>
+      <Text style={styles.confirmButton} onPress={showCustomerModal}>
+        Confirm Order
+      </Text>
     </View>
   );
 };
