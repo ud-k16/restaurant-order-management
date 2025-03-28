@@ -3,7 +3,12 @@ import { createContext, useContext, useState } from "react";
 const OrderContext = createContext();
 
 const OrderContextProvider = ({ children }) => {
-  const [currentOrders, setCurrentOrders] = useState(new Map());
+  // holds ordering table name and its respective cart and confirmed orders
+  const [currentOrders, setCurrentOrders] = useState({
+    tableId,
+    cart: [],
+    orders: [],
+  });
   const [customers, setCustomers] = useState(
     new Map([
       [
