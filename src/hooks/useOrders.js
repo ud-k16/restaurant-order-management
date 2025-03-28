@@ -58,7 +58,7 @@ const useOrders = () => {
           });
         //   updating the tableId and its Items
         prev.set(tableId, availableItems);
-        console.log("prev", prev);
+        // console.log("prev", prev);
 
         return new Map(prev);
       });

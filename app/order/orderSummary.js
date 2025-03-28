@@ -9,11 +9,13 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useCallback, useEffect } from "react";
 import { useHeaderContext } from "../../src/context/useHeaderContext";
+import { useSocketContext } from "../../src/context/useSocketContext";
 import { useFocusEffect } from "expo-router";
 import UserCard from "../../src/components/userCard";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
   const { currentOrders } = useOrderContext();
+  const { socket } = useSocketContext();
   const {
     customerModelVisible,
     showCustomerModal,
@@ -94,7 +96,22 @@ const OrderSummary = () => {
       <Modal visible={customerModelVisible} onRequestClose={hideCustomerModal}>
         <UserCard hideModal={hideCustomerModal} />
       </Modal>
-      <Text style={styles.confirmButton} onPress={showCustomerModal}>
+      {/* <Text style={styles.confirmButton} onPress={showCustomerModal}>
+        Confirm Order
+      </Text> */}
+      <Text
+        style={styles.confirmButton}
+        onPress={() => {
+          console.log("confirm order button clicked");
+          const data = {
+            [tableId]: currentOrders.get(tableId),
+          };
+          console.log(data);
+          // console.log(socket);
+
+          socket.emit("order", data);
+        }}
+      >
         Confirm Order
       </Text>
     </View>
