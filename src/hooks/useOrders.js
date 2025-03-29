@@ -25,26 +25,25 @@ const useOrders = () => {
   const { tableId, cart, setCurrentOrders } = useOrderContext();
   // socket for communication
   const { socket } = useSocketContext();
-  // function to add items to particular tableId
+
   const addItemToCart = ({ productId = "", productName, amountPerUnit }) => {
     try {
-      // console.log("Add to table : ", tableId, productId, productName);
-
       // {productId:number,productName:string,amountPerUnit:number}
       setCurrentOrders((prev) => {
-        //   retriving already available Itemss for the particular tableId
+        //   retriving already available Items in cart
         const availableItems = prev.cart || [];
         // checking if the item already present or not
         const findIndex = availableItems.findIndex(
           (value) => value.productId == productId
         );
+        // if present increment the quantity
         if (findIndex != -1) {
           availableItems[findIndex] = {
             ...availableItems[findIndex],
             quantity: availableItems[findIndex].quantity + 1,
           };
         }
-        //   adding in the new Item
+        // else adding in the new Item
         else
           availableItems.push({
             quantity: 1,
@@ -52,10 +51,8 @@ const useOrders = () => {
             productName,
             amountPerUnit,
           });
-        //   updating the tableId and its Items
+        //   updating the cart
         prev.cart = availableItems;
-        // console.log("prev", prev);
-
         return { ...prev };
       });
     } catch (error) {
@@ -63,18 +60,17 @@ const useOrders = () => {
     }
   };
 
-  // function to delete Item to particular tableId
+  // function to delete Item in cart
   const deleteItemFromCart = ({ productId }) => {
-    // console.log("delete Item from Table", tableId, productId);
     try {
       setCurrentOrders((prev) => {
-        //   retriving already available Items for the particular tableId
+        //   retriving already available cart items
         const availableItems = prev.cart || [];
-        //   deleting given time Item
+        //   deleting given item from cart
         const newItemSet = availableItems.filter(
           (Item) => Item.productId !== productId
         );
-        //   updating the tableId and its Items
+        //   updating the cart
         prev.cart = newItemSet;
         return { ...prev };
       });
@@ -86,27 +82,29 @@ const useOrders = () => {
   const decrementQuantityInCart = ({ productId }) => {
     try {
       setCurrentOrders((prev) => {
-        //   retriving already available Itemss for the particular tableId
+        //   retriving already available Items in cart
         const availableItems = prev.cart || [];
         // checking if the item already present or not
         const findIndex = availableItems.findIndex(
           (value) => value.productId == productId
         );
+        // if item already present and its quantity greater than 1 , decrement it
         if (findIndex != -1 && availableItems[findIndex].quantity > 1) {
           availableItems[findIndex] = {
             ...availableItems[findIndex],
             quantity: availableItems[findIndex].quantity - 1,
           };
-          //   updating the tableId and its Items
+          //   updating the cart
           prev.cart = availableItems;
-        } else if (availableItems[findIndex].quantity == 1) {
+        }
+        // if quantity is one then as an act of decrement,remove the item from cart, as quantity turns 0
+        else if (availableItems[findIndex].quantity == 1) {
           const newItemSet = availableItems.filter(
             (Item) => Item.productId !== productId
           );
-          //   updating the tableId and its Items
+          //   updating the cart
           prev.cart = newItemSet;
         }
-
         return { ...prev };
       });
     } catch (error) {
@@ -114,6 +112,7 @@ const useOrders = () => {
     }
   };
   const deleteCart = () => {
+    // clear entire cart
     setCurrentOrders((prev) => {
       prev.cart = [];
       return { ...prev };
