@@ -22,7 +22,7 @@ const useOrders = () => {
       snackBarVisibility: false,
       snackBarMessage: state.defaultErrorMessage,
     }));
-  const { tableId, cart, setCurrentOrders } = useOrderContext();
+  const { tableId, cart, orders, setCurrentOrders } = useOrderContext();
   // socket for communication
   const { socket } = useSocketContext();
 
@@ -111,6 +111,7 @@ const useOrders = () => {
       console.log(error);
     }
   };
+
   const deleteCart = () => {
     // clear entire cart
     setCurrentOrders((prev) => {
@@ -118,16 +119,49 @@ const useOrders = () => {
       return { ...prev };
     });
   };
+
   const activeTableId = (tableId) => {
     setCurrentOrders((prev) => {
       prev.tableId = tableId;
       return { ...prev };
     });
   };
+
+  // const confirmOrder = () => {
+  //   socket.emit("updateOrderForTable", {
+  //     [tableId]: cart,
+  //   });
+  // };
+
   const confirmOrder = () => {
-    socket.emit("updateOrderForTable", {
-      [tableId]: cart,
-    });
+    try {
+      if (orders.has(tableId)) {
+        console.log("update request for table : ", tableId);
+        const availableItems = orders.get(tableId) || [];
+        // checking if the item already present or not
+        for (const element of cart) {
+          const findIndex = availableItems.findIndex(
+            (value) => value.productId == element.productId
+          );
+          // if item already present in order,
+          // update the quantity
+          if (findIndex != -1) {
+            availableItems[findIndex] = {
+              ...element,
+              quantity: element.quantity + availableItems[findIndex].quantity,
+            };
+          }
+          // add the item to the order
+          else {
+            availableItems.push(element);
+          }
+        }
+        orders.set(tableId, availableItems);
+        // update the existing order
+      } else {
+        orders.set(tableId, cart);
+      }
+    } catch (error) {}
   };
   useEffect(() => {}, []);
   return {

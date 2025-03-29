@@ -9,7 +9,7 @@ const OrderContextProvider = ({ children }) => {
   const [currentOrders, setCurrentOrders] = useState({
     tableId: "",
     cart: [],
-    orders: [],
+    orders: new Map(),
   });
 
   const [customers, setCustomers] = useState(
