@@ -24,7 +24,7 @@ const MenuList = () => {
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   // ================================================
-  const { addItemToCart, decrementQuantity, deleteOrder, activeTableId } =
+  const { addItemToCart, decrementQuantityInCart, deleteCart, activeTableId } =
     useOrders();
   // for setting Table name in Header
   // --------------------------------
@@ -74,7 +74,7 @@ const MenuList = () => {
                         });
                       }}
                       onDecrement={() => {
-                        decrementQuantity({
+                        decrementQuantityInCart({
                           tableId,
                           productId: value.product_id,
                         });
@@ -92,7 +92,7 @@ const MenuList = () => {
         <Text
           style={{ color: Themes.white, fontSize: moderateScale(16) }}
           onPress={() => {
-            deleteOrder();
+            deleteCart();
           }}
         >
           Clear Menu

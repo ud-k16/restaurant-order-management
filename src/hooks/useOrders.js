@@ -26,14 +26,9 @@ const useOrders = () => {
   // socket for communication
   const { socket } = useSocketContext();
   // function to add items to particular tableId
-  const addItemToCart = ({
-    tableId,
-    productId = "",
-    productName,
-    amountPerUnit,
-  }) => {
+  const addItemToCart = ({ productId = "", productName, amountPerUnit }) => {
     try {
-      console.log("Add to table : ", tableId, productId, productName);
+      // console.log("Add to table : ", tableId, productId, productName);
 
       // {productId:number,productName:string,amountPerUnit:number}
       setCurrentOrders((prev) => {
@@ -69,9 +64,8 @@ const useOrders = () => {
   };
 
   // function to delete Item to particular tableId
-  const deleteItemFromTable = ({ tableId, productId }) => {
-    console.log("delete Item from Table", tableId, productId);
-
+  const deleteItemFromCart = ({ productId }) => {
+    // console.log("delete Item from Table", tableId, productId);
     try {
       setCurrentOrders((prev) => {
         //   retriving already available Items for the particular tableId
@@ -89,8 +83,7 @@ const useOrders = () => {
     }
   };
 
-  const decrementQuantity = ({ tableId, productId }) => {
-    // if quantity is Zero , logic is handled in the render that it should not call decrement
+  const decrementQuantityInCart = ({ productId }) => {
     try {
       setCurrentOrders((prev) => {
         //   retriving already available Itemss for the particular tableId
@@ -120,7 +113,7 @@ const useOrders = () => {
       console.log(error);
     }
   };
-  const deleteOrder = () => {
+  const deleteCart = () => {
     setCurrentOrders((prev) => {
       prev.cart = [];
       return { ...prev };
@@ -143,9 +136,9 @@ const useOrders = () => {
     activeTableId,
     addItemToCart,
     confirmOrder,
-    decrementQuantity,
-    deleteItemFromTable,
-    deleteOrder,
+    decrementQuantityInCart,
+    deleteItemFromCart,
+    deleteCart,
     showCustomerModal,
     hideCustomerModal,
   };

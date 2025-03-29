@@ -21,9 +21,9 @@ const OrderSummary = () => {
     showCustomerModal,
     hideCustomerModal,
     addItemToCart,
-    decrementQuantity,
-    deleteOrder,
-    deleteItemFromTable,
+    decrementQuantityInCart,
+    deleteCart,
+    deleteItemFromCart,
     confirmOrder,
   } = useOrders();
   const { setState: setHeaders } = useHeaderContext();
@@ -50,7 +50,7 @@ const OrderSummary = () => {
               color="black"
               style={{ flex: 0.5 }}
               onPress={() => {
-                deleteItemFromTable({ tableId, productId: value.productId });
+                deleteItemFromCart({ tableId, productId: value.productId });
               }}
             />
             <Text style={styles.productNameStyle} numberOfLines={1}>
@@ -66,7 +66,10 @@ const OrderSummary = () => {
                   textAlign: "center",
                 }}
                 onPress={() => {
-                  decrementQuantity({ tableId, productId: value.productId });
+                  decrementQuantityInCart({
+                    tableId,
+                    productId: value.productId,
+                  });
                 }}
               />
               <Text
