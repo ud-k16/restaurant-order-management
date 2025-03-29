@@ -6,7 +6,12 @@ const useCustomers = () => {
   const [state, setState] = useState({
     contactNumber: null,
     customerName: "",
+    customerModelVisible: false,
   });
+  const showCustomerModal = () =>
+    setState((prev) => ({ ...prev, customerModelVisible: true }));
+  const hideCustomerModal = () =>
+    setState((prev) => ({ ...prev, customerModelVisible: false }));
 
   const { setCustomers } = useOrderContext();
   //   const { setItem: setLocalStorageOrders } = useAsyncStorage("ORDERS");

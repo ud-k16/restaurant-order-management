@@ -1,31 +1,13 @@
 import { useEffect, useState } from "react";
 import { useOrderContext } from "../context/useOrderContext";
-import { useSocketContext } from "../context/useSocketContext";
 import { router } from "expo-router";
 
 const useOrders = () => {
   const [state, setState] = useState({
     isLoading: false,
-    customerModelVisible: false,
-    snackBarVisibility: false,
-    snackBarMessage: "Something went wrong",
-    defaultErrorMessage: "Something went wrong",
   });
-  const showCustomerModal = () =>
-    setState((prev) => ({ ...prev, customerModelVisible: true }));
-  const hideCustomerModal = () =>
-    setState((prev) => ({ ...prev, customerModelVisible: false }));
-  const showSnackBar = () =>
-    setState((prev) => ({ ...prev, snackBarVisibility: true }));
-  const hideSnackBar = () =>
-    setState((prev) => ({
-      ...prev,
-      snackBarVisibility: false,
-      snackBarMessage: state.defaultErrorMessage,
-    }));
+
   const { tableId, cart, orders, setCurrentOrders } = useOrderContext();
-  // socket for communication
-  const { socket } = useSocketContext();
 
   const addItemToCart = ({ productId = "", productName, amountPerUnit }) => {
     try {
@@ -179,8 +161,6 @@ const useOrders = () => {
     decrementQuantityInCart,
     deleteItemFromCart,
     deleteCart,
-    showCustomerModal,
-    hideCustomerModal,
   };
 };
 export default useOrders;
