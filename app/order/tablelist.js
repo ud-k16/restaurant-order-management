@@ -2,16 +2,14 @@ import { View, StyleSheet, ScrollView, Modal } from "react-native";
 import { tableNames } from "../../src/constants";
 import TableCard from "../../src/components/tableCard";
 import moderateScale from "@/src/utils/responsiveScale";
-import { useOrderContext } from "@/src/context/useOrderContext";
 import { useState } from "react";
-import EmptyContent from "../EmptyContent";
 import { Themes } from "@/src/utils/themes";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import OrderSummary from "@/app/order/orderSummary";
 
 const TableList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentTable, setCurrentTable] = useState("");
-  const { currentOrders } = useOrderContext();
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
 
@@ -47,7 +45,7 @@ const TableList = () => {
               style={{ alignSelf: "flex-end" }}
             />
           </View>
-          {currentOrders.get(currentTable) ? <View></View> : <EmptyContent />}
+          <OrderSummary tableId={currentTable} />
         </Modal>
       )}
     </View>
