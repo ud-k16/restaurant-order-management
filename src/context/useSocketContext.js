@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 const SocketContext = createContext();
 
 const SocketContextProvider = ({ children }) => {
-  const socket = useRef(io("ws://192.168.1.5:3000")).current;
+  const socket = useRef(io("ws://192.168.128.73:3000")).current;
   socket.on("connect", () => {
     console.log("Client connected successfully!");
     // Now try emitting your event

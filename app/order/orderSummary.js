@@ -24,6 +24,7 @@ const OrderSummary = () => {
     decrementQuantity,
     deleteOrder,
     deleteItemFromTable,
+    confirmOrder,
   } = useOrders();
   const { setState: setHeaders } = useHeaderContext();
 
@@ -99,17 +100,7 @@ const OrderSummary = () => {
       {/* <Text style={styles.confirmButton} onPress={showCustomerModal}>
         Confirm Order
       </Text> */}
-      <Text
-        style={styles.confirmButton}
-        onPress={() => {
-          console.log("confirm order button clicked");
-          const data = {
-            [tableId]: tableOrder,
-          };
-          console.log(data);
-          deleteOrder();
-        }}
-      >
+      <Text style={styles.confirmButton} onPress={confirmOrder}>
         Confirm Order
       </Text>
     </View>

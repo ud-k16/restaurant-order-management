@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOrderContext } from "../context/useOrderContext";
+import { useSocketContext } from "../context/useSocketContext";
 // import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 const useOrders = () => {
@@ -22,8 +23,9 @@ const useOrders = () => {
       snackBarVisibility: false,
       snackBarMessage: state.defaultErrorMessage,
     }));
-  const { setCurrentOrders } = useOrderContext();
-  //   const { setItem: setLocalStorageOrders } = useAsyncStorage("ORDERS");
+  const { tableId, cart, setCurrentOrders } = useOrderContext();
+  // socket for communication
+  const { socket } = useSocketContext();
   // function to add items to particular tableId
   const addItemToTable = ({
     tableId,
@@ -131,11 +133,17 @@ const useOrders = () => {
       return { ...prev };
     });
   };
+  const confirmOrder = () => {
+    socket.emit("updateOrderForTable", {
+      [tableId]: cart,
+    });
+  };
   useEffect(() => {}, []);
   return {
     ...state,
     activeTableId,
     addItemToTable,
+    confirmOrder,
     decrementQuantity,
     deleteItemFromTable,
     deleteOrder,
