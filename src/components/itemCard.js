@@ -17,10 +17,9 @@ const ItemCard = ({
   onAdd = () => {},
   onDecrement = () => {},
 }) => {
-  const { currentOrders } = useOrderContext();
-  console.log("log in item card", currentOrders, "\n", tableId);
+  const { cart: tableOrder } = useOrderContext();
+  // console.log("log in item card", tableOrder, "\n");
 
-  const tableOrder = currentOrders.get(tableId);
   const isInOrder = tableOrder?.find((value) => value.productId == productId);
   return (
     <TouchableOpacity style={styles.container} onPress={onAdd}>

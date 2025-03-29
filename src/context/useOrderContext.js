@@ -5,7 +5,7 @@ const OrderContext = createContext();
 const OrderContextProvider = ({ children }) => {
   // holds ordering table name and its respective cart and confirmed orders
   const [currentOrders, setCurrentOrders] = useState({
-    tableId,
+    tableId: "",
     cart: [],
     orders: [],
   });
@@ -23,7 +23,7 @@ const OrderContextProvider = ({ children }) => {
 
   return (
     <OrderContext.Provider
-      value={{ currentOrders, setCurrentOrders, customers, setCustomers }}
+      value={{ ...currentOrders, setCurrentOrders, customers, setCustomers }}
     >
       {children}
     </OrderContext.Provider>

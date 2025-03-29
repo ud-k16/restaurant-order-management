@@ -37,7 +37,7 @@ const useOrders = () => {
       // {productId:number,productName:string,amountPerUnit:number}
       setCurrentOrders((prev) => {
         //   retriving already available Itemss for the particular tableId
-        const availableItems = prev.get(tableId) || [];
+        const availableItems = prev.cart || [];
         // checking if the item already present or not
         const findIndex = availableItems.findIndex(
           (value) => value.productId == productId
@@ -57,10 +57,10 @@ const useOrders = () => {
             amountPerUnit,
           });
         //   updating the tableId and its Items
-        prev.set(tableId, availableItems);
+        prev.cart = availableItems;
         // console.log("prev", prev);
 
-        return new Map(prev);
+        return { ...prev };
       });
     } catch (error) {
       console.log(error);
@@ -74,14 +74,14 @@ const useOrders = () => {
     try {
       setCurrentOrders((prev) => {
         //   retriving already available Items for the particular tableId
-        const availableItems = prev.get(tableId) || [];
+        const availableItems = prev.cart || [];
         //   deleting given time Item
         const newItemSet = availableItems.filter(
           (Item) => Item.productId !== productId
         );
         //   updating the tableId and its Items
-        prev.set(tableId, newItemSet);
-        return new Map(prev);
+        prev.cart = newItemSet;
+        return { ...prev };
       });
     } catch (error) {
       console.log(error);
@@ -93,7 +93,7 @@ const useOrders = () => {
     try {
       setCurrentOrders((prev) => {
         //   retriving already available Itemss for the particular tableId
-        const availableItems = prev.get(tableId) || [];
+        const availableItems = prev.cart || [];
         // checking if the item already present or not
         const findIndex = availableItems.findIndex(
           (value) => value.productId == productId
@@ -104,25 +104,25 @@ const useOrders = () => {
             quantity: availableItems[findIndex].quantity - 1,
           };
           //   updating the tableId and its Items
-          prev.set(tableId, availableItems);
+          prev.cart = availableItems;
         } else if (availableItems[findIndex].quantity == 1) {
           const newItemSet = availableItems.filter(
             (Item) => Item.productId !== productId
           );
           //   updating the tableId and its Items
-          prev.set(tableId, newItemSet);
+          prev.cart = newItemSet;
         }
 
-        return new Map(prev);
+        return { ...prev };
       });
     } catch (error) {
       console.log(error);
     }
   };
-  const deleteOrder = ({ tableId }) => {
+  const deleteOrder = () => {
     setCurrentOrders((prev) => {
-      prev.delete(tableId);
-      return new Map(prev);
+      prev.cart = [];
+      return { ...prev };
     });
   };
 

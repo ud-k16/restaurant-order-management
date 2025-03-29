@@ -14,7 +14,7 @@ import { useFocusEffect } from "expo-router";
 import UserCard from "../../src/components/userCard";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
-  const { currentOrders } = useOrderContext();
+  const { cart: tableOrder } = useOrderContext();
   const { socket } = useSocketContext();
   const {
     customerModelVisible,
@@ -22,11 +22,11 @@ const OrderSummary = () => {
     hideCustomerModal,
     addItemToTable,
     decrementQuantity,
+    deleteOrder,
     deleteItemFromTable,
   } = useOrders();
   const { setState: setHeaders } = useHeaderContext();
 
-  const tableOrder = currentOrders.get(tableId);
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -104,12 +104,10 @@ const OrderSummary = () => {
         onPress={() => {
           console.log("confirm order button clicked");
           const data = {
-            [tableId]: currentOrders.get(tableId),
+            [tableId]: tableOrder,
           };
           console.log(data);
-          // console.log(socket);
-
-          socket.emit("order", data);
+          deleteOrder();
         }}
       >
         Confirm Order

@@ -79,7 +79,7 @@ const MenuList = () => {
         <Text
           style={{ color: Themes.white, fontSize: moderateScale(16) }}
           onPress={() => {
-            deleteOrder({ tableId });
+            deleteOrder();
           }}
         >
           Clear Menu
