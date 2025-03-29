@@ -20,7 +20,7 @@ const OrderSummary = () => {
     customerModelVisible,
     showCustomerModal,
     hideCustomerModal,
-    addItemToTable,
+    addItemToCart,
     decrementQuantity,
     deleteOrder,
     deleteItemFromTable,
@@ -87,7 +87,7 @@ const OrderSummary = () => {
                   textAlign: "center",
                 }}
                 onPress={() => {
-                  addItemToTable({ tableId, productId: value.productId });
+                  addItemToCart({ tableId, productId: value.productId });
                 }}
               />
             </View>

@@ -24,7 +24,7 @@ const MenuList = () => {
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   // ================================================
-  const { addItemToTable, decrementQuantity, deleteOrder, activeTableId } =
+  const { addItemToCart, decrementQuantity, deleteOrder, activeTableId } =
     useOrders();
   // for setting Table name in Header
   // --------------------------------
@@ -66,7 +66,7 @@ const MenuList = () => {
                       productName={value.product_name}
                       key={index}
                       onAdd={() => {
-                        addItemToTable({
+                        addItemToCart({
                           tableId,
                           amountPerUnit: value.price,
                           productName: value.product_name,

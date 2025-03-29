@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useOrderContext } from "../context/useOrderContext";
 import { useSocketContext } from "../context/useSocketContext";
-// import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 const useOrders = () => {
   const [state, setState] = useState({
@@ -27,7 +26,7 @@ const useOrders = () => {
   // socket for communication
   const { socket } = useSocketContext();
   // function to add items to particular tableId
-  const addItemToTable = ({
+  const addItemToCart = ({
     tableId,
     productId = "",
     productName,
@@ -142,7 +141,7 @@ const useOrders = () => {
   return {
     ...state,
     activeTableId,
-    addItemToTable,
+    addItemToCart,
     confirmOrder,
     decrementQuantity,
     deleteItemFromTable,
