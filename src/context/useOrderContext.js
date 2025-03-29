@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useSocketContext } from "./useSocketContext";
+import { router } from "expo-router";
 
 const OrderContext = createContext();
 
@@ -31,8 +32,10 @@ const OrderContextProvider = ({ children }) => {
         console.log("order placed confirmed");
         // clear cart
         setCurrentOrders((prev) => ({ ...prev, cart: [], tableId: "" }));
+        router.navigate("/publish/successful");
       } else {
         console.log("error placing order");
+        router.navigate("/publish/failure");
       }
     });
   }, []);
