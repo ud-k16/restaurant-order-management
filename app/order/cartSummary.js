@@ -1,4 +1,4 @@
-import { View, StyleSheet, Modal } from "react-native";
+import { View, StyleSheet, Modal, ScrollView } from "react-native";
 import { useOrderContext } from "@/src/context/useOrderContext";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "../../src/utils/themes";
@@ -35,62 +35,64 @@ const OrderSummary = () => {
   );
   return (
     <View style={styles.container}>
-      {tableOrder?.map((value, index) => {
-        return (
-          <View style={styles.displayStack1} key={index}>
-            <MaterialCommunityIcons
-              name="delete-outline"
-              size={24}
-              color="black"
-              style={{ flex: 0.5 }}
-              onPress={() => {
-                deleteItemFromCart({ tableId, productId: value.productId });
-              }}
-            />
-            <Text style={styles.productNameStyle} numberOfLines={1}>
-              {value.productName}
-            </Text>
-            <View style={styles.displayStack2}>
-              <Entypo
-                name="minus"
+      <ScrollView>
+        {tableOrder?.map((value, index) => {
+          return (
+            <View style={styles.displayStack1} key={index}>
+              <MaterialCommunityIcons
+                name="delete-outline"
                 size={24}
                 color="black"
-                style={{
-                  textAlignVertical: "center",
-                  textAlign: "center",
-                }}
+                style={{ flex: 0.5 }}
                 onPress={() => {
-                  decrementQuantityInCart({
-                    tableId,
-                    productId: value.productId,
-                  });
+                  deleteItemFromCart({ tableId, productId: value.productId });
                 }}
               />
-              <Text
-                style={{
-                  borderWidth: moderateScale(2),
-                  paddingVertical: moderateScale(3),
-                  paddingHorizontal: moderateScale(10),
-                }}
-              >
-                {value.quantity}
+              <Text style={styles.productNameStyle} numberOfLines={1}>
+                {value.productName}
               </Text>
-              <Entypo
-                name="plus"
-                size={24}
-                color="black"
-                style={{
-                  textAlignVertical: "center",
-                  textAlign: "center",
-                }}
-                onPress={() => {
-                  addItemToCart({ tableId, productId: value.productId });
-                }}
-              />
+              <View style={styles.displayStack2}>
+                <Entypo
+                  name="minus"
+                  size={24}
+                  color="black"
+                  style={{
+                    textAlignVertical: "center",
+                    textAlign: "center",
+                  }}
+                  onPress={() => {
+                    decrementQuantityInCart({
+                      tableId,
+                      productId: value.productId,
+                    });
+                  }}
+                />
+                <Text
+                  style={{
+                    borderWidth: moderateScale(2),
+                    paddingVertical: moderateScale(3),
+                    paddingHorizontal: moderateScale(10),
+                  }}
+                >
+                  {value.quantity}
+                </Text>
+                <Entypo
+                  name="plus"
+                  size={24}
+                  color="black"
+                  style={{
+                    textAlignVertical: "center",
+                    textAlign: "center",
+                  }}
+                  onPress={() => {
+                    addItemToCart({ tableId, productId: value.productId });
+                  }}
+                />
+              </View>
             </View>
-          </View>
-        );
-      })}
+          );
+        })}
+      </ScrollView>
       <Text style={styles.confirmButton} onPress={confirmOrder}>
         Confirm Order
       </Text>
