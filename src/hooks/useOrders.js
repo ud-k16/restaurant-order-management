@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useOrderContext } from "../context/useOrderContext";
 import { useSocketContext } from "../context/useSocketContext";
+import { router } from "expo-router";
 
 const useOrders = () => {
   const [state, setState] = useState({
@@ -161,7 +162,13 @@ const useOrders = () => {
       } else {
         orders.set(tableId, cart);
       }
-    } catch (error) {}
+      // after successful placement
+      router.navigate("/publsih/successful");
+    } catch (error) {
+      router.navigate("/publsih/failure");
+    } finally {
+      deleteCart();
+    }
   };
   useEffect(() => {}, []);
   return {
