@@ -125,10 +125,16 @@ const useOrders = () => {
       return { ...prev };
     });
   };
-
+  const activeTableId = (tableId) => {
+    setCurrentOrders((prev) => {
+      prev.tableId = tableId;
+      return { ...prev };
+    });
+  };
   useEffect(() => {}, []);
   return {
     ...state,
+    activeTableId,
     addItemToTable,
     decrementQuantity,
     deleteItemFromTable,

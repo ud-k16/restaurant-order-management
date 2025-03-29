@@ -18,10 +18,16 @@ import { Link, router, useFocusEffect, useNavigation } from "expo-router";
 import { useHeaderContext } from "@/src/context/useHeaderContext";
 const MenuList = () => {
   const { tableId } = useGlobalSearchParams();
+  // showing list of menu Category logic variables
+  // ---------------------------------------------
   const [categoryVisible, setCategoryVisible] = useState(false);
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
-  const { addItemToTable, decrementQuantity, deleteOrder } = useOrders();
+  // ================================================
+  const { addItemToTable, decrementQuantity, deleteOrder, activeTableId } =
+    useOrders();
+  // for setting Table name in Header
+  // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
   useFocusEffect(
     useCallback(() => {
@@ -34,6 +40,13 @@ const MenuList = () => {
       };
     }, [])
   );
+  // =================================================
+  // updating table Id in the context
+  // --------------------------------
+  useEffect(() => {
+    activeTableId(tableId);
+  }, []);
+  // ==================================================
   return (
     <View style={styles.container}>
       <FlatList
