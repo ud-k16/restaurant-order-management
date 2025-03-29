@@ -101,7 +101,7 @@ const MenuList = () => {
         <Link
           style={{ color: Themes.white, fontSize: moderateScale(16) }}
           href={{
-            pathname: "/order/orderSummary",
+            pathname: "/order/cartSummary",
             params: {
               tableId,
             },

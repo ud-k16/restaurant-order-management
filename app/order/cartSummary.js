@@ -9,17 +9,11 @@ import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useCallback, useEffect } from "react";
 import { useHeaderContext } from "../../src/context/useHeaderContext";
-import { useSocketContext } from "../../src/context/useSocketContext";
 import { useFocusEffect } from "expo-router";
-import UserCard from "../../src/components/userCard";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
   const { cart: tableOrder } = useOrderContext();
-  const { socket } = useSocketContext();
   const {
-    customerModelVisible,
-    showCustomerModal,
-    hideCustomerModal,
     addItemToCart,
     decrementQuantityInCart,
     deleteCart,
@@ -97,12 +91,6 @@ const OrderSummary = () => {
           </View>
         );
       })}
-      <Modal visible={customerModelVisible} onRequestClose={hideCustomerModal}>
-        <UserCard hideModal={hideCustomerModal} />
-      </Modal>
-      {/* <Text style={styles.confirmButton} onPress={showCustomerModal}>
-        Confirm Order
-      </Text> */}
       <Text style={styles.confirmButton} onPress={confirmOrder}>
         Confirm Order
       </Text>
