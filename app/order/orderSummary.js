@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: moderateScale(1),
     borderStyle: "dashed",
     width: "100%",
+    marginVertical: moderateScale(10),
   },
 });
 export default OrderSummary;
