@@ -22,18 +22,23 @@ const useCustomers = () => {
       if (!state.customerName && !state.serverName) {
         setState((prev) => ({ ...prev, validationError: true }));
         return;
-      } else setState((prev) => ({ ...prev, validationError: false }));
+      }
       setCustomersData((prev) => {
         prev.set(tableId, {
           customerName: state.customerName,
           contactNumber: state.contactNumber,
           serverName: state.serverName,
         });
-        hideCustomerModal();
         return new Map(prev);
       });
+      setState((prev) => ({
+        ...prev,
+        validationError: false,
+      }));
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
   };
 

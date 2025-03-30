@@ -11,6 +11,8 @@ const OrderSummary = ({ tableId }) => {
   const { customersData } = useCustomerContext();
   const {
     customerModelVisible,
+    validationError,
+    setState,
     addCustomerDataInTable,
     hideCustomerModal,
     showCustomerModal,
@@ -85,8 +87,19 @@ const OrderSummary = ({ tableId }) => {
           <Modal
             visible={customerModelVisible}
             onRequestClose={hideCustomerModal}
+            onDismiss={hideCustomerModal}
           >
-            <UserCard hideModal={hideCustomerModal} tableId={tableId} />
+            <UserCard
+              hideModal={hideCustomerModal}
+              addCustomerDataInTable={() => {
+                const status = addCustomerDataInTable({ tableId });
+                status && hideCustomerModal();
+              }}
+              validationError={validationError}
+              customerName={customer?.customerName}
+              serverName={customer?.serverName}
+              setState={setState}
+            />
           </Modal>
         </ScrollView>
       ) : (

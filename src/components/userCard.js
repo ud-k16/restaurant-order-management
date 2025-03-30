@@ -3,14 +3,14 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Themes } from "../utils/themes";
 import moderateScale from "../utils/responsiveScale";
 import useCustomers from "../hooks/useCustomers";
-const UserCard = ({ hideModal = () => {}, tableId }) => {
-  const {
-    setState,
-    validationError,
-    customerName,
-    serverName,
-    addCustomerDataInTable,
-  } = useCustomers();
+const UserCard = ({
+  validationError,
+  customerName,
+  serverName,
+  setState,
+  hideModal = () => {},
+  addCustomerDataInTable = () => {},
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -53,9 +53,7 @@ const UserCard = ({ hideModal = () => {}, tableId }) => {
               styles.buttonText,
               { backgroundColor: Themes.primary, color: Themes.white },
             ]}
-            onPress={() => {
-              addCustomerDataInTable({ tableId });
-            }}
+            onPress={addCustomerDataInTable}
           >
             Save
           </Text>
