@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { router } from "expo-router";
+import { createContext, useContext, useState } from "react";
 
 const OrderContext = createContext();
 
@@ -11,17 +10,6 @@ const OrderContextProvider = ({ children }) => {
     orders: new Map(),
   });
 
-  const [customers, setCustomers] = useState(
-    new Map([
-      [
-        "T1",
-        {
-          contactNumber: 9999999999,
-          customerName: "Green Two Dot",
-        },
-      ],
-    ])
-  );
   // socket logic, use when needed
   // =============================================================================
   // active status update logic
@@ -47,9 +35,7 @@ const OrderContextProvider = ({ children }) => {
   // }, [currentOrders.tableId]);
   // =================================================
   return (
-    <OrderContext.Provider
-      value={{ ...currentOrders, setCurrentOrders, customers, setCustomers }}
-    >
+    <OrderContext.Provider value={{ ...currentOrders, setCurrentOrders }}>
       {children}
     </OrderContext.Provider>
   );
