@@ -14,9 +14,8 @@ const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
   const { cart: tableOrder } = useOrderContext();
   const {
-    addItemToCart,
+    incrementQuantityInCart,
     decrementQuantityInCart,
-    deleteCart,
     deleteItemFromCart,
     confirmOrder,
   } = useOrders();
@@ -45,7 +44,7 @@ const OrderSummary = () => {
                 color="black"
                 style={{ flex: 0.5 }}
                 onPress={() => {
-                  deleteItemFromCart({ tableId, productId: value.productId });
+                  deleteItemFromCart({ productId: value.productId });
                 }}
               />
               <Text style={styles.productNameStyle} numberOfLines={1}>
@@ -62,7 +61,6 @@ const OrderSummary = () => {
                   }}
                   onPress={() => {
                     decrementQuantityInCart({
-                      tableId,
                       productId: value.productId,
                     });
                   }}
@@ -85,7 +83,7 @@ const OrderSummary = () => {
                     textAlign: "center",
                   }}
                   onPress={() => {
-                    addItemToCart({ tableId, productId: value.productId });
+                    incrementQuantityInCart({ productId: value.productId });
                   }}
                 />
               </View>

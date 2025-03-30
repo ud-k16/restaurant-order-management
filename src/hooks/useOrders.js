@@ -9,7 +9,12 @@ const useOrders = () => {
 
   const { tableId, cart, orders, setCurrentOrders } = useOrderContext();
 
-  const addItemToCart = ({ productId = "", productName, amountPerUnit }) => {
+  const addItemToCart = ({
+    productId = "",
+    productName,
+    amountPerUnit,
+    quantity = 1,
+  }) => {
     try {
       // {productId:number,productName:string,amountPerUnit:number}
       setCurrentOrders((prev) => {
@@ -19,17 +24,17 @@ const useOrders = () => {
         const findIndex = availableItems.findIndex(
           (value) => value.productId == productId
         );
-        // if present increment the quantity
+        // if present change the quantity
         if (findIndex != -1) {
           availableItems[findIndex] = {
             ...availableItems[findIndex],
-            quantity: availableItems[findIndex].quantity + 1,
+            quantity,
           };
         }
         // else adding in the new Item
         else
           availableItems.push({
-            quantity: 1,
+            quantity,
             productId,
             productName,
             amountPerUnit,
@@ -88,6 +93,31 @@ const useOrders = () => {
           //   updating the cart
           prev.cart = newItemSet;
         }
+        return { ...prev };
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const incrementQuantityInCart = ({ productId }) => {
+    try {
+      setCurrentOrders((prev) => {
+        //   retriving already available Items in cart
+        const availableItems = prev.cart || [];
+        // checking if the item already present or not
+        const findIndex = availableItems.findIndex(
+          (value) => value.productId == productId
+        );
+        // if item already present
+        if (findIndex != -1) {
+          availableItems[findIndex] = {
+            ...availableItems[findIndex],
+            quantity: availableItems[findIndex].quantity + 1,
+          };
+          //   updating the cart
+          prev.cart = availableItems;
+        }
+
         return { ...prev };
       });
     } catch (error) {
@@ -157,6 +187,7 @@ const useOrders = () => {
     ...state,
     activeTableId,
     addItemToCart,
+    incrementQuantityInCart,
     confirmOrder,
     decrementQuantityInCart,
     deleteItemFromCart,

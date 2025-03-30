@@ -65,12 +65,13 @@ const MenuList = () => {
                       productId={value.product_id}
                       productName={value.product_name}
                       key={index}
-                      onAdd={() => {
+                      onAdd={(quantity) => {
                         addItemToCart({
                           tableId,
                           amountPerUnit: value.price,
                           productName: value.product_name,
                           productId: value.product_id,
+                          quantity,
                         });
                       }}
                       onDecrement={() => {

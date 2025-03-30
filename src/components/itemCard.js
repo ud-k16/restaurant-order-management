@@ -9,20 +9,20 @@ import {
 import { useOrderContext } from "../context/useOrderContext";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Themes } from "../utils/themes";
+import { useState } from "react";
 const ItemCard = ({
   productId,
   productName,
-  amountPerUnit,
-  tableId,
   onAdd = () => {},
   onDecrement = () => {},
 }) => {
+  const [quantity, setQuantity] = useState(1);
   const { cart: tableOrder } = useOrderContext();
   // console.log("log in item card", tableOrder, "\n");
 
   const isInOrder = tableOrder?.find((value) => value.productId == productId);
   return (
-    <TouchableOpacity style={styles.container} onPress={onAdd}>
+    <TouchableOpacity style={styles.container} onPress={() => onAdd(quantity)}>
       <Text style={isInOrder && styles.quantityTextStyle}>
         {isInOrder && isInOrder.quantity}
       </Text>
