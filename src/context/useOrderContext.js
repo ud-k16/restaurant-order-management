@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useSocketContext } from "./useSocketContext";
 import { router } from "expo-router";
 
 const OrderContext = createContext();
@@ -23,27 +22,30 @@ const OrderContextProvider = ({ children }) => {
       ],
     ])
   );
+  // socket logic, use when needed
+  // =============================================================================
   // active status update logic
   // ===========================
-  const { socket } = useSocketContext();
-  useEffect(() => {
-    socket.on("updateOrderForTable", (update) => {
-      if (update) {
-        console.log("order placed confirmed");
-        // clear cart
-        setCurrentOrders((prev) => ({ ...prev, cart: [], tableId: "" }));
-        router.navigate("/publish/successful");
-      } else {
-        console.log("error placing order");
-        router.navigate("/publish/failure");
-      }
-    });
-  }, []);
-  useEffect(() => {
-    if (currentOrders.tableId) {
-      socket.emit("active", currentOrders.tableId);
-    }
-  }, [currentOrders.tableId]);
+  // const { socket } = useSocketContext();
+  // useEffect(() => {
+  //   socket.on("updateOrderForTable", (update) => {
+  //     if (update) {
+  //       console.log("order placed confirmed");
+  //       // clear cart
+  //       setCurrentOrders((prev) => ({ ...prev, cart: [], tableId: "" }));
+  //       router.navigate("/publish/successful");
+  //     } else {
+  //       console.log("error placing order");
+  //       router.navigate("/publish/failure");
+  //     }
+  //   });
+  // }, []);
+  // useEffect(() => {
+  //   if (currentOrders.tableId) {
+  //     socket.emit("active", currentOrders.tableId);
+  //   }
+  // }, [currentOrders.tableId]);
+  // =================================================
   return (
     <OrderContext.Provider
       value={{ ...currentOrders, setCurrentOrders, customers, setCustomers }}
