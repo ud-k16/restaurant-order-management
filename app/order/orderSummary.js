@@ -27,7 +27,7 @@ const OrderSummary = ({ tableId }) => {
   return (
     <View style={styles.container}>
       {orderOfTheTable ? (
-        <ScrollView>
+        <ScrollView style={styles.scrollViewStyle}>
           <Text>RECEIPT</Text>
           <Text>Date: {new Date().toDateString()}</Text>
           {customer?.customerName && (
@@ -84,6 +84,9 @@ const OrderSummary = ({ tableId }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  scrollViewStyle: {
+    paddingHorizontal: moderateScale(5),
   },
   displayStack: {
     flexDirection: "row",
