@@ -7,6 +7,7 @@ const useCustomers = () => {
     customerName: "",
     serverName: "",
     customerModelVisible: false,
+    validationError: false,
   });
   const showCustomerModal = () =>
     setState((prev) => ({ ...prev, customerModelVisible: true }));
@@ -17,7 +18,11 @@ const useCustomers = () => {
   // function to add user data to respective table
   const addCustomerDataInTable = ({ tableId }) => {
     try {
-      console.log("Add customer data : ", tableId, customerName, contactNumber);
+      console.log("Add customer data : ", tableId);
+      if (!state.customerName && !state.serverName) {
+        setState((prev) => ({ ...prev, validationError: true }));
+        return;
+      } else setState((prev) => ({ ...prev, validationError: false }));
       setCustomersData((prev) => {
         prev.set(tableId, {
           customerName: state.customerName,

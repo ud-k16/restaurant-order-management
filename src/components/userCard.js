@@ -3,8 +3,14 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Themes } from "../utils/themes";
 import moderateScale from "../utils/responsiveScale";
 import useCustomers from "../hooks/useCustomers";
-const UserCard = ({ hideModal = () => {} }) => {
-  const { setState, contactNumber, customerName, serverName } = useCustomers();
+const UserCard = ({ hideModal = () => {}, tableId }) => {
+  const {
+    setState,
+    validationError,
+    customerName,
+    serverName,
+    addCustomerDataInTable,
+  } = useCustomers();
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -25,6 +31,9 @@ const UserCard = ({ hideModal = () => {} }) => {
             setState((prev) => ({ ...prev, customerName: text }))
           }
         />
+        <Text style={styles.errorText}>
+          {validationError && !customerName && "Enter Customer Name"}
+        </Text>
         <TextInput
           style={styles.textInputStyle}
           placeholder="Server Name"
@@ -32,6 +41,9 @@ const UserCard = ({ hideModal = () => {} }) => {
             setState((prev) => ({ ...prev, serverName: text }))
           }
         />
+        <Text style={styles.errorText}>
+          {validationError && !serverName && "Enter Server Name"}
+        </Text>
         <View style={styles.displayStack1}>
           <Text style={styles.buttonText} onPress={hideModal}>
             Cancel
@@ -41,6 +53,10 @@ const UserCard = ({ hideModal = () => {} }) => {
               styles.buttonText,
               { backgroundColor: Themes.primary, color: Themes.white },
             ]}
+            onPress={() => {
+              addCustomerDataInTable({ tableId });
+              hideModal();
+            }}
           >
             Save
           </Text>
@@ -55,12 +71,17 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.backDrop,
     justifyContent: "center",
   },
+  errorText: {
+    color: Themes.red,
+    margin: 0,
+    paddingLeft: moderateScale(15),
+    marginBottom: moderateScale(5),
+  },
   contentContainer: {
     width: "80%",
-    // height: "40%",
     alignSelf: "center",
     backgroundColor: Themes.white,
-    rowGap: moderateScale(30),
+    // rowGap: moderateScale(30),
   },
   textInputStyle: {
     borderBottomWidth: moderateScale(2),

@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 const CustomerContext = createContext();
 
 const CustomerContextProvider = ({ children }) => {
-  const [customersData, setCustomersData] = useState();
+  const [customersData, setCustomersData] = useState(new Map());
 
   return (
     <CustomerContext.Provider value={{ customersData, setCustomersData }}>
