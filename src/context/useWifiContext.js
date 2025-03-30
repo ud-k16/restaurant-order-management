@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 // import NetInfo from "@react-native-community/netinfo";
 // import Ping from "ping";
 
