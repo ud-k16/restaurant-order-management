@@ -4,10 +4,10 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 const OrderSummary = ({ tableId }) => {
   const { orders } = useOrderContext();
   const orderOfTheTable = orders.get(tableId);
-  const subTotal = orderOfTheTable.reduce((subTotal = 0, product) => {
+  const subTotal = orderOfTheTable.reduce((subTotal, product) => {
     const amount = product.quantity * product.amountPerUnit;
     return subTotal + amount;
-  });
+  }, 0);
   return (
     <View style={styles.container}>
       {orderOfTheTable && (
@@ -40,7 +40,7 @@ const OrderSummary = ({ tableId }) => {
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 3 }}>Sub total (Excl. GST)</Text>
-            {/* <Text style={{ flex: 1 }}>{subTotal}</Text> */}
+            <Text style={{ flex: 1 }}>{subTotal}</Text>
           </View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 3 }}>GST @ 18%</Text>
