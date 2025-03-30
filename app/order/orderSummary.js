@@ -2,7 +2,8 @@ import { useOrderContext } from "@/src/context/useOrderContext";
 import { useCustomerContext } from "@/src/context/useCustomerContext";
 import useCustomers from "@/src/hooks/useCustomers";
 import moderateScale from "@/src/utils/responsiveScale";
-import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
+import UserCard from "@/src/components/userCard";
+import { View, StyleSheet, ScrollView, Text, Modal } from "react-native";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
 const OrderSummary = ({ tableId }) => {
@@ -75,9 +76,15 @@ const OrderSummary = ({ tableId }) => {
             <Text style={{ flex: 0.29 }}>{subTotal + gst}</Text>
           </View>
           <View style={styles.lineStyle}></View>
-          <Text style={styles.buttonStyle}>
+          <Text
+            style={styles.buttonStyle}
+            onPress={customer?.customerName ? null : showCustomerModal}
+          >
             {customer?.customerName ? "Print" : "Add Customer"}
           </Text>
+          <Modal visible={customerModelVisible}>
+            <UserCard hideModal={hideCustomerModal} />
+          </Modal>
         </ScrollView>
       ) : (
         <EmptyContent />
