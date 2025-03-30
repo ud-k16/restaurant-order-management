@@ -27,7 +27,7 @@ const TableList = () => {
         })}
       </ScrollView>
       {modalVisible && (
-        <Modal style={styles.modalConatainer}>
+        <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
           <View
             style={{
               backgroundColor: Themes.primary,
