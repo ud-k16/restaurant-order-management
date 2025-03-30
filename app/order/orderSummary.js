@@ -22,6 +22,8 @@ const OrderSummary = ({ tableId }) => {
   }, 0);
   // table customer data
   const customer = customersData?.get(tableId);
+  // gst
+  const gst = 10;
   return (
     <View style={styles.container}>
       {orderOfTheTable ? (
@@ -59,12 +61,17 @@ const OrderSummary = ({ tableId }) => {
           })}
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
-            <Text style={{ flex: 3 }}>Sub total (Excl. GST)</Text>
-            <Text style={{ flex: 1 }}>{subTotal}</Text>
+            <Text style={{ flex: 1 }}>Sub total (Excl. GST)</Text>
+            <Text style={{ flex: 0.29 }}>{subTotal}</Text>
           </View>
           <View style={styles.displayStack}>
-            <Text style={{ flex: 3 }}>GST @ 18%</Text>
-            <Text style={{ flex: 1 }}>{10}</Text>
+            <Text style={{ flex: 1 }}>GST @ 18%</Text>
+            <Text style={{ flex: 0.29 }}>{gst}</Text>
+          </View>
+          <View style={styles.lineStyle}></View>
+          <View style={styles.displayStack}>
+            <Text style={{ flex: 1 }}>Total </Text>
+            <Text style={{ flex: 0.29 }}>{subTotal + gst}</Text>
           </View>
           <View style={styles.lineStyle}></View>
         </ScrollView>
