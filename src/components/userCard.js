@@ -4,7 +4,7 @@ import { Themes } from "../utils/themes";
 import moderateScale from "../utils/responsiveScale";
 import useCustomers from "../hooks/useCustomers";
 const UserCard = ({ hideModal = () => {} }) => {
-  const { setState, contactNumber, customerName } = useCustomers();
+  const { setState, contactNumber, customerName, serverName } = useCustomers();
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -27,10 +27,9 @@ const UserCard = ({ hideModal = () => {} }) => {
         />
         <TextInput
           style={styles.textInputStyle}
-          placeholder="Contact Number"
-          keyboardType="name-phone-pad"
+          placeholder="Server Name"
           onChangeText={(text) =>
-            setState((prev) => ({ ...prev, contactNumber: text }))
+            setState((prev) => ({ ...prev, serverName: text }))
           }
         />
         <View style={styles.displayStack1}>
@@ -43,7 +42,7 @@ const UserCard = ({ hideModal = () => {} }) => {
               { backgroundColor: Themes.primary, color: Themes.white },
             ]}
           >
-            Place Order
+            Save
           </Text>
         </View>
       </View>
