@@ -28,15 +28,7 @@ const TableList = () => {
       </ScrollView>
       {modalVisible && (
         <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
-          <View
-            style={{
-              backgroundColor: Themes.primary,
-              height: moderateScale(50),
-              elevation: 6,
-              justifyContent: "center",
-              paddingHorizontal: moderateScale(10),
-            }}
-          >
+          <View style={styles.modalHeader}>
             <AntDesign
               name="close"
               size={24}
@@ -65,9 +57,13 @@ const styles = StyleSheet.create({
   },
   modalConatainer: {
     backgroundColor: Themes.white,
-    // width: "100%",
-    // height: "100%",
-    // position: "absolute",
+  },
+  modalHeader: {
+    backgroundColor: Themes.primary,
+    height: moderateScale(50),
+    elevation: 6,
+    justifyContent: "center",
+    paddingHorizontal: moderateScale(10),
   },
 });
 export default TableList;
