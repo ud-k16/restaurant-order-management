@@ -2,8 +2,9 @@ import { useOrderContext } from "@/src/context/useOrderContext";
 import { useCustomerContext } from "@/src/context/useCustomerContext";
 import useCustomers from "@/src/hooks/useCustomers";
 import moderateScale from "@/src/utils/responsiveScale";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, Pressable } from "react-native";
 import EmptyContent from "@/app/EmptyContent";
+import { Themes } from "@/src/utils/themes";
 const OrderSummary = ({ tableId }) => {
   const { orders } = useOrderContext();
   const { customersData } = useCustomerContext();
@@ -74,6 +75,9 @@ const OrderSummary = ({ tableId }) => {
             <Text style={{ flex: 0.29 }}>{subTotal + gst}</Text>
           </View>
           <View style={styles.lineStyle}></View>
+          <Text style={styles.buttonStyle}>
+            {customer?.customerName ? "Print" : "Add Customer"}
+          </Text>
         </ScrollView>
       ) : (
         <EmptyContent />
@@ -96,6 +100,17 @@ const styles = StyleSheet.create({
     borderStyle: "dashed",
     width: "100%",
     marginVertical: moderateScale(10),
+  },
+  buttonStyle: {
+    alignSelf: "center",
+    minHeight: moderateScale(10),
+    backgroundColor: Themes.primary,
+    color: Themes.white,
+    paddingVertical: moderateScale(10),
+    paddingHorizontal: moderateScale(15),
+    fontSize: moderateScale(16),
+    marginTop: moderateScale(55),
+    borderRadius: moderateScale(5),
   },
 });
 export default OrderSummary;
