@@ -82,7 +82,10 @@ const OrderSummary = ({ tableId }) => {
           >
             {customer?.customerName ? "Print" : "Add Customer"}
           </Text>
-          <Modal visible={customerModelVisible}>
+          <Modal
+            visible={customerModelVisible}
+            onRequestClose={hideCustomerModal}
+          >
             <UserCard hideModal={hideCustomerModal} tableId={tableId} />
           </Modal>
         </ScrollView>

@@ -29,6 +29,7 @@ const useCustomers = () => {
           contactNumber: state.contactNumber,
           serverName: state.serverName,
         });
+        hideCustomerModal();
         return new Map(prev);
       });
     } catch (error) {

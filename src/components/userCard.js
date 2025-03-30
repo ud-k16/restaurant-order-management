@@ -55,7 +55,6 @@ const UserCard = ({ hideModal = () => {}, tableId }) => {
             ]}
             onPress={() => {
               addCustomerDataInTable({ tableId });
-              hideModal();
             }}
           >
             Save
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
-    marginBottom: moderateScale(20),
+    marginVertical: moderateScale(20),
   },
   buttonText: {
     width: moderateScale(100),
