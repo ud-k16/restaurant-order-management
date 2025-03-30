@@ -1,16 +1,17 @@
 import { useOrderContext } from "@/src/context/useOrderContext";
 import moderateScale from "@/src/utils/responsiveScale";
 import { View, StyleSheet, ScrollView, Text } from "react-native";
+import EmptyContent from "@/app/EmptyContent";
 const OrderSummary = ({ tableId }) => {
   const { orders } = useOrderContext();
   const orderOfTheTable = orders.get(tableId);
-  const subTotal = orderOfTheTable.reduce((subTotal, product) => {
+  const subTotal = orderOfTheTable?.reduce((subTotal, product) => {
     const amount = product.quantity * product.amountPerUnit;
     return subTotal + amount;
   }, 0);
   return (
     <View style={styles.container}>
-      {orderOfTheTable && (
+      {orderOfTheTable ? (
         <ScrollView>
           <Text>RECEIPT</Text>
           <Text>Date: {new Date().toDateString()}</Text>
@@ -25,9 +26,9 @@ const OrderSummary = ({ tableId }) => {
           </View>
           <View style={styles.lineStyle}></View>
 
-          {orderOfTheTable.map((product) => {
+          {orderOfTheTable.map((product, index) => {
             return (
-              <View style={styles.displayStack}>
+              <View style={styles.displayStack} key={index}>
                 <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
                 <Text style={{ flex: 1 }}>{product.amountPerUnit}</Text>
@@ -48,6 +49,8 @@ const OrderSummary = ({ tableId }) => {
           </View>
           <View style={styles.lineStyle}></View>
         </ScrollView>
+      ) : (
+        <EmptyContent />
       )}
     </View>
   );
