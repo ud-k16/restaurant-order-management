@@ -157,10 +157,11 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(20),
   },
   categoryHeading: {
-    marginVertical: moderateScale(10),
+    marginVertical: moderateScale(15),
     fontSize: moderateScale(20),
     fontWeight: 500,
     paddingHorizontal: moderateScale(18),
+    textAlign: "center",
   },
   itemContainer: {
     flexDirection: "row",
