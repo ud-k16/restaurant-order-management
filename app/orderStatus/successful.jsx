@@ -6,8 +6,8 @@ import { router } from "expo-router";
 const Successful = () => {
   return (
     <View style={styles.container}>
-      <Feather name="check-circle" size={44} color={styles.iconStyle.color} />
-      <Text style={styles.textStyle}>Published</Text>
+      <Feather name="check-circle" size={44} color={Themes.primary} />
+      <Text style={styles.textStyle}>Ordered</Text>
       <Pressable
         style={styles.backButton}
         onPress={() => {

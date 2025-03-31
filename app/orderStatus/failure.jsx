@@ -6,12 +6,8 @@ import { router } from "expo-router";
 const Failure = () => {
   return (
     <View style={styles.container}>
-      <MaterialIcons
-        name="report-gmailerrorred"
-        size={44}
-        color={styles.iconStyle.color}
-      />
-      <Text style={styles.textStyle}>Publish Failed</Text>
+      <MaterialIcons name="report-gmailerrorred" size={44} color={"red"} />
+      <Text style={styles.textStyle}>Order Failed</Text>
       <Pressable
         style={styles.backButton}
         onPress={() => {
