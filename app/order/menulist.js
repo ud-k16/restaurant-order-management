@@ -74,12 +74,6 @@ const MenuList = () => {
                           quantity,
                         });
                       }}
-                      onDecrement={() => {
-                        decrementQuantityInCart({
-                          tableId,
-                          productId: value.product_id,
-                        });
-                      }}
                     />
                   );
                 })}
