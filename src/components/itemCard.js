@@ -26,9 +26,20 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
       onPress={null}
     >
       {!inputVisible && (
-        <Text style={styles.productNameTextStyle} numberOfLines={3}>
-          {productName}
-        </Text>
+        <View>
+          <View
+            style={{
+              alignSelf: "center",
+              borderWidth: moderateScale(1),
+              borderRadius: moderateScale(7.5),
+              width: moderateScale(15),
+              height: moderateScale(15),
+            }}
+          ></View>
+          <Text style={styles.productNameTextStyle} numberOfLines={1}>
+            {productName}
+          </Text>
+        </View>
       )}
       {isInOrder && !inputVisible && (
         <Text style={styles.quantityTextStyle}>{isInOrder?.quantity}</Text>
@@ -68,10 +79,11 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     color: Themes.black,
     textAlign: "center",
-    textAlignVertical: "center",
+    textAlignVertical: "bottom",
     height: moderateScale(70),
-    borderTopLeftRadius: moderateScale(20),
-    borderTopRightRadius: moderateScale(20),
+
+    borderTopLeftRadius: moderateScale(70),
+    borderTopRightRadius: moderateScale(70),
     borderWidth: moderateScale(1),
   },
   textInputStyle: {
