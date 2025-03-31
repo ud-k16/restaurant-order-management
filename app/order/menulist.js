@@ -55,34 +55,35 @@ const MenuList = () => {
           const { name, items } = item;
           return (
             <View>
-              <Text style={styles.categoryHeading}>{name}</Text>
-              <View style={styles.itemContainer}>
-                {items.map((value, index) => {
-                  return (
-                    <ItemCard
-                      tableId={tableId}
-                      productId={value.product_id}
-                      productName={value.product_name}
-                      key={index}
-                      onAdd={(quantity) => {
-                        quantity &&
-                          addItemToCart({
-                            tableId,
-                            amountPerUnit: value.price,
-                            productName: value.product_name,
-                            productId: value.product_id,
-                            quantity,
-                          });
-                      }}
-                    />
-                  );
-                })}
-              </View>
+              <ScrollView>
+                <Text style={styles.categoryHeading}>{name}</Text>
+                <View style={styles.itemContainer}>
+                  {items.map((value, index) => {
+                    return (
+                      <ItemCard
+                        tableId={tableId}
+                        productId={value.product_id}
+                        productName={value.product_name}
+                        key={index}
+                        onAdd={(quantity) => {
+                          quantity &&
+                            addItemToCart({
+                              tableId,
+                              amountPerUnit: value.price,
+                              productName: value.product_name,
+                              productId: value.product_id,
+                              quantity,
+                            });
+                        }}
+                      />
+                    );
+                  })}
+                </View>
+              </ScrollView>
             </View>
           );
         }}
       />
-
       <View style={styles.bottomBar}>
         <Text
           style={{ color: Themes.white, fontSize: moderateScale(16) }}
@@ -116,7 +117,10 @@ const MenuList = () => {
                 onPress={() => {
                   toggleCategoryVisibility();
                   if (flatlistRef?.current)
-                    flatlistRef.current.scrollToItem({ item, animated: true });
+                    flatlistRef.current.scrollToItem({
+                      item,
+                      animated: true,
+                    });
                   else console.log("unable to scroll to index");
                 }}
               >
