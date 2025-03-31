@@ -65,13 +65,14 @@ const MenuList = () => {
                       productName={value.product_name}
                       key={index}
                       onAdd={(quantity) => {
-                        addItemToCart({
-                          tableId,
-                          amountPerUnit: value.price,
-                          productName: value.product_name,
-                          productId: value.product_id,
-                          quantity,
-                        });
+                        quantity &&
+                          addItemToCart({
+                            tableId,
+                            amountPerUnit: value.price,
+                            productName: value.product_name,
+                            productId: value.product_id,
+                            quantity,
+                          });
                       }}
                     />
                   );

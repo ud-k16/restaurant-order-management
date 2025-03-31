@@ -40,7 +40,7 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
           keyboardType="numeric"
           autoFocus={true}
           onEndEditing={(event) => {
-            onAdd(event.nativeEvent.text);
+            onAdd(Number(event.nativeEvent.text));
             setInputVisible(false);
           }}
         />
