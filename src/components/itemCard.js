@@ -14,9 +14,9 @@ import { useState } from "react";
 const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
   const { cart: tableOrder } = useOrderContext();
   const isInOrder = tableOrder?.find((value) => value.productId == productId);
-  const [addedQuantity, setAddedQuantity] = useState(
-    isInOrder && isInOrder.quantity
-  );
+  // const [addedQuantity, setAddedQuantity] = useState(
+  //   isInOrder && isInOrder.quantity
+  // );
   const [inputVisible, setInputVisible] = useState(false);
 
   return (
@@ -30,18 +30,17 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
           {productName}
         </Text>
       )}
-      {addedQuantity && !inputVisible && (
-        <Text style={styles.quantityTextStyle}>{addedQuantity}</Text>
+      {isInOrder && !inputVisible && (
+        <Text style={styles.quantityTextStyle}>{isInOrder?.quantity}</Text>
       )}
       {inputVisible && (
         <TextInput
           style={styles.textInputStyle}
-          value={isInOrder?.quantity}
-          onChangeText={(text) => setAddedQuantity(text)}
+          defaultValue={isInOrder?.quantity}
           keyboardType="numeric"
           autoFocus={true}
-          onEndEditing={() => {
-            onAdd(addedQuantity);
+          onEndEditing={(event) => {
+            onAdd(event.nativeEvent.text);
             setInputVisible(false);
           }}
         />
