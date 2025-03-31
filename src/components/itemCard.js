@@ -20,11 +20,7 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
   const [inputVisible, setInputVisible] = useState(false);
 
   return (
-    <Pressable
-      style={styles.container}
-      onLongPress={() => setInputVisible(true)}
-      onPress={null}
-    >
+    <Pressable style={styles.container} onPress={() => setInputVisible(true)}>
       {!inputVisible && (
         <View>
           <View style={styles.handler}></View>
