@@ -7,9 +7,10 @@ import { useGlobalSearchParams } from "expo-router/build/hooks";
 import { Text } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useHeaderContext } from "../../src/context/useHeaderContext";
 import { useFocusEffect } from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
 const OrderSummary = () => {
   const { tableId } = useGlobalSearchParams();
   const { cart: tableOrder } = useOrderContext();
@@ -34,66 +35,77 @@ const OrderSummary = () => {
   );
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {tableOrder?.map((value, index) => {
-          return (
-            <View style={styles.displayStack1} key={index}>
-              <MaterialCommunityIcons
-                name="delete-outline"
-                size={24}
-                color="black"
-                style={{ flex: 0.5 }}
-                onPress={() => {
-                  deleteItemFromCart({ productId: value.productId });
-                }}
-              />
-              <Text style={styles.productNameStyle} numberOfLines={1}>
-                {value.productName}
-              </Text>
-              <View style={styles.displayStack2}>
-                <Entypo
-                  name="minus"
+      {tableOrder.length > 0 ? (
+        <ScrollView>
+          {tableOrder?.map((value, index) => {
+            return (
+              <View style={styles.displayStack1} key={index}>
+                <MaterialCommunityIcons
+                  name="delete-outline"
                   size={24}
                   color="black"
-                  style={{
-                    textAlignVertical: "center",
-                    textAlign: "center",
-                  }}
+                  style={{ flex: 0.5 }}
                   onPress={() => {
-                    decrementQuantityInCart({
-                      productId: value.productId,
-                    });
+                    deleteItemFromCart({ productId: value.productId });
                   }}
                 />
-                <Text
-                  style={{
-                    borderWidth: moderateScale(2),
-                    paddingVertical: moderateScale(3),
-                    paddingHorizontal: moderateScale(10),
-                  }}
-                >
-                  {value.quantity}
+                <Text style={styles.productNameStyle} numberOfLines={1}>
+                  {value.productName}
                 </Text>
-                <Entypo
-                  name="plus"
-                  size={24}
-                  color="black"
-                  style={{
-                    textAlignVertical: "center",
-                    textAlign: "center",
-                  }}
-                  onPress={() => {
-                    incrementQuantityInCart({ productId: value.productId });
-                  }}
-                />
+                <View style={styles.displayStack2}>
+                  <Entypo
+                    name="minus"
+                    size={24}
+                    color="black"
+                    style={{
+                      textAlignVertical: "center",
+                      textAlign: "center",
+                    }}
+                    onPress={() => {
+                      decrementQuantityInCart({
+                        productId: value.productId,
+                      });
+                    }}
+                  />
+                  <Text
+                    style={{
+                      borderWidth: moderateScale(2),
+                      paddingVertical: moderateScale(3),
+                      paddingHorizontal: moderateScale(10),
+                    }}
+                  >
+                    {value.quantity}
+                  </Text>
+                  <Entypo
+                    name="plus"
+                    size={24}
+                    color="black"
+                    style={{
+                      textAlignVertical: "center",
+                      textAlign: "center",
+                    }}
+                    onPress={() => {
+                      incrementQuantityInCart({ productId: value.productId });
+                    }}
+                  />
+                </View>
               </View>
-            </View>
-          );
-        })}
-      </ScrollView>
-      <Text style={styles.confirmButton} onPress={confirmOrder}>
-        Confirm Order
-      </Text>
+            );
+          })}
+        </ScrollView>
+      ) : (
+        <View
+          style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
+        >
+          <Ionicons name="restaurant-outline" size={24} color="black" />
+          <Text>No Item To In Order</Text>
+        </View>
+      )}
+      {tableOrder.length > 0 && (
+        <Text style={styles.confirmButton} onPress={confirmOrder}>
+          Confirm Order
+        </Text>
+      )}
     </View>
   );
 };
