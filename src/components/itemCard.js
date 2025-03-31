@@ -5,46 +5,57 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
+  Pressable,
 } from "react-native";
 import { useOrderContext } from "../context/useOrderContext";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Themes } from "../utils/themes";
 import { useState } from "react";
-const ItemCard = ({ productId, productName, quantity, onAdd = () => {} }) => {
-  const [addedQuantity, setAddedQuantity] = useState(quantity);
-  const [inputVisible, setInputVisible] = useState(false);
+const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
   const { cart: tableOrder } = useOrderContext();
   const isInOrder = tableOrder?.find((value) => value.productId == productId);
+  const [addedQuantity, setAddedQuantity] = useState(
+    isInOrder && isInOrder.quantity
+  );
+  const [inputVisible, setInputVisible] = useState(false);
+
   return (
-    <View style={styles.container}>
-      {!inputVisible ? (
-        <View style={{ rowGap: moderateScale(15) }}>
-          <Text style={styles.productNameTextStyle} numberOfLines={3}>
-            {productName}
-          </Text>
-          {quantity && <Text style={styles.quantityTextStyle}>{quantity}</Text>}
-        </View>
-      ) : (
+    <Pressable
+      style={styles.container}
+      onLongPress={() => setInputVisible(true)}
+      onPress={null}
+    >
+      {!inputVisible && (
+        <Text style={styles.productNameTextStyle} numberOfLines={3}>
+          {productName}
+        </Text>
+      )}
+      {addedQuantity && !inputVisible && (
+        <Text style={styles.quantityTextStyle}>{addedQuantity}</Text>
+      )}
+      {inputVisible && (
         <TextInput
-          value={quantity}
+          style={styles.textInputStyle}
+          value={isInOrder?.quantity}
           onChangeText={(text) => setAddedQuantity(text)}
           keyboardType="numeric"
+          autoFocus={true}
+          onEndEditing={() => {
+            onAdd(addedQuantity);
+            setInputVisible(false);
+          }}
         />
       )}
-    </View>
+    </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: "45%",
-    borderTopLeftRadius: moderateScale(20),
-    borderTopEndRadius: moderateScale(20),
-    borderWidth: moderateScale(1),
   },
   quantityTextStyle: {
     backgroundColor: Themes.primary,
-    borderRadius: moderateScale(5),
     color: Themes.white,
     alignSelf: "center",
     width: "100%",
@@ -60,13 +71,17 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     height: moderateScale(70),
+    borderTopLeftRadius: moderateScale(20),
+    borderTopRightRadius: moderateScale(20),
+    borderWidth: moderateScale(1),
   },
-  displayStack1: {
-    height: moderateScale(40),
-    flexDirection: "row",
-    borderBottomLeftRadius: moderateScale(25),
-    borderBottomEndRadius: moderateScale(25),
-    bottom: -5,
+  textInputStyle: {
+    height: moderateScale(70),
+    backgroundColor: Themes.backDrop,
+    borderTopLeftRadius: moderateScale(20),
+    borderTopRightRadius: moderateScale(20),
+    textAlign: "center",
+    fontSize: moderateScale(20),
   },
 });
 export default ItemCard;

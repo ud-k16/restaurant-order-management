@@ -24,8 +24,7 @@ const MenuList = () => {
   const flatlistRef = useRef();
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   // ================================================
-  const { addItemToCart, decrementQuantityInCart, deleteCart, activeTableId } =
-    useOrders();
+  const { addItemToCart, deleteCart, activeTableId } = useOrders();
   // for setting Table name in Header
   // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
