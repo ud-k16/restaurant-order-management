@@ -27,15 +27,7 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
     >
       {!inputVisible && (
         <View>
-          <View
-            style={{
-              alignSelf: "center",
-              borderWidth: moderateScale(1),
-              borderRadius: moderateScale(7.5),
-              width: moderateScale(15),
-              height: moderateScale(15),
-            }}
-          ></View>
+          <View style={styles.handler}></View>
           <Text style={styles.productNameTextStyle} numberOfLines={1}>
             {productName}
           </Text>
@@ -45,16 +37,19 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
         <Text style={styles.quantityTextStyle}>{isInOrder?.quantity}</Text>
       )}
       {inputVisible && (
-        <TextInput
-          style={styles.textInputStyle}
-          defaultValue={isInOrder?.quantity}
-          keyboardType="numeric"
-          autoFocus={true}
-          onEndEditing={(event) => {
-            onAdd(Number(event.nativeEvent.text));
-            setInputVisible(false);
-          }}
-        />
+        <View>
+          <View style={styles.handler}></View>
+          <TextInput
+            style={styles.textInputStyle}
+            defaultValue={isInOrder?.quantity}
+            keyboardType="numeric"
+            autoFocus={true}
+            onEndEditing={(event) => {
+              onAdd(Number(event.nativeEvent.text));
+              setInputVisible(false);
+            }}
+          />
+        </View>
       )}
     </Pressable>
   );
@@ -63,6 +58,13 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
 const styles = StyleSheet.create({
   container: {
     width: "45%",
+  },
+  handler: {
+    alignSelf: "center",
+    borderWidth: moderateScale(1),
+    borderRadius: moderateScale(7.5),
+    width: moderateScale(15),
+    height: moderateScale(15),
   },
   quantityTextStyle: {
     backgroundColor: Themes.primary,
@@ -89,9 +91,10 @@ const styles = StyleSheet.create({
   textInputStyle: {
     height: moderateScale(70),
     backgroundColor: Themes.backDrop,
-    borderTopLeftRadius: moderateScale(20),
-    borderTopRightRadius: moderateScale(20),
+    borderTopLeftRadius: moderateScale(70),
+    borderTopRightRadius: moderateScale(70),
     textAlign: "center",
+    textAlignVertical: "bottom",
     fontSize: moderateScale(20),
   },
 });
