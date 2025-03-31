@@ -65,11 +65,15 @@ const styles = StyleSheet.create({
   quantityTextStyle: {
     backgroundColor: Themes.primary,
     color: Themes.white,
-    alignSelf: "center",
-    width: "100%",
+    alignSelf: "flex-end",
+    minWidth: moderateScale(30),
+    minHeight: moderateScale(30),
+    borderRadius: moderateScale(15),
     textAlign: "center",
     textAlignVertical: "center",
-    fontSize: moderateScale(25),
+    fontSize: moderateScale(16),
+    zIndex: 500,
+    bottom: 60,
   },
   productNameTextStyle: {
     fontWeight: 600,
