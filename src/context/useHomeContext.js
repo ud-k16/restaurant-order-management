@@ -18,8 +18,8 @@ const HomeContextProvider = ({ children }) => {
       const tableCount = await getTableCount();
       setState((prev) => ({
         ...prev,
-        menu,
-        tableCount,
+        menu: JSON.parse(menu),
+        tableCount: Number(tableCount),
       }));
     } catch (error) {
     } finally {

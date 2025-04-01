@@ -4,10 +4,12 @@ import { useWifiContext } from "@/src/context/useWifiContext";
 import TableList from "@/app/order/tablelist";
 import NoInternet from "@/app/NoInternet";
 import Configure from "@/app/Configure";
+
 const AppHome = () => {
   const { isLoading, menu, tableCount } = useHomeContext();
   const { isWifiEnabled, continueOffline } = useWifiContext();
-  console.log(isWifiEnabled, " :Flag Wifi");
+
+  // console.log(isWifiEnabled, " :Flag Wifi");
 
   if (isLoading)
     return (
@@ -16,7 +18,7 @@ const AppHome = () => {
       </View>
     );
   else if (!isWifiEnabled && !continueOffline) return <NoInternet />;
-  else if (menu || !tableCount) return <Configure />;
+  else if (!menu || !tableCount) return <Configure />;
   return <TableList />;
 };
 const styles = StyleSheet.create({

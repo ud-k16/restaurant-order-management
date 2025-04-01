@@ -2,9 +2,12 @@ import { useHomeContext } from "@/src/context/useHomeContext";
 import useHelpers from "@/src/utils/helperFunctions";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 const Configure = () => {
   const { tableCount, menu, setState: setHomeState } = useHomeContext();
+  const { setItem: setMenu } = useAsyncStorage("menu");
+  const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
   return (
     <View style={styles.container}>
@@ -14,12 +17,13 @@ const Configure = () => {
           style={styles.textInputStyle}
           keyboardType="numeric"
           value={tableCount}
-          onEndEditing={(event) =>
+          onEndEditing={(event) => {
             setHomeState((prev) => ({
               ...prev,
               tableCount: Number(event.nativeEvent.text),
-            }))
-          }
+            }));
+            setTableCount(event.nativeEvent.text);
+          }}
         />
       </View>
 
@@ -27,9 +31,8 @@ const Configure = () => {
         style={styles.menuPicker}
         onPress={async () => {
           const menu = await handleFilePicker();
-          console.log(menu, "menu received");
-
           setHomeState((prev) => ({ ...prev, menu }));
+          setMenu(JSON.stringify(menu));
         }}
       >
         Upload Menu
