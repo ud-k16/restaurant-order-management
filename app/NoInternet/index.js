@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
-import { router } from "expo-router";
 import { useWifiContext } from "@/src/context/useWifiContext";
 const NoInternet = () => {
   const { setState } = useWifiContext();
