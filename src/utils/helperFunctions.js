@@ -70,6 +70,7 @@ const useHelpers = () => {
       }
     } catch (error) {
       console.log("Error in handle Response function");
+      showError();
     }
   };
 

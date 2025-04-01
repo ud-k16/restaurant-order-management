@@ -1,24 +1,18 @@
 import { createContext, useContext, useState } from "react";
+import { ToastAndroid } from "react-native";
 
 const ErrorContext = createContext();
 
 const ErrorContextProvider = ({ children }) => {
-  const [state, setState] = useState({
-    errorVisible: false,
-    errorMessage: "",
-  });
   const showError = (message) => {
-    setState((prev) => ({
-      ...prev,
-      errorVisible: true,
-      errorMessage: message ?? "Something Went Wrong!, Try again",
-    }));
+    ToastAndroid.show(
+      message ?? "Something Went Wrong!, Try again",
+      ToastAndroid.LONG
+    );
   };
 
-  const hideError = () =>
-    setState((prev) => ({ ...prev, errorVisible: false, errorMessage: "" }));
   return (
-    <ErrorContext.Provider value={{ ...state, setState, showError, hideError }}>
+    <ErrorContext.Provider value={{ showError }}>
       {children}
     </ErrorContext.Provider>
   );
