@@ -1,25 +1,23 @@
 import { createContext, useContext, useEffect, useState } from "react";
-// import NetInfo from "@react-native-community/netinfo";
-// import Ping from "ping";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 const WifiContext = createContext();
 
 const WifiContextProvider = ({ children }) => {
+  const { isConnected, isInternetReachable, type, details, isWifiEnabled } =
+    useNetInfo();
   const [state, setState] = useState({
     ip: "",
     port: "",
     printerOnline: false,
+    serverOnline: isConnected,
   });
   useEffect(() => {
-    const intervalId = setInterval(async () => {
-      const status = await checkPrinterStatus(state.ip);
-      setState((prev) => ({ ...prev, printerOnline: status }));
-    }, 5000); // Check every 5 seconds
-
-    return () => clearInterval(intervalId);
-  }, [state.ip]);
-
-  const checkPrinterStatus = async (printerIP) => {};
+    setState((prev) => ({
+      ...prev,
+      serverOnline: isConnected,
+    }));
+  }, [isConnected]);
 
   return (
     <WifiContext.Provider value={{ ...state, setState }}>
