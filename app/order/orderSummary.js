@@ -13,7 +13,7 @@ const OrderSummary = ({ tableId }) => {
   const { orders } = useOrderContext();
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
-  const { printInWifiMode } = useWifiContext();
+  const { isPrinting, printInWifiMode } = useWifiContext();
   const {
     customerModelVisible,
     validationError,
@@ -96,7 +96,11 @@ const OrderSummary = ({ tableId }) => {
                 : showCustomerModal
             }
           >
-            {customer?.customerName ? "Print" : "Add Customer"}
+            {customer?.customerName
+              ? isPrinting
+                ? "Printing..."
+                : "Print"
+              : "Add Customer"}
           </Text>
           <Modal
             visible={customerModelVisible}

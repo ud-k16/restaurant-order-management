@@ -28,6 +28,7 @@ const useHelpers = () => {
       return response;
     } catch (error) {
       console.log("Error occured in the Fetch With TimeOut Function", error);
+      showError("Network Error,Check your internet");
       throw error;
     }
   };
