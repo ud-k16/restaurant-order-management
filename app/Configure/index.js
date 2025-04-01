@@ -1,14 +1,28 @@
+import { useHeaderContext } from "@/src/context/useHeaderContext";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import useHelpers from "@/src/utils/helperFunctions";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 const Configure = () => {
   const { tableCount, menu, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
+  const { setState: setHeaders } = useHeaderContext();
+  useFocusEffect(
+    useCallback(() => {
+      setHeaders({
+        currentPage: "Configuration",
+      });
+      return () => {
+        setHeaders({ currentPage: "", currentTable: "" });
+      };
+    }, [])
+  );
   return (
     <View style={styles.container}>
       <View>
