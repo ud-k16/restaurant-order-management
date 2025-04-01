@@ -1,9 +1,12 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useErrorContext } from "../context/useErrorContext";
+import * as DocumentPicker from "expo-document-picker";
+import * as FileSystem from "expo-file-system";
 
 const useHelpers = () => {
   const { showError } = useErrorContext();
-  // const { getItem: getRefreshToken } = useAsyncStorage("");
+
+  const { setItem: setMenu } = useAsyncStorage("menu");
 
   const fetchWithTimeOut = async ({ url, requestOptions, timeOut = 10000 }) => {
     console.log(
@@ -75,10 +78,45 @@ const useHelpers = () => {
     }
   };
 
+  const handleFilePicker = async () => {
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        type: "application/json", // Filter for JSON files
+        multiple: false, // Allow only single file selection
+      });
+
+      if (!result.canceled) {
+        // Now, let's read the content of the selected file using FileSystem
+        await readFile(result.assets[0].uri);
+      } else {
+        showError("file pick cancelled");
+      }
+    } catch (err) {
+      showError("Error picking file: " + err.message);
+      console.error("Error picking file:", err);
+    }
+  };
+
+  const readFile = async (fileUri) => {
+    try {
+      const fileContent = await FileSystem.readAsStringAsync(fileUri, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+      await setMenu(fileContent);
+      const parsedJson = JSON.parse(fileContent);
+      // console.log(parsedJson, "\n", fileContent, "\n", typeof fileContent);
+      return parsedJson;
+    } catch (e) {
+      showError("Error reading or parsing JSON file: " + e.message);
+      console.error("Error reading or parsing JSON file:", e);
+    }
+  };
+
   return {
     fetchWithTimeOut,
     handleResponse,
     handleResponseError,
+    handleFilePicker,
   };
 };
 

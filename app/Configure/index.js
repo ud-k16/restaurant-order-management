@@ -1,9 +1,11 @@
 import { useHomeContext } from "@/src/context/useHomeContext";
+import useHelpers from "@/src/utils/helperFunctions";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 const Configure = () => {
   const { tableCount, menu, setState: setHomeState } = useHomeContext();
+  const { handleFilePicker } = useHelpers();
   return (
     <View style={styles.container}>
       <Text style={styles.placeholderTextStyle}>Table Count</Text>
@@ -18,6 +20,16 @@ const Configure = () => {
           }))
         }
       />
+      <Text
+        onPress={async () => {
+          const menu = await handleFilePicker();
+          console.log(menu, "menu received");
+
+          setHomeState((prev) => ({ ...prev, menu }));
+        }}
+      >
+        Add Menu File
+      </Text>
     </View>
   );
 };
