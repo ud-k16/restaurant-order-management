@@ -87,7 +87,8 @@ const useHelpers = () => {
 
       if (!result.canceled) {
         // Now, let's read the content of the selected file using FileSystem
-        await readFile(result.assets[0].uri);
+        const menu = await readFile(result.assets[0].uri);
+        return menu;
       } else {
         showError("file pick cancelled");
       }
