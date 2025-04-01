@@ -182,9 +182,18 @@ const useOrders = () => {
       deleteCart();
     }
   };
+
+  const deleteOrder = (tableId) => {
+    // clear entire cart
+    setCurrentOrders((prev) => {
+      prev.orders.delete(tableId);
+      return { ...prev };
+    });
+  };
   useEffect(() => {}, []);
   return {
     ...state,
+    deleteOrder,
     activeTableId,
     addItemToCart,
     incrementQuantityInCart,

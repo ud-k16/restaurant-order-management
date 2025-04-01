@@ -6,9 +6,14 @@ import UserCard from "@/src/components/userCard";
 import { View, StyleSheet, ScrollView, Text, Modal } from "react-native";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
+import { useWifiContext } from "@/src/context/useWifiContext";
+import useOrders from "@/src/hooks/useOrders";
+
 const OrderSummary = ({ tableId }) => {
   const { orders } = useOrderContext();
   const { customersData } = useCustomerContext();
+  const { deleteOrder } = useOrders();
+  const { printInWifiMode } = useWifiContext();
   const {
     customerModelVisible,
     validationError,
@@ -28,6 +33,8 @@ const OrderSummary = ({ tableId }) => {
   const customer = customersData?.get(tableId);
   // gst
   const gst = 10;
+  // receipt
+  const receipt = "";
   return (
     <View style={styles.container}>
       {orderOfTheTable ? (
@@ -80,7 +87,14 @@ const OrderSummary = ({ tableId }) => {
           <View style={styles.lineStyle}></View>
           <Text
             style={styles.buttonStyle}
-            onPress={customer?.customerName ? null : showCustomerModal}
+            onPress={
+              customer?.customerName
+                ? async () => {
+                    const result = await printInWifiMode(receipt);
+                    result && deleteOrder(tableId);
+                  }
+                : showCustomerModal
+            }
           >
             {customer?.customerName ? "Print" : "Add Customer"}
           </Text>
