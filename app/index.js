@@ -1,6 +1,5 @@
-import MenuList from "./order/menulist";
-import TableList from "./order/tablelist";
+import AppHome from "./Home";
 
 export default function Index() {
-  return <TableList />;
+  return <AppHome />;
 }

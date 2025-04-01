@@ -10,14 +10,16 @@ const WifiContextProvider = ({ children }) => {
     ip: "",
     port: "",
     printerOnline: false,
-    serverOnline: isConnected,
+    isWifiEnabled,
+    offline: false,
   });
   useEffect(() => {
     setState((prev) => ({
       ...prev,
-      serverOnline: isConnected,
+      isWifiEnabled,
+      continueOffline: false,
     }));
-  }, [isConnected]);
+  }, [isWifiEnabled]);
 
   return (
     <WifiContext.Provider value={{ ...state, setState }}>
