@@ -1,18 +1,27 @@
 import { View, StyleSheet, ScrollView, Modal } from "react-native";
-import { tableNames } from "../../src/constants";
 import TableCard from "../../src/components/tableCard";
 import moderateScale from "@/src/utils/responsiveScale";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Themes } from "@/src/utils/themes";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import OrderSummary from "@/app/order/orderSummary";
+import { useHomeContext } from "@/src/context/useHomeContext";
 
 const TableList = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentTable, setCurrentTable] = useState("");
+  const [tableNames, setTableNames] = useState([]);
+  const { tableCount } = useHomeContext();
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
 
+  useEffect(() => {
+    let tNames = [];
+    for (let count = 1; count <= tableCount; count++) {
+      tNames.push(`T${count}`);
+    }
+    setTableNames(tNames);
+  }, []);
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     flex: 1,
-    paddingTop: moderateScale(20),
+    paddingVertical: moderateScale(20),
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-evenly",

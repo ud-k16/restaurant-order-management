@@ -16,7 +16,7 @@ const AppHome = () => {
       </View>
     );
   else if (!isWifiEnabled && !continueOffline) return <NoInternet />;
-  else if (!menu || !tableCount) return <Configure />;
+  else if (menu || !tableCount) return <Configure />;
   return <TableList />;
 };
 const styles = StyleSheet.create({

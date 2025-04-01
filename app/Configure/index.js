@@ -11,8 +11,11 @@ const Configure = () => {
         style={[styles.textInputStyle]}
         keyboardType="numeric"
         value={tableCount}
-        onChangeText={(text) =>
-          setHomeState((prev) => ({ ...prev, tableCount: Number(text) }))
+        onEndEditing={(event) =>
+          setHomeState((prev) => ({
+            ...prev,
+            tableCount: Number(event.nativeEvent.text),
+          }))
         }
       />
     </View>
