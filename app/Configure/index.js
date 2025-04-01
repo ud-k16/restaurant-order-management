@@ -8,19 +8,23 @@ const Configure = () => {
   const { handleFilePicker } = useHelpers();
   return (
     <View style={styles.container}>
-      <Text style={styles.placeholderTextStyle}>Table Count</Text>
-      <TextInput
-        style={[styles.textInputStyle]}
-        keyboardType="numeric"
-        value={tableCount}
-        onEndEditing={(event) =>
-          setHomeState((prev) => ({
-            ...prev,
-            tableCount: Number(event.nativeEvent.text),
-          }))
-        }
-      />
+      <View>
+        <Text>No. of Tables</Text>
+        <TextInput
+          style={styles.textInputStyle}
+          keyboardType="numeric"
+          value={tableCount}
+          onEndEditing={(event) =>
+            setHomeState((prev) => ({
+              ...prev,
+              tableCount: Number(event.nativeEvent.text),
+            }))
+          }
+        />
+      </View>
+
       <Text
+        style={styles.menuPicker}
         onPress={async () => {
           const menu = await handleFilePicker();
           console.log(menu, "menu received");
@@ -28,7 +32,7 @@ const Configure = () => {
           setHomeState((prev) => ({ ...prev, menu }));
         }}
       >
-        Add Menu File
+        Upload Menu
       </Text>
     </View>
   );
@@ -36,30 +40,29 @@ const Configure = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: moderateScale(15),
+    padding: moderateScale(15),
     backgroundColor: Themes.white,
+    rowGap: moderateScale(15),
   },
-  placeholderTextStyle: {
-    marginLeft: "32%",
-    bottom: moderateScale(-10),
-    backgroundColor: Themes.white,
-    zIndex: 500,
-    width: 88,
-    textAlign: "center",
-    color: Themes.black,
-  },
+
   textInputStyle: {
     borderWidth: moderateScale(1),
     height: moderateScale(50),
-    width: "40%",
-    alignSelf: "center",
+    width: 100,
     textAlign: "center",
     borderRadius: moderateScale(5),
     paddingLeft: moderateScale(10),
     fontSize: moderateScale(20),
-    placeholderTextStyle: {
-      fontSize: moderateScale(10),
-    },
+  },
+  menuPicker: {
+    borderWidth: moderateScale(2),
+    textAlign: "center",
+    textAlignVertical: "center",
+    borderRadius: moderateScale(5),
+    height: moderateScale(30),
+    backgroundColor: Themes.backDrop,
+    color: Themes.white,
+    width: moderateScale(200),
   },
 });
 export default Configure;
