@@ -4,7 +4,7 @@ import useHelpers from "@/src/utils/helperFunctions";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { useFocusEffect } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 const Configure = () => {
@@ -16,7 +16,7 @@ const Configure = () => {
   useFocusEffect(
     useCallback(() => {
       setHeaders({
-        currentPage: "Configuration",
+        currentPage: "Settings",
       });
       return () => {
         setHeaders({ currentPage: "", currentTable: "" });
@@ -25,45 +25,62 @@ const Configure = () => {
   );
   return (
     <View style={styles.container}>
-      <View>
-        <Text>No. of Tables</Text>
-        <TextInput
-          style={styles.textInputStyle}
-          keyboardType="numeric"
-          value={tableCount.toString()}
-          onEndEditing={(event) => {
-            setHomeState((prev) => ({
-              ...prev,
-              tableCount: Number(event.nativeEvent.text),
-            }));
-            setTableCount(event.nativeEvent.text);
-          }}
-        />
+      <View style={styles.contentContainer}>
+        <View>
+          <Text>No. of Tables</Text>
+          <TextInput
+            style={styles.textInputStyle}
+            keyboardType="numeric"
+            value={tableCount.toString()}
+            onEndEditing={(event) => {
+              setHomeState((prev) => ({
+                ...prev,
+                tableCount: Number(event.nativeEvent.text),
+              }));
+              setTableCount(event.nativeEvent.text);
+            }}
+          />
+        </View>
+        <View>
+          <Text>{menuFileName}</Text>
+          <Text
+            style={styles.menuPicker}
+            onPress={async () => {
+              const { menu, fileName } = await handleFilePicker();
+              setHomeState((prev) => ({
+                ...prev,
+                menu,
+                menuFileName: fileName,
+              }));
+              setMenu(JSON.stringify({ menu, fileName }));
+            }}
+          >
+            Upload Menu
+          </Text>
+        </View>
       </View>
-      <View>
-        <Text>{menuFileName}</Text>
-        <Text
-          style={styles.menuPicker}
-          onPress={async () => {
-            const { menu, fileName } = await handleFilePicker();
-            setHomeState((prev) => ({ ...prev, menu, menuFileName: fileName }));
-            setMenu(JSON.stringify({ menu, fileName }));
-          }}
-        >
-          Upload Menu
-        </Text>
-      </View>
+
+      <Text
+        style={styles.bottomAction}
+        onPress={() => {
+          router.navigate("/order/tablelist");
+        }}
+      >
+        View Table
+      </Text>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: moderateScale(15),
     backgroundColor: Themes.white,
+  },
+  contentContainer: {
+    padding: moderateScale(15),
+
     rowGap: moderateScale(15),
   },
-
   textInputStyle: {
     borderWidth: moderateScale(1),
     height: moderateScale(50),
@@ -82,6 +99,17 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.backDrop,
     color: Themes.white,
     width: moderateScale(200),
+  },
+  bottomAction: {
+    height: moderateScale(50),
+    backgroundColor: Themes.primary,
+    color: Themes.white,
+    textAlign: "center",
+    textAlignVertical: "center",
+    bottom: 0,
+    fontSize: moderateScale(20),
+    position: "absolute",
+    width: "100%",
   },
 });
 export default Configure;
