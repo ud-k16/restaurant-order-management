@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     rowGap: moderateScale(15),
     paddingHorizontal: moderateScale(20),
+    marginBottom: moderateScale(5),
   },
 
   dividerLine: {
