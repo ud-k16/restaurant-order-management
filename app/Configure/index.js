@@ -31,7 +31,7 @@ const Configure = () => {
           <TextInput
             style={styles.textInputStyle}
             keyboardType="numeric"
-            value={tableCount.toString()}
+            defaultValue={tableCount.toString()}
             onEndEditing={(event) => {
               setHomeState((prev) => ({
                 ...prev,
