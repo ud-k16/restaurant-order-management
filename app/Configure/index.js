@@ -1,5 +1,6 @@
 import { useHeaderContext } from "@/src/context/useHeaderContext";
 import { useHomeContext } from "@/src/context/useHomeContext";
+import { useWifiContext } from "@/src/context/useWifiContext";
 import useHelpers from "@/src/utils/helperFunctions";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
@@ -13,6 +14,7 @@ const Configure = () => {
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
   const { setState: setHeaders } = useHeaderContext();
+  const { ip, port } = useWifiContext();
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -58,6 +60,33 @@ const Configure = () => {
             Upload Menu
           </Text>
         </View>
+        <View>
+          <Text>Enter printer's IP Address</Text>
+          <TextInput
+            style={[styles.textInputStyle, { width: moderateScale(200) }]}
+            defaultValue={ip}
+            onEndEditing={(event) => {
+              setHomeState((prev) => ({
+                ...prev,
+                ip: event.nativeEvent.text,
+              }));
+            }}
+          />
+        </View>
+        <View>
+          <Text>Enter Printer's Port Number</Text>
+          <TextInput
+            style={styles.textInputStyle}
+            keyboardType="numeric"
+            defaultValue={port?.toString()}
+            onEndEditing={(event) => {
+              setHomeState((prev) => ({
+                ...prev,
+                port: Number(event.nativeEvent.text),
+              }));
+            }}
+          />
+        </View>
       </View>
 
       <Text
@@ -78,7 +107,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     padding: moderateScale(15),
-
     rowGap: moderateScale(15),
   },
   textInputStyle: {
@@ -87,7 +115,7 @@ const styles = StyleSheet.create({
     width: 100,
     textAlign: "center",
     borderRadius: moderateScale(5),
-    paddingLeft: moderateScale(10),
+    // paddingLeft: moderateScale(10),
     fontSize: moderateScale(20),
   },
   menuPicker: {

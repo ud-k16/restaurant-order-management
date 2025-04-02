@@ -10,7 +10,7 @@ const HomeContextProvider = ({ children }) => {
     menuFileName: "",
     tableCount: null,
   });
-  const { serverOnline } = useWifiContext();
+
   const { getItem: getMenu } = useAsyncStorage("menu");
   const { getItem: getTableCount } = useAsyncStorage("tableCount");
   const fetchTableAndMenuAvailable = async () => {

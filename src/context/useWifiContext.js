@@ -11,7 +11,7 @@ const WifiContextProvider = ({ children }) => {
 
   const [state, setState] = useState({
     ip: "",
-    port: "",
+    port: null,
     isPrinting: false,
     isConnected: false,
     isInternetReachable: false,
