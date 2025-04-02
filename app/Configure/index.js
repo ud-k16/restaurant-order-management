@@ -87,6 +87,30 @@ const Configure = () => {
             }}
           />
         </View>
+        <View>
+          <Text>Enter Tax detail</Text>
+          <View style={styles.displayStack}>
+            <TextInput
+              style={[styles.textInputStyle, { width: moderateScale(100) }]}
+              onEndEditing={(event) => {
+                setHomeState((prev) => ({
+                  ...prev,
+                  port: Number(event.nativeEvent.text),
+                }));
+              }}
+            />
+            <TextInput
+              style={[styles.textInputStyle, { width: moderateScale(200) }]}
+              keyboardType="numeric"
+              onEndEditing={(event) => {
+                setHomeState((prev) => ({
+                  ...prev,
+                  port: Number(event.nativeEvent.text),
+                }));
+              }}
+            />
+          </View>
+        </View>
       </View>
 
       <Text
@@ -109,6 +133,7 @@ const styles = StyleSheet.create({
     padding: moderateScale(15),
     rowGap: moderateScale(15),
   },
+  displayStack: { flexDirection: "row", columnGap: moderateScale(3) },
   textInputStyle: {
     borderWidth: moderateScale(1),
     height: moderateScale(50),
