@@ -45,7 +45,7 @@ const WifiContextProvider = ({ children }) => {
       console.log(result);
       return result;
     } catch (error) {
-      handleResponse(error);
+      handleResponseError(error);
     } finally {
       setState((prev) => ({ ...prev, isPrinting: false }));
     }
