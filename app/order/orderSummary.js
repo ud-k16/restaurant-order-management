@@ -34,7 +34,18 @@ const OrderSummary = ({ tableId }) => {
   // gst
   const gst = 10;
   // receipt
-  const receipt = "";
+
+  const generateReceipt = () => {
+    let receipt = "";
+    receipt =
+      "RECEIPT\n" +
+      `Date: ${new Date().toDateString()}\n` +
+      `Customer: ${customer?.customerName}\n` +
+      `Server: ${customer?.serverName}\n` +
+      `Time: ${new Date().toLocaleTimeString()}\n` +
+      `Table: ${tableId}\n`;
+    return receipt;
+  };
   return (
     <View style={styles.container}>
       {orderOfTheTable ? (
@@ -125,6 +136,7 @@ const OrderSummary = ({ tableId }) => {
           <Text
             style={styles.menuTextStyle}
             onPress={async () => {
+              const receipt = generateReceipt();
               const result = await printInWifiMode(receipt);
               result && deleteOrder(tableId);
             }}
