@@ -61,7 +61,7 @@ const Configure = () => {
           </Text>
         </View>
         <View>
-          <Text>Enter printer's IP Address</Text>
+          <Text>Enter Printer's IP Address</Text>
           <TextInput
             style={[styles.textInputStyle, { width: moderateScale(200) }]}
             defaultValue={ip}
