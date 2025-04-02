@@ -13,17 +13,16 @@ const WifiContextProvider = ({ children }) => {
     ip: "192.168.1.5",
     port: "5000",
     isPrinting: false,
-    printerOnline: false,
-    isWifiEnabled,
-    offline: false,
+    isConnected: false,
+    isInternetReachable: false,
   });
   useEffect(() => {
     setState((prev) => ({
       ...prev,
-      isWifiEnabled,
-      continueOffline: false,
+      isConnected,
+      isInternetReachable,
     }));
-  }, [isWifiEnabled]);
+  }, [isConnected, isInternetReachable]);
   const printInWifiMode = async (receipt = "") => {
     try {
       setState((prev) => ({ ...prev, isPrinting: true }));
