@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
+import EmptyContent from "@/app/EmptyContent";
 import { useCallback, useEffect, useRef, useState } from "react";
 import useOrders from "@/src/hooks/useOrders";
 import { useGlobalSearchParams } from "expo-router/build/hooks";
@@ -47,9 +48,13 @@ const MenuList = () => {
     activeTableId(tableId);
   }, []);
   // ==================================================
+
   return (
     <View style={styles.container}>
       <FlatList
+        ListEmptyComponent={
+          <EmptyContent content={"No Menu- upload Menu file in Settings"} />
+        }
         ref={flatlistRef}
         data={menu}
         renderItem={({ item }) => {
@@ -85,28 +90,30 @@ const MenuList = () => {
           );
         }}
       />
-      <View style={styles.bottomBar}>
-        <Text
-          style={{ color: Themes.white, fontSize: moderateScale(16) }}
-          onPress={() => {
-            deleteCart();
-          }}
-        >
-          Clear Menu
-        </Text>
+      {menu && (
+        <View style={styles.bottomBar}>
+          <Text
+            style={{ color: Themes.white, fontSize: moderateScale(16) }}
+            onPress={() => {
+              deleteCart();
+            }}
+          >
+            Clear Menu
+          </Text>
 
-        <Link
-          style={{ color: Themes.white, fontSize: moderateScale(16) }}
-          href={{
-            pathname: "/order/cartSummary",
-            params: {
-              tableId,
-            },
-          }}
-        >
-          View Orders
-        </Link>
-      </View>
+          <Link
+            style={{ color: Themes.white, fontSize: moderateScale(16) }}
+            href={{
+              pathname: "/order/cartSummary",
+              params: {
+                tableId,
+              },
+            }}
+          >
+            View Orders
+          </Link>
+        </View>
+      )}
       {categoryVisible && (
         <View style={styles.categoryContainer}>
           <FlatList
@@ -131,16 +138,18 @@ const MenuList = () => {
           />
         </View>
       )}
-      <Pressable
-        style={styles.bottomArrowContainer}
-        onPress={toggleCategoryVisibility}
-      >
-        {!categoryVisible ? (
-          <AntDesign name="arrowup" size={35} color="black" />
-        ) : (
-          <AntDesign name="arrowdown" size={35} color="black" />
-        )}
-      </Pressable>
+      {menu && (
+        <Pressable
+          style={styles.bottomArrowContainer}
+          onPress={toggleCategoryVisibility}
+        >
+          {!categoryVisible ? (
+            <AntDesign name="arrowup" size={35} color="black" />
+          ) : (
+            <AntDesign name="arrowdown" size={35} color="black" />
+          )}
+        </Pressable>
+      )}
     </View>
   );
 };
