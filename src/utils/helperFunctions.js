@@ -61,7 +61,14 @@ const useHelpers = () => {
   const handleResponse = async (response) => {
     try {
       if (response.status === 200) {
-        const result = await response.json();
+        let result = response;
+
+        const contentType = response.headers.get("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          result = response.json(); // Parse as JSON
+        } else if (contentType && contentType.includes("text/html")) {
+          result = response.text();
+        }
         return result;
       } else if (response.status === 401) {
         showError();
