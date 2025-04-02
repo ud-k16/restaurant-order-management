@@ -1,11 +1,12 @@
 import { View, StyleSheet, ScrollView, Modal } from "react-native";
 import TableCard from "../../src/components/tableCard";
 import moderateScale from "@/src/utils/responsiveScale";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Themes } from "@/src/utils/themes";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import OrderSummary from "@/app/order/orderSummary";
 import { useHomeContext } from "@/src/context/useHomeContext";
+import EmptyContent from "../EmptyContent";
 
 const TableList = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -21,7 +22,9 @@ const TableList = () => {
       tNames.push(`T${count}`);
     }
     setTableNames(tNames);
-  }, []);
+  }, [tableCount]);
+  if (!tableCount)
+    return <EmptyContent content="Configure Number Of Tables in Settings" />;
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>

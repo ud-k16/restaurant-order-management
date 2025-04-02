@@ -33,7 +33,7 @@ const Configure = () => {
           <TextInput
             style={styles.textInputStyle}
             keyboardType="numeric"
-            defaultValue={tableCount.toString()}
+            defaultValue={tableCount?.toString()}
             onEndEditing={(event) => {
               setHomeState((prev) => ({
                 ...prev,
@@ -78,7 +78,7 @@ const Configure = () => {
           <TextInput
             style={styles.textInputStyle}
             keyboardType="numeric"
-            defaultValue={port?.toString()}
+            defaultValue={port ? port.toString() : ""}
             onEndEditing={(event) => {
               setHomeState((prev) => ({
                 ...prev,

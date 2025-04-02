@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text } from "react-native";
-const EmptyContent = ({ content = "No Order Data to Display" }) => {
+const EmptyContent = ({ content = "No Data to Display" }) => {
   return (
     <View style={styles.container}>
       <Text>{content}</Text>
