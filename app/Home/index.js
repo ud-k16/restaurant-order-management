@@ -6,7 +6,7 @@ import NoInternet from "@/app/NoInternet";
 import Configure from "@/app/Configure";
 
 const AppHome = () => {
-  const { isLoading, menu, tableCount } = useHomeContext();
+  const { isLoading, menu, tableCount, ip, port } = useHomeContext();
   const { isInternetReachable, continueOffline } = useWifiContext();
 
   if (isLoading)
@@ -16,7 +16,9 @@ const AppHome = () => {
       </View>
     );
   else if (!isInternetReachable && !continueOffline) return <NoInternet />;
-  return !menu && !tableCount ? <Configure /> : <TableList />;
+  else if (!menu && !tableCount) return <Configure />;
+  else if (!continueOffline && !ip && !port) return <Configure />;
+  return <TableList />;
 };
 const styles = StyleSheet.create({
   container: {

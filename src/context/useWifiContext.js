@@ -10,8 +10,8 @@ const WifiContextProvider = ({ children }) => {
     useHelpers();
 
   const [state, setState] = useState({
-    ip: "192.168.1.5",
-    port: "5000",
+    ip: "",
+    port: "",
     isPrinting: false,
     isConnected: false,
     isInternetReachable: false,
