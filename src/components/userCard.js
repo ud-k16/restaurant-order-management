@@ -2,7 +2,6 @@ import { View, StyleSheet, TextInput, Text } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Themes } from "../utils/themes";
 import moderateScale from "../utils/responsiveScale";
-import useCustomers from "../hooks/useCustomers";
 const UserCard = ({
   validationError,
   customerName,
@@ -14,16 +13,25 @@ const UserCard = ({
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <MaterialCommunityIcons
-          name="account-outline"
-          size={64}
-          color={Themes.white}
+        <View
           style={{
             textAlign: "center",
             textAlignVertical: "center",
             backgroundColor: Themes.primary,
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: moderateScale(20),
           }}
-        />
+        >
+          <MaterialCommunityIcons
+            name="account-outline"
+            size={30}
+            color={Themes.white}
+          />
+          <Text style={{ color: Themes.white }}>
+            Customer-Server Information
+          </Text>
+        </View>
         <TextInput
           style={styles.textInputStyle}
           placeholder="Customer Name"
