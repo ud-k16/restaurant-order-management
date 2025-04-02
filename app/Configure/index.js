@@ -116,7 +116,7 @@ const Configure = () => {
       <Text
         style={styles.bottomAction}
         onPress={() => {
-          router.navigate("/order/tablelist");
+          router.dismissAll();
         }}
       >
         View Table
