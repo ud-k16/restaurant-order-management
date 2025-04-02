@@ -85,23 +85,12 @@ const OrderSummary = ({ tableId }) => {
             <Text style={{ flex: 0.29 }}>{subTotal + gst}</Text>
           </View>
           <View style={styles.lineStyle}></View>
-          <Text
-            style={styles.buttonStyle}
-            onPress={
-              customer?.customerName
-                ? async () => {
-                    const result = await printInWifiMode(receipt);
-                    result && deleteOrder(tableId);
-                  }
-                : showCustomerModal
-            }
-          >
-            {customer?.customerName
-              ? isPrinting
-                ? "Printing..."
-                : "Print"
-              : "Add Customer"}
-          </Text>
+          {!customer?.customerName && (
+            <Text style={styles.buttonStyle} onPress={showCustomerModal}>
+              Add Customer
+            </Text>
+          )}
+
           <Modal
             visible={customerModelVisible}
             onRequestClose={hideCustomerModal}
@@ -123,12 +112,49 @@ const OrderSummary = ({ tableId }) => {
       ) : (
         <EmptyContent />
       )}
+      {orderOfTheTable && customer?.customerName && (
+        <View style={styles.bottomAction}>
+          <Text
+            onPress={() => {
+              deleteOrder(tableId);
+            }}
+            style={styles.menuTextStyle}
+          >
+            Delete Order
+          </Text>
+          <Text
+            style={styles.menuTextStyle}
+            onPress={async () => {
+              const result = await printInWifiMode(receipt);
+              result && deleteOrder(tableId);
+            }}
+          >
+            {isPrinting ? "Printing........." : "Print Receipt"}
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  bottomAction: {
+    height: moderateScale(50),
+    backgroundColor: Themes.primary,
+
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+    alignItems: "center",
+    bottom: 0,
+
+    position: "absolute",
+    width: "100%",
+  },
+  menuTextStyle: {
+    color: Themes.white,
+    fontSize: moderateScale(16),
   },
   scrollViewStyle: {
     paddingHorizontal: moderateScale(5),
