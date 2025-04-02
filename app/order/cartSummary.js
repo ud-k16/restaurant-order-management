@@ -98,7 +98,7 @@ const OrderSummary = () => {
           style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
         >
           <Ionicons name="restaurant-outline" size={24} color="black" />
-          <Text>No Item To In Order</Text>
+          <Text>No Item To Display</Text>
         </View>
       )}
       {tableOrder.length > 0 && (
