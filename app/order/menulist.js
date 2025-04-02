@@ -11,11 +11,11 @@ import {
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Menus } from "@/src/constants";
 import useOrders from "@/src/hooks/useOrders";
 import { useGlobalSearchParams } from "expo-router/build/hooks";
-import { Link, router, useFocusEffect, useNavigation } from "expo-router";
+import { Link, useFocusEffect } from "expo-router";
 import { useHeaderContext } from "@/src/context/useHeaderContext";
+import { useHomeContext } from "@/src/context/useHomeContext";
 const MenuList = () => {
   const { tableId } = useGlobalSearchParams();
   // showing list of menu Category logic variables
@@ -28,6 +28,7 @@ const MenuList = () => {
   // for setting Table name in Header
   // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
+  const { menu } = useHomeContext();
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -50,7 +51,7 @@ const MenuList = () => {
     <View style={styles.container}>
       <FlatList
         ref={flatlistRef}
-        data={Menus}
+        data={menu}
         renderItem={({ item }) => {
           const { name, items } = item;
           return (
@@ -110,7 +111,7 @@ const MenuList = () => {
         <View style={styles.categoryContainer}>
           <FlatList
             style={{ padding: moderateScale(10) }}
-            data={Menus}
+            data={menu}
             ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
             renderItem={({ item }) => (
               <Pressable
