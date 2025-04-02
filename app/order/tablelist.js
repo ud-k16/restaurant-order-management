@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollViewContainer: {
-    flex: 1,
+    flexGrow: 1,
     paddingVertical: moderateScale(20),
     flexDirection: "row",
     flexWrap: "wrap",
