@@ -46,7 +46,7 @@ const Configure = () => {
           style={styles.menuPicker}
           onPress={async () => {
             const { menu, fileName } = await handleFilePicker();
-            setHomeState((prev) => ({ ...prev, menu }));
+            setHomeState((prev) => ({ ...prev, menu, menuFileName: fileName }));
             setMenu(JSON.stringify({ menu, fileName }));
           }}
         >

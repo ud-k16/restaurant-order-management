@@ -86,9 +86,11 @@ const useHelpers = () => {
       });
 
       if (!result.canceled) {
+        console.log(result);
+
         // Now, let's read the content of the selected file using FileSystem
         const menu = await readFile(result.assets[0].uri);
-        return menu;
+        return { menu, fileName: result.assets[0].name };
       } else {
         showError("file pick cancelled");
       }
@@ -103,7 +105,6 @@ const useHelpers = () => {
       const fileContent = await FileSystem.readAsStringAsync(fileUri, {
         encoding: FileSystem.EncodingType.UTF8,
       });
-      await setMenu(fileContent);
       const parsedJson = JSON.parse(fileContent);
       // console.log(parsedJson, "\n", fileContent, "\n", typeof fileContent);
       return parsedJson;
