@@ -49,7 +49,7 @@ const TableList = () => {
               style={{ alignSelf: "flex-end" }}
             />
           </View>
-          <OrderSummary tableId={currentTable} />
+          <OrderSummary tableId={currentTable} hideModal={hideModal} />
         </Modal>
       )}
     </View>

@@ -3,22 +3,14 @@ import { useCustomerContext } from "@/src/context/useCustomerContext";
 import useCustomers from "@/src/hooks/useCustomers";
 import moderateScale from "@/src/utils/responsiveScale";
 import UserCard from "@/src/components/userCard";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Modal,
-  Pressable,
-} from "react-native";
+import { View, StyleSheet, ScrollView, Text, Modal } from "react-native";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
 import { useWifiContext } from "@/src/context/useWifiContext";
 import useOrders from "@/src/hooks/useOrders";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { router } from "expo-router";
 
-const OrderSummary = ({ tableId }) => {
+const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { orders } = useOrderContext();
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
@@ -155,6 +147,7 @@ const OrderSummary = ({ tableId }) => {
             <Text
               style={styles.menuTextStyle}
               onPress={() => {
+                hideModal();
                 router.navigate("/Configure");
               }}
             >
