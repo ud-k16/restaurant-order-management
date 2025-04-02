@@ -152,22 +152,14 @@ const OrderSummary = ({ tableId }) => {
               {isPrinting ? "Printing........." : "Print Receipt"}
             </Text>
           ) : (
-            <Pressable
+            <Text
+              style={styles.menuTextStyle}
               onPress={() => {
                 router.navigate("/Configure");
               }}
             >
-              <Ionicons
-                name="settings-outline"
-                size={20}
-                style={{ alignSelf: "center" }}
-                color={Themes.white}
-                onPress={() => {
-                  router.navigate("/Configure");
-                }}
-              />
-              <Text style={styles.menuTextStyle}>Printer Config</Text>
-            </Pressable>
+              Printer Config
+            </Text>
           )}
         </View>
       )}
