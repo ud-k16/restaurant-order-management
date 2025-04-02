@@ -14,7 +14,7 @@ const Configure = () => {
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
   const { setState: setHeaders } = useHeaderContext();
-  const { ip, port } = useWifiContext();
+  const { ip, port, setState: setWifiState } = useWifiContext();
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -66,7 +66,7 @@ const Configure = () => {
             style={[styles.textInputStyle, { width: moderateScale(200) }]}
             defaultValue={ip}
             onEndEditing={(event) => {
-              setHomeState((prev) => ({
+              setWifiState((prev) => ({
                 ...prev,
                 ip: event.nativeEvent.text,
               }));
@@ -80,7 +80,7 @@ const Configure = () => {
             keyboardType="numeric"
             defaultValue={port ? port.toString() : ""}
             onEndEditing={(event) => {
-              setHomeState((prev) => ({
+              setWifiState((prev) => ({
                 ...prev,
                 port: Number(event.nativeEvent.text),
               }));

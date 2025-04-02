@@ -3,17 +3,26 @@ import { useCustomerContext } from "@/src/context/useCustomerContext";
 import useCustomers from "@/src/hooks/useCustomers";
 import moderateScale from "@/src/utils/responsiveScale";
 import UserCard from "@/src/components/userCard";
-import { View, StyleSheet, ScrollView, Text, Modal } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Modal,
+  Pressable,
+} from "react-native";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
 import { useWifiContext } from "@/src/context/useWifiContext";
 import useOrders from "@/src/hooks/useOrders";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { router } from "expo-router";
 
 const OrderSummary = ({ tableId }) => {
   const { orders } = useOrderContext();
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
-  const { isPrinting, printInWifiMode } = useWifiContext();
+  const { isPrinting, printInWifiMode, ip, port } = useWifiContext();
   const {
     customerModelVisible,
     validationError,
@@ -34,7 +43,6 @@ const OrderSummary = ({ tableId }) => {
   // gst
   const gst = 10;
   // receipt
-
   const generateReceipt = () => {
     let receipt = "";
     receipt =
@@ -133,16 +141,35 @@ const OrderSummary = ({ tableId }) => {
           >
             Delete Order
           </Text>
-          <Text
-            style={styles.menuTextStyle}
-            onPress={async () => {
-              const receipt = generateReceipt();
-              const result = await printInWifiMode(receipt);
-              result && deleteOrder(tableId);
-            }}
-          >
-            {isPrinting ? "Printing........." : "Print Receipt"}
-          </Text>
+          {!!ip && !!port ? (
+            <Text
+              style={styles.menuTextStyle}
+              onPress={async () => {
+                const receipt = generateReceipt();
+                const result = await printInWifiMode(receipt);
+                result && deleteOrder(tableId);
+              }}
+            >
+              {isPrinting ? "Printing........." : "Print Receipt"}
+            </Text>
+          ) : (
+            <Pressable
+              onPress={() => {
+                router.navigate("/Configure");
+              }}
+            >
+              <Ionicons
+                name="settings-outline"
+                size={20}
+                style={{ alignSelf: "center" }}
+                color={Themes.white}
+                onPress={() => {
+                  router.navigate("/Configure");
+                }}
+              />
+              <Text style={styles.menuTextStyle}>Printer Config</Text>
+            </Pressable>
+          )}
         </View>
       )}
     </View>
