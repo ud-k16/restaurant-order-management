@@ -78,7 +78,7 @@ const useHelpers = () => {
       } else if (response.status === 400) {
         // bad request
         showError();
-      }
+      } else showError();
     } catch (error) {
       console.log("Error in handle Response function");
       showError();
