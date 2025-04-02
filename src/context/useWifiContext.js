@@ -15,12 +15,14 @@ const WifiContextProvider = ({ children }) => {
     isPrinting: false,
     isConnected: false,
     isInternetReachable: false,
+    continueOffline: false,
   });
   useEffect(() => {
     setState((prev) => ({
       ...prev,
       isConnected,
       isInternetReachable,
+      continueOffline: isInternetReachable && false,
     }));
   }, [isConnected, isInternetReachable]);
   const printInWifiMode = async (receipt = "") => {

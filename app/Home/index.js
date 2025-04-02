@@ -7,9 +7,7 @@ import Configure from "@/app/Configure";
 
 const AppHome = () => {
   const { isLoading, menu, tableCount } = useHomeContext();
-  const { isWifiEnabled, continueOffline } = useWifiContext();
-
-  // console.log(isWifiEnabled, " :Flag Wifi");
+  const { isInternetReachable, continueOffline } = useWifiContext();
 
   if (isLoading)
     return (
@@ -17,8 +15,8 @@ const AppHome = () => {
         <Text>Hold on for some time</Text>
       </View>
     );
-  else if (!isWifiEnabled && !continueOffline) return <NoInternet />;
-  return <Configure />;
+  else if (!isInternetReachable && !continueOffline) return <NoInternet />;
+  return !menu && !tableCount ? <Configure /> : <TableList />;
 };
 const styles = StyleSheet.create({
   container: {
