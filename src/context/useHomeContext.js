@@ -7,6 +7,7 @@ const HomeContextProvider = ({ children }) => {
   const [state, setState] = useState({
     isLoading: true,
     menu: null,
+    menuFileName: "",
     tableCount: null,
   });
   const { serverOnline } = useWifiContext();
@@ -14,11 +15,13 @@ const HomeContextProvider = ({ children }) => {
   const { getItem: getTableCount } = useAsyncStorage("tableCount");
   const fetchTableAndMenuAvailable = async () => {
     try {
-      const menu = await getMenu();
+      const menuDetail = await getMenu();
+      const { menu, fileName } = JSON.parse(menuDetail);
       const tableCount = await getTableCount();
       setState((prev) => ({
         ...prev,
-        menu: JSON.parse(menu),
+        menu,
+        menuFileName: fileName,
         tableCount: Number(tableCount),
       }));
     } catch (error) {

@@ -8,7 +8,7 @@ import { useFocusEffect } from "expo-router";
 import { useCallback } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
 const Configure = () => {
-  const { tableCount, menu, setState: setHomeState } = useHomeContext();
+  const { tableCount, menuFileName, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
@@ -30,7 +30,7 @@ const Configure = () => {
         <TextInput
           style={styles.textInputStyle}
           keyboardType="numeric"
-          value={tableCount}
+          value={tableCount.toString()}
           onEndEditing={(event) => {
             setHomeState((prev) => ({
               ...prev,
@@ -40,17 +40,19 @@ const Configure = () => {
           }}
         />
       </View>
-
-      <Text
-        style={styles.menuPicker}
-        onPress={async () => {
-          const menu = await handleFilePicker();
-          setHomeState((prev) => ({ ...prev, menu }));
-          setMenu(JSON.stringify(menu));
-        }}
-      >
-        Upload Menu
-      </Text>
+      <View>
+        <Text>{menuFileName}</Text>
+        <Text
+          style={styles.menuPicker}
+          onPress={async () => {
+            const { menu, fileName } = await handleFilePicker();
+            setHomeState((prev) => ({ ...prev, menu }));
+            setMenu(JSON.stringify({ menu, fileName }));
+          }}
+        >
+          Upload Menu
+        </Text>
+      </View>
     </View>
   );
 };
