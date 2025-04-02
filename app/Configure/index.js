@@ -87,7 +87,7 @@ const Configure = () => {
             }}
           />
         </View>
-        <View>
+        {/* <View>
           <Text>Enter Tax detail</Text>
           <View style={styles.displayStack}>
             <TextInput
@@ -95,7 +95,7 @@ const Configure = () => {
               onEndEditing={(event) => {
                 setHomeState((prev) => ({
                   ...prev,
-                  port: Number(event.nativeEvent.text),
+                  taxes: [...prev.taxes],
                 }));
               }}
             />
@@ -110,7 +110,7 @@ const Configure = () => {
               }}
             />
           </View>
-        </View>
+        </View> */}
       </View>
 
       <Text

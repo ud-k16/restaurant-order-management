@@ -9,6 +9,7 @@ const HomeContextProvider = ({ children }) => {
     menu: null,
     menuFileName: "",
     tableCount: null,
+    taxes: [],
   });
 
   const { getItem: getMenu } = useAsyncStorage("menu");
