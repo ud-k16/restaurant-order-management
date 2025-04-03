@@ -23,15 +23,16 @@ const ItemCard = ({
 
   return (
     <Pressable style={styles.container} onPress={() => setInputVisible(true)}>
+      {isInOrder && !inputVisible && (
+        <Text style={styles.quantityTextStyle}>{isInOrder?.quantity}</Text>
+      )}
       {!inputVisible && (
         <View style={styles.ItemCardContainer}>
           <Text numberOfLines={2}>{productName}</Text>
           <Text numberOfLines={2}>{productDescription}</Text>
         </View>
       )}
-      {isInOrder && !inputVisible && (
-        <Text style={styles.quantityTextStyle}>{isInOrder?.quantity}</Text>
-      )}
+
       {inputVisible && (
         <View>
           <TextInput
@@ -74,7 +75,9 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     fontSize: moderateScale(16),
     zIndex: 500,
-    bottom: 60,
+    top: -10,
+    right: -10,
+    position: "absolute",
   },
   ItemCardContainer: {
     color: Themes.black,
