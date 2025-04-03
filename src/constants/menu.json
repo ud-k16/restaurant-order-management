@@ -1,95 +1,41 @@
 [
   {
-    "name": "Kalte Vorspeicen",
-    "items": [
+    "category": "Cold Appetizers",
+    "dishes": [
       {
-        "product_name": "oliven and peporini",
-        "available": null,
-        "price": 100,
+        "product_name": "Olives and Peppers",
+        "product_description": "",
         "product_id": 1
       },
       {
-        "product_name": "Fish Fry",
-        "available": null,
-        "price": 100,
+        "product_name": "Greek Farmer's Salad",
+        "product_description": "",
         "product_id": 2
       },
       {
-        "product_name": "Egg Fry",
-        "available": null,
-        "price": 100,
+        "product_name": "Ktipiti",
+        "product_description": "Spicy feta cheese cream",
         "product_id": 3
       },
       {
-        "product_name": "Moringa",
-        "available": null,
-        "price": 100,
+        "product_name": "Tzatziki",
+        "product_description": "Spiced yogurt dip with garlic, spices, and olive oil",
         "product_id": 4
       },
       {
-        "product_name": "Pepper Fry",
-        "available": null,
-        "price": 100,
+        "product_name": "Taramos",
+        "product_description": "Fish roe cream",
         "product_id": 5
       },
       {
-        "product_name": "Chicken Legs Fry",
-        "available": null,
-        "price": 100,
+        "product_name": "Ouzo Meze",
+        "product_description": "With dolmadakia, tzatziki, tarama, feta cheese, olives, peppers, broad beans, and a double ouzo with ice cubes",
         "product_id": 6
       },
       {
-        "product_name": "Olive oil Fried Cheese",
-        "available": null,
-        "price": 100,
+        "product_name": "Syrtaki Salad",
+        "product_description": "Seasonal salad with grilled chicken breast strips",
         "product_id": 7
-      }
-    ]
-  },
-  {
-    "name": "Cock Tail",
-    "items": [
-      {
-        "product_name": "oliven and peporini",
-        "available": null,
-        "price": 100,
-        "product_id": 8
-      },
-      {
-        "product_name": "votka",
-        "available": null,
-        "price": 100,
-        "product_id": 9
-      },
-      {
-        "product_name": "liquor Red",
-        "available": null,
-        "price": 100,
-        "product_id": 10
-      },
-      {
-        "product_name": "Voilet Liquid",
-        "available": null,
-        "price": 100,
-        "product_id": 11
-      },
-      {
-        "product_name": "heaven",
-        "available": null,
-        "price": 100,
-        "product_id": 12
-      },
-      {
-        "product_name": "Red Wine and Added Cashews and Some Nuts",
-        "available": null,
-        "price": 100,
-        "product_id": 13
-      },
-      {
-        "product_name": "Fire  dragon",
-        "available": null,
-        "price": 100,
-        "product_id": 14
       }
     ]
   }
