@@ -21,7 +21,7 @@ const useCustomers = () => {
       console.log("Add customer data : ", tableId);
       if (!state.customerName && !state.serverName) {
         setState((prev) => ({ ...prev, validationError: true }));
-        return;
+        return false;
       }
       setCustomersData((prev) => {
         prev.set(tableId, {

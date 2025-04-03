@@ -32,6 +32,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   }, 0);
   // table customer data
   const customer = customersData?.get(tableId);
+  console.log(customer?.customerName, customer?.serverName, ">>>>>>>>>>");
 
   // receipt
   const generateReceipt = () => {
@@ -45,6 +46,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       `Table: ${tableId}\n`;
     return receipt;
   };
+
   return (
     <View style={styles.container}>
       {orderOfTheTable ? (
@@ -80,24 +82,16 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
               </View>
             );
           })}
-          {/* <View style={styles.lineStyle}></View>
-          <View style={styles.displayStack}>
-            <Text style={{ flex: 1 }}>Sub total (Excl. GST)</Text>
-            <Text style={{ flex: 0.29 }}>{subTotal}</Text>
-          </View> */}
-          {/* <View style={styles.displayStack}>
-            <Text style={{ flex: 1 }}>GST @ 18%</Text>
-            <Text style={{ flex: 0.29 }}>{gst}</Text>
-          </View> */}
+
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 1 }}>Total </Text>
             <Text style={{ flex: 0.29 }}>{subTotal}</Text>
           </View>
           <View style={styles.lineStyle}></View>
-          {!customer?.customerName && (
+          {(!customer?.customerName || !customer?.serverName) && (
             <Text style={styles.buttonStyle} onPress={showCustomerModal}>
-              Add Customer
+              Customer/Server Information
             </Text>
           )}
 
@@ -122,7 +116,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       ) : (
         <EmptyContent />
       )}
-      {orderOfTheTable && customer?.customerName && (
+      {orderOfTheTable && customer?.customerName && customer?.serverName && (
         <View style={styles.bottomAction}>
           <Text
             onPress={() => {

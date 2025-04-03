@@ -34,6 +34,7 @@ const UserCard = ({
         </View>
         <TextInput
           style={styles.textInputStyle}
+          defaultValue={customerName}
           placeholder="Customer Name"
           onChangeText={(text) =>
             setState((prev) => ({ ...prev, customerName: text }))
@@ -44,6 +45,7 @@ const UserCard = ({
         </Text>
         <TextInput
           style={styles.textInputStyle}
+          defaultValue={serverName}
           placeholder="Server Name"
           onChangeText={(text) =>
             setState((prev) => ({ ...prev, serverName: text }))
