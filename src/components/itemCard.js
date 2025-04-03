@@ -26,6 +26,7 @@ const ItemCard = ({
       {!inputVisible && (
         <View style={styles.ItemCardContainer}>
           <Text numberOfLines={2}>{productName}</Text>
+          <Text numberOfLines={2}>{productDescription}</Text>
         </View>
       )}
       {isInOrder && !inputVisible && (
