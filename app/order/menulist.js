@@ -58,13 +58,13 @@ const MenuList = () => {
         ref={flatlistRef}
         data={menu}
         renderItem={({ item }) => {
-          const { name, items } = item;
+          const { category, dishes } = item;
           return (
             <View>
               <ScrollView>
-                <Text style={styles.categoryHeading}>{name}</Text>
+                <Text style={styles.categoryHeading}>{category}</Text>
                 <View style={styles.itemContainer}>
-                  {items.map((value, index) => {
+                  {dishes.map((value, index) => {
                     return (
                       <ItemCard
                         tableId={tableId}
