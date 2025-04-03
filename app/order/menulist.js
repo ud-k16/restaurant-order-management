@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     paddingHorizontal: moderateScale(18),
     textAlign: "center",
+    color: Themes.primary,
   },
   itemContainer: {
     flexDirection: "row",

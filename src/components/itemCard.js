@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(7.5),
     width: moderateScale(15),
     height: moderateScale(15),
+    backgroundColor: Themes.primary,
+    borderColor: Themes.primary,
   },
   quantityTextStyle: {
     backgroundColor: Themes.primary,
@@ -79,14 +81,14 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     fontSize: moderateScale(14),
     textTransform: "capitalize",
-    color: Themes.black,
+    color: Themes.primary,
     textAlign: "center",
     textAlignVertical: "bottom",
     height: moderateScale(70),
-
-    borderTopLeftRadius: moderateScale(70),
-    borderTopRightRadius: moderateScale(70),
-    borderWidth: moderateScale(1),
+    borderColor: Themes.primary,
+    borderTopLeftRadius: moderateScale(60),
+    borderTopRightRadius: moderateScale(60),
+    borderWidth: moderateScale(3),
   },
   textInputStyle: {
     height: moderateScale(70),
