@@ -11,22 +11,21 @@ import { useOrderContext } from "../context/useOrderContext";
 import Entypo from "@expo/vector-icons/Entypo";
 import { Themes } from "../utils/themes";
 import { useState } from "react";
-const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
+const ItemCard = ({
+  productId = 0,
+  productName = "",
+  onAdd = () => {},
+  productDescription = "",
+}) => {
   const { cart: tableOrder } = useOrderContext();
   const isInOrder = tableOrder?.find((value) => value.productId == productId);
-  // const [addedQuantity, setAddedQuantity] = useState(
-  //   isInOrder && isInOrder.quantity
-  // );
   const [inputVisible, setInputVisible] = useState(false);
 
   return (
     <Pressable style={styles.container} onPress={() => setInputVisible(true)}>
       {!inputVisible && (
-        <View>
-          <View style={styles.handler}></View>
-          <Text style={styles.productNameTextStyle} numberOfLines={2}>
-            {productName}
-          </Text>
+        <View style={styles.ItemCardContainer}>
+          <Text numberOfLines={2}>{productName}</Text>
         </View>
       )}
       {isInOrder && !inputVisible && (
@@ -34,7 +33,6 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
       )}
       {inputVisible && (
         <View>
-          <View style={styles.handler}></View>
           <TextInput
             style={styles.textInputStyle}
             defaultValue={isInOrder?.quantity}
@@ -77,24 +75,15 @@ const styles = StyleSheet.create({
     zIndex: 500,
     bottom: 60,
   },
-  productNameTextStyle: {
-    fontWeight: 600,
-    fontSize: moderateScale(16),
-    textTransform: "capitalize",
+  ItemCardContainer: {
     color: Themes.black,
-    textAlign: "center",
-    textAlignVertical: "bottom",
     height: moderateScale(70),
     borderColor: Themes.primary,
-    borderTopLeftRadius: moderateScale(60),
-    borderTopRightRadius: moderateScale(60),
     borderWidth: moderateScale(3),
   },
   textInputStyle: {
     height: moderateScale(70),
     backgroundColor: Themes.backDrop,
-    borderTopLeftRadius: moderateScale(70),
-    borderTopRightRadius: moderateScale(70),
     textAlign: "center",
     textAlignVertical: "bottom",
     fontSize: moderateScale(20),
@@ -113,7 +102,7 @@ const oldItemDesign = () => (
       {isInOrder && isInOrder.quantity}
     </Text>
 
-    <Text style={styles.productNameTextStyle} numberOfLines={1}>
+    <Text style={styles.ItemCardContainer} numberOfLines={1}>
       {productName}
     </Text>
     {isInOrder && (

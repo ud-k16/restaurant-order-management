@@ -70,6 +70,7 @@ const MenuList = () => {
                         tableId={tableId}
                         productId={value.product_id}
                         productName={value.product_name}
+                        productDescription={value.product_description}
                         key={index}
                         onAdd={(quantity) => {
                           quantity &&
@@ -132,7 +133,7 @@ const MenuList = () => {
                   else console.log("unable to scroll to index");
                 }}
               >
-                <Text style={styles.categoryTextStyle}>{item.name}</Text>
+                <Text style={styles.categoryTextStyle}>{item.category}</Text>
               </Pressable>
             )}
           />
