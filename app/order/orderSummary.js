@@ -36,15 +36,33 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
 
   // receipt
   const generateReceipt = () => {
-    let receipt = "";
-    receipt =
+    let receiptInfo = "",
+      itemsList = "",
+      totalInfo = "";
+    receiptInfo =
       "RECEIPT\n" +
       `Date: ${new Date().toDateString()}\n` +
       `Customer: ${customer?.customerName}\n` +
       `Server: ${customer?.serverName}\n` +
       `Time: ${new Date().toLocaleTimeString()}\n` +
-      `Table: ${tableId}\n`;
-    return receipt;
+      `Table: ${tableId}\n` +
+      `----------------------------------------------\n` +
+      `Qty\tItem Description\t\t\t\tPrice\t\tAmount\n` +
+      `----------------------------------------------\n`;
+    for (const product of orderOfTheTable) {
+      itemsList =
+        itemsList +
+        `${product.quantity}\t${product.productName}\t\t\t\t${
+          product.amountPerUnit
+        }\t\t${product.amountPerUnit * product.quantity}\n`;
+    }
+    totalInfo =
+      `----------------------------------------------\n` +
+      `Total\t\t\t\t\t\t\t\t\t\t\t\t${subTotal}\n` +
+      `----------------------------------------------\n`;
+    console.log(receiptInfo + itemsList + totalInfo);
+
+    return receiptInfo + itemsList + totalInfo;
   };
 
   return (
