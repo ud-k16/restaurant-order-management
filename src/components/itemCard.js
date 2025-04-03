@@ -24,7 +24,7 @@ const ItemCard = ({ productId, productName, onAdd = () => {} }) => {
       {!inputVisible && (
         <View>
           <View style={styles.handler}></View>
-          <Text style={styles.productNameTextStyle} numberOfLines={1}>
+          <Text style={styles.productNameTextStyle} numberOfLines={2}>
             {productName}
           </Text>
         </View>
@@ -79,9 +79,9 @@ const styles = StyleSheet.create({
   },
   productNameTextStyle: {
     fontWeight: 600,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(16),
     textTransform: "capitalize",
-    color: Themes.primary,
+    color: Themes.black,
     textAlign: "center",
     textAlignVertical: "bottom",
     height: moderateScale(70),
