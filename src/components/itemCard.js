@@ -28,8 +28,12 @@ const ItemCard = ({
       )}
       {!inputVisible && (
         <View style={styles.ItemCardContainer}>
-          <Text numberOfLines={2}>{productName}</Text>
-          <Text numberOfLines={2}>{productDescription}</Text>
+          <Text numberOfLines={2} style={styles.productNameStyle}>
+            {productName}
+          </Text>
+          <Text numberOfLines={2} style={styles.productDescriptionStyle}>
+            {productDescription}
+          </Text>
         </View>
       )}
 
@@ -55,14 +59,12 @@ const styles = StyleSheet.create({
   container: {
     width: "45%",
   },
-  handler: {
-    alignSelf: "center",
-    borderWidth: moderateScale(1),
-    borderRadius: moderateScale(7.5),
-    width: moderateScale(15),
-    height: moderateScale(15),
-    backgroundColor: Themes.primary,
-    borderColor: Themes.primary,
+
+  productNameStyle: {
+    fontSize: moderateScale(16),
+  },
+  productDescriptionStyle: {
+    color: Themes.primary,
   },
   quantityTextStyle: {
     backgroundColor: Themes.primary,
@@ -80,17 +82,22 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   ItemCardContainer: {
+    padding: moderateScale(10),
     color: Themes.black,
-    height: moderateScale(70),
+    height: moderateScale(90),
     borderColor: Themes.primary,
-    borderWidth: moderateScale(3),
+    borderWidth: moderateScale(1),
+    elevation: 6,
+    backgroundColor: Themes.white,
   },
   textInputStyle: {
-    height: moderateScale(70),
-    backgroundColor: Themes.backDrop,
+    height: moderateScale(90),
+    backgroundColor: Themes.white,
     textAlign: "center",
-    textAlignVertical: "bottom",
-    fontSize: moderateScale(20),
+    textAlignVertical: "center",
+    fontSize: moderateScale(25),
+    borderWidth: moderateScale(1),
+    color: Themes.primary,
   },
 });
 export default ItemCard;
