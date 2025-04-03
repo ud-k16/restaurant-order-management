@@ -116,7 +116,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       ) : (
         <EmptyContent />
       )}
-      {orderOfTheTable && customer?.customerName && customer?.serverName && (
+      {orderOfTheTable && (
         <View style={styles.bottomAction}>
           <Text
             onPress={() => {
