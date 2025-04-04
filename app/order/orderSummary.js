@@ -78,25 +78,25 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <Text>Table: {tableId}</Text>
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
-            <Text style={{ flex: 0.5 }}>Qty</Text>
             <Text style={{ flex: 2 }}>Item Description</Text>
+            <Text style={{ flex: 0.5 }}>Qty</Text>
           </View>
           <View style={styles.lineStyle}></View>
 
           {orderOfTheTable.map((product, index) => {
             return (
               <View style={styles.displayStack} key={index}>
-                <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
+                <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
               </View>
             );
           })}
 
-          {/* <View style={styles.lineStyle}></View>
+          <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
-            <Text style={{ flex: 1 }}>Total </Text>
-            <Text style={{ flex: 0.29 }}>{subTotal}</Text>
-          </View> */}
+            <Text style={{ flex: 2 }}>Total Quantity </Text>
+            <Text style={{ flex: 0.5 }}>{0}</Text>
+          </View>
           <View style={styles.lineStyle}></View>
           {(!customer?.customerName || !customer?.serverName) && (
             <Text style={styles.buttonStyle} onPress={showCustomerModal}>
