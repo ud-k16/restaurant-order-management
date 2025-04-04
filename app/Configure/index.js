@@ -46,6 +46,9 @@ const Configure = () => {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
+        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+          Table Number Configuration
+        </Text>
         <View>
           <Text>No. of Tables</Text>
           <TextInput
@@ -61,6 +64,9 @@ const Configure = () => {
             }}
           />
         </View>
+        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+          Upload a Menu File
+        </Text>
         <View>
           <Text style={{ color: Themes.primary, fontWeight: 500 }}>
             {menuFileName}
