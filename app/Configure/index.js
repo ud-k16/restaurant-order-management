@@ -7,7 +7,14 @@ import { Themes } from "@/src/utils/themes";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback } from "react";
-import { View, StyleSheet, TextInput, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  ToastAndroid,
+  Keyboard,
+} from "react-native";
 const Configure = () => {
   const { tableCount, menuFileName, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
@@ -75,11 +82,19 @@ const Configure = () => {
           <TextInput
             style={[styles.textInputStyle, { width: moderateScale(200) }]}
             defaultValue={ip}
+            keyboardType="numeric"
             onEndEditing={(event) => {
-              setWifiState((prev) => ({
-                ...prev,
-                ip: event.nativeEvent.text,
-              }));
+              Keyboard.dismiss();
+              const isValid = isValidIPv4(event.nativeEvent.text);
+              isValid
+                ? setWifiState((prev) => ({
+                    ...prev,
+                    ip: event.nativeEvent.text,
+                  }))
+                : ToastAndroid.show(
+                    "Not a valid IPv4 Addrress",
+                    ToastAndroid.LONG
+                  );
             }}
           />
         </View>
