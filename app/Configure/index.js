@@ -25,6 +25,11 @@ const Configure = () => {
       };
     }, [])
   );
+  function isValidIPv4(ip) {
+    const ipv4Regex =
+      /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    return ipv4Regex.test(ip);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -44,7 +49,9 @@ const Configure = () => {
           />
         </View>
         <View>
-          <Text>{menuFileName}</Text>
+          <Text style={{ color: Themes.primary, fontWeight: 500 }}>
+            {menuFileName}
+          </Text>
           <Text
             style={styles.menuPicker}
             onPress={async () => {
@@ -60,6 +67,9 @@ const Configure = () => {
             Upload Menu
           </Text>
         </View>
+        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+          Wifi Printer Configuration
+        </Text>
         <View>
           <Text>Enter Printer's IP Address</Text>
           <TextInput
@@ -87,30 +97,6 @@ const Configure = () => {
             }}
           />
         </View>
-        {/* <View>
-          <Text>Enter Tax detail</Text>
-          <View style={styles.displayStack}>
-            <TextInput
-              style={[styles.textInputStyle, { width: moderateScale(100) }]}
-              onEndEditing={(event) => {
-                setHomeState((prev) => ({
-                  ...prev,
-                  taxes: [...prev.taxes],
-                }));
-              }}
-            />
-            <TextInput
-              style={[styles.textInputStyle, { width: moderateScale(200) }]}
-              keyboardType="numeric"
-              onEndEditing={(event) => {
-                setHomeState((prev) => ({
-                  ...prev,
-                  port: Number(event.nativeEvent.text),
-                }));
-              }}
-            />
-          </View>
-        </View> */}
       </View>
 
       <Text
