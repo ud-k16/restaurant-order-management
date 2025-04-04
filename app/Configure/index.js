@@ -38,6 +38,11 @@ const Configure = () => {
       /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     return ipv4Regex.test(ip);
   }
+  function isValidPort(port) {
+    const portRegex =
+      /^([1-9]|[1-9][0-9]{1,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/;
+    return portRegex.test(port);
+  }
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -106,10 +111,17 @@ const Configure = () => {
             keyboardType="numeric"
             defaultValue={port ? port.toString() : ""}
             onEndEditing={(event) => {
-              setWifiState((prev) => ({
-                ...prev,
-                port: Number(event.nativeEvent.text),
-              }));
+              Keyboard.dismiss();
+              const isValid = isValidPort(event.nativeEvent.text);
+              isValid
+                ? setWifiState((prev) => ({
+                    ...prev,
+                    port: Number(event.nativeEvent.text),
+                  }))
+                : ToastAndroid.show(
+                    "Not a valid Port Number",
+                    ToastAndroid.LONG
+                  );
             }}
           />
         </View>
