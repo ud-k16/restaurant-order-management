@@ -15,6 +15,7 @@ import {
   ToastAndroid,
   Keyboard,
 } from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 const Configure = () => {
   const { tableCount, menuFileName, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
