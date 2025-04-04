@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/android/resmipmap-hdpi/ic_launcher_round_foreground.png",
-        "backgroundColor": "assets/android/resmipmap-hdpi/ic_launcher_round_background.png"
+        "foregroundImage": "./assets/android/res/mipmap-hdpi/ic_launcher_round_foreground.png",
+        "backgroundColor": "./assets/android/res/mipmap-hdpi/ic_launcher_round_background.png"
       },
       "package": "com.udk16.restaurantordermanagement"
     },
