@@ -47,22 +47,19 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       `Time: ${new Date().toLocaleTimeString()}\n` +
       `Table: ${tableId}\n` +
       `----------------------------------------------\n` +
-      `Qty\tItem Description\t\t\t\tPrice\t\tAmount\n` +
+      `Qty\tItem Description\t\t\t\t\n` +
       `----------------------------------------------\n`;
     for (const product of orderOfTheTable) {
       itemsList =
-        itemsList +
-        `${product.quantity}\t${product.productName}\t\t\t\t${
-          product.amountPerUnit
-        }\t\t${product.amountPerUnit * product.quantity}\n`;
+        itemsList + `${product.quantity}\t${product.productName}\t\t\t\t\n`;
     }
     totalInfo =
       `----------------------------------------------\n` +
       `Total\t\t\t\t\t\t\t\t\t\t\t\t${subTotal}\n` +
       `----------------------------------------------\n`;
-    console.log(receiptInfo + itemsList + totalInfo);
+    console.log(receiptInfo + itemsList);
 
-    return receiptInfo + itemsList + totalInfo;
+    return receiptInfo + itemsList;
   };
 
   return (
@@ -83,8 +80,6 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.displayStack}>
             <Text style={{ flex: 0.5 }}>Qty</Text>
             <Text style={{ flex: 2 }}>Item Description</Text>
-            <Text style={{ flex: 1 }}>Price</Text>
-            <Text style={{ flex: 1 }}>Amount</Text>
           </View>
           <View style={styles.lineStyle}></View>
 
@@ -93,10 +88,6 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
               <View style={styles.displayStack} key={index}>
                 <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
-                <Text style={{ flex: 1 }}>{product.amountPerUnit}</Text>
-                <Text style={{ flex: 1 }}>
-                  {product.amountPerUnit * product.quantity}
-                </Text>
               </View>
             );
           })}
