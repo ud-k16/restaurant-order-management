@@ -92,11 +92,11 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
             );
           })}
 
-          <View style={styles.lineStyle}></View>
+          {/* <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 1 }}>Total </Text>
             <Text style={{ flex: 0.29 }}>{subTotal}</Text>
-          </View>
+          </View> */}
           <View style={styles.lineStyle}></View>
           {(!customer?.customerName || !customer?.serverName) && (
             <Text style={styles.buttonStyle} onPress={showCustomerModal}>
