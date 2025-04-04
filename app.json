@@ -14,7 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/android/res/mipmap-hdpi/ic_launcher_round_foreground.png",
-        "backgroundColor": "./assets/android/res/mipmap-hdpi/ic_launcher_round_background.png"
+        "backgroundColor": "#754742"
       },
       "package": "com.udk16.restaurantordermanagement"
     },
