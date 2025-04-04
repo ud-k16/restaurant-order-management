@@ -30,6 +30,10 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     const amount = product.quantity * product.amountPerUnit;
     return subTotal + amount;
   }, 0);
+  // quantity count
+  const quantityCount = orderOfTheTable?.reduce((quantityCount, product) => {
+    return quantityCount + product.quantity;
+  }, 0);
   // table customer data
   const customer = customersData?.get(tableId);
   console.log(customer?.customerName, customer?.serverName, ">>>>>>>>>>");
@@ -95,7 +99,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 2 }}>Total Quantity </Text>
-            <Text style={{ flex: 0.5 }}>{0}</Text>
+            <Text style={{ flex: 0.5 }}>{quantityCount}</Text>
           </View>
           <View style={styles.lineStyle}></View>
           {(!customer?.customerName || !customer?.serverName) && (
