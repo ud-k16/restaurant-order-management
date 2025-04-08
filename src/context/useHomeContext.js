@@ -8,6 +8,7 @@ const HomeContextProvider = ({ children }) => {
   const [state, setState] = useState({
     isLoading: true,
     menu: null,
+    menuFileName: "",
     tableCount: null,
   });
 
@@ -15,18 +16,13 @@ const HomeContextProvider = ({ children }) => {
   const { getItem: getTableCount } = useAsyncStorage("tableCount");
   const fetchTableAndMenuAvailable = async () => {
     try {
-      let menu;
       const menuDetail = await getMenu();
-      if (menuDetail) {
-        menu = JSON.parse(menuDetail);
-      } else {
-        menu = MenuList;
-      }
-
+      const { menu, menuFileName } = menuDetail && JSON.parse(menuDetail);
       const tableCount = await getTableCount();
       setState((prev) => ({
         ...prev,
-        menu,
+        menu: menu ? menu : MenuList,
+        menuFileName: menuFileName ?? "",
         tableCount: Number(tableCount),
       }));
     } catch (error) {
