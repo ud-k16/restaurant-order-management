@@ -1,28 +1,32 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useWifiContext } from "./useWifiContext";
+import { MenuList } from "@/src/constants/menu";
 const HomeContext = createContext();
 
 const HomeContextProvider = ({ children }) => {
   const [state, setState] = useState({
     isLoading: true,
     menu: null,
-    menuFileName: "",
     tableCount: null,
-    taxes: [],
   });
 
   const { getItem: getMenu } = useAsyncStorage("menu");
   const { getItem: getTableCount } = useAsyncStorage("tableCount");
   const fetchTableAndMenuAvailable = async () => {
     try {
+      let menu;
       const menuDetail = await getMenu();
-      const { menu, fileName } = JSON.parse(menuDetail);
+      if (menuDetail) {
+        menu = JSON.parse(menuDetail);
+      } else {
+        menu = MenuList;
+      }
+
       const tableCount = await getTableCount();
       setState((prev) => ({
         ...prev,
         menu,
-        menuFileName: fileName,
         tableCount: Number(tableCount),
       }));
     } catch (error) {
