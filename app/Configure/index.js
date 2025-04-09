@@ -103,7 +103,7 @@ const Configure = () => {
               Edit Menu Prices
             </Text>
             <Dropdown
-              data={menu}
+              data={menu.map((data) => data.dishes).flat()}
               labelField="product_name"
               valueField="product_id"
               onChange={(id) => {

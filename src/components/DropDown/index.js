@@ -31,6 +31,8 @@ const Dropdown = ({
   valueField = "",
   icon,
 }) => {
+  console.log(data);
+
   const isIcon = React.isValidElement(icon);
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState("");
@@ -88,9 +90,9 @@ const Dropdown = ({
         >
           <View style={[styles.optionView, containerStyle, position]}>
             <ScrollView style={{ flexGrow: 1 }}>
-              {data.map((data) => {
-                const label = labelField ? data[labelField] : data["label"];
-                const value = valueField ? data[valueField] : data["value"];
+              {data.map((item) => {
+                const label = labelField ? item[labelField] : item["label"];
+                const value = valueField ? item[valueField] : item["value"];
                 return (
                   <TouchableOpacity
                     onPress={() => {
