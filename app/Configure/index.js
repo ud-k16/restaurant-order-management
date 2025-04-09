@@ -90,31 +90,43 @@ const Configure = () => {
                 menu,
                 menuFileName: fileName,
               }));
-              setMenu(JSON.stringify({ menu, fileName }));
+              setMenu(JSON.stringify({ menu, menuFileName }));
             }}
           >
             Upload Menu
           </Text>
         </View>
-
         {menu && (
-          <View style={{}}>
-            <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-              Edit Menu Prices
-            </Text>
-            <Dropdown
-              data={menu.map((data) => data.dishes).flat()}
-              labelField="product_name"
-              valueField="product_id"
-              onChange={(id) => {
-                setPrice((prev) => ({
-                  ...prev,
-                  product_id: id,
-                }));
-              }}
-            />
+          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+            Edit Menu Prices
+          </Text>
+        )}
+        {menu && (
+          <View style={{ rowGap: moderateScale(10) }}>
+            <View
+              style={{ flexDirection: "row", columnGap: moderateScale(10) }}
+            >
+              <Dropdown
+                data={menu.map((data) => data.dishes).flat()}
+                style={{
+                  width: moderateScale(200),
+                  justifyContent: "space-evenly",
+                }}
+                containerStyle={{
+                  height: moderateScale(200),
+                  backgroundColor: Themes.white,
+                  borderRadius: moderateScale(5),
+                }}
+                labelField="product_name"
+                valueField="product_id"
+                onChange={(id) => {
+                  setPrice((prev) => ({
+                    ...prev,
+                    product_id: id,
+                  }));
+                }}
+              />
 
-            {price.product_id && (
               <TextInput
                 style={styles.textInputStyle}
                 keyboardType="numeric"
@@ -125,36 +137,44 @@ const Configure = () => {
                   }));
                 }}
               />
-            )}
-            {price.product_id && price.amount_per_unit && (
-              <Text
-                onPress={() => {
-                  try {
-                    const findIndex = menu.findIndex(
-                      (value) => value.product_id == price.product_id
-                    );
-                    if (findIndex != -1) {
-                      setHomeState((prev) => {
-                        prev.menu[findIndex] = {
-                          ...menu[findIndex],
-                          amount_per_unit: price.amount_per_unit,
-                        };
-                        setMenu(
-                          JSON.stringify({ menu: prev.menu, menuFileName })
-                        );
-                        return {
-                          ...prev,
-                        };
-                      });
-                    }
-                  } catch (error) {
-                    console.log(error);
+            </View>
+            <Text
+              style={{
+                width: moderateScale(100),
+                backgroundColor: Themes.primary,
+                color: Themes.white,
+                textAlign: "center",
+                textAlignVertical: "center",
+                borderRadius: moderateScale(5),
+                width: moderateScale(60),
+                minHeight: moderateScale(30),
+              }}
+              onPress={() => {
+                try {
+                  const findIndex = menu.findIndex(
+                    (value) => value.product_id == price.product_id
+                  );
+                  if (findIndex != -1) {
+                    setHomeState((prev) => {
+                      prev.menu[findIndex] = {
+                        ...menu[findIndex],
+                        amount_per_unit: price.amount_per_unit,
+                      };
+                      setMenu(
+                        JSON.stringify({ menu: prev.menu, menuFileName })
+                      );
+                      return {
+                        ...prev,
+                      };
+                    });
                   }
-                }}
-              >
-                Save
-              </Text>
-            )}
+                } catch (error) {
+                  console.log(error);
+                }
+              }}
+            >
+              Save
+            </Text>
           </View>
         )}
 
@@ -232,7 +252,6 @@ const styles = StyleSheet.create({
     width: 100,
     textAlign: "center",
     borderRadius: moderateScale(5),
-    // paddingLeft: moderateScale(10),
     fontSize: moderateScale(20),
   },
   menuPicker: {
