@@ -11,32 +11,38 @@
       {
         "product_name": "Griechischer Bauernsalat",
         "product_description": "",
+        "product_price": 0,
         "product_id": 2
       },
       {
         "product_name": "Ktipiti",
         "product_description": "Spicy feta cheese cream",
-        "product_id": 3
+        "product_id": 3,
+        "product_price": 0
       },
       {
         "product_name": "Tzatziki",
         "product_description": "Spiced yogurt dip with garlic, spices, and olive oil",
-        "product_id": 4
+        "product_id": 4,
+        "product_price": 0
       },
       {
         "product_name": "Taramos",
         "product_description": "Fish roe cream",
-        "product_id": 5
+        "product_id": 5,
+        "product_price": 0
       },
       {
         "product_name": "Ouzo Meze",
         "product_description": "With dolmadakia, tzatziki, tarama, feta cheese, olives, peppers, broad beans, and a double ouzo with ice cubes",
-        "product_id": 6
+        "product_id": 6,
+        "product_price": 0
       },
       {
         "product_name": "Syrtaki Salad",
         "product_description": "Seasonal salad with grilled chicken breast strips",
-        "product_id": 7
+        "product_id": 7,
+        "product_price": 0
       }
     ]
   },
@@ -46,52 +52,62 @@
       {
         "product_name": "Gegrillte Paprika",
         "product_description": "With garlic sauce",
-        "product_id": 8
+        "product_id": 8,
+        "product_price": 0
       },
       {
         "product_name": "Dolmadakia",
         "product_description": "Grape leaves stuffed with rice",
-        "product_id": 9
+        "product_id": 9,
+        "product_price": 0
       },
       {
         "product_name": "Knoblauchbrot",
         "product_description": "With tzatziki",
-        "product_id": 10
+        "product_id": 10,
+        "product_price": 0
       },
       {
         "product_name": "Pita-Brot",
         "product_description": "",
-        "product_id": 11
+        "product_id": 11,
+        "product_price": 0
       },
       {
         "product_name": "Frittierte Auberginen",
         "product_description": "With garlic tomato sauce",
-        "product_id": 12
+        "product_id": 12,
+        "product_price": 0
       },
       {
         "product_name": "Tiropitakia/Spanakopitakia",
         "product_description": "Pastry filled with cheese/spinach and cheese",
-        "product_id": 13
+        "product_id": 13,
+        "product_price": 0
       },
       {
         "product_name": " Warme Vorspeisenplatte (1 Person)",
         "product_description": "Mixed selection for 1 person",
-        "product_id": 14
+        "product_id": 14,
+        "product_price": 0
       },
       {
         "product_name": "Warme Vorspeisenplatte (2 Personen)",
         "product_description": "",
-        "product_id": 15
+        "product_id": 15,
+        "product_price": 0
       },
       {
         "product_name": "Brokkoli",
         "product_description": "With garlic sauce",
-        "product_id": 16
+        "product_id": 16,
+        "product_price": 0
       },
       {
         "product_name": "Roll",
         "product_description": "Pita bread roll with pork, chicken, or cheese",
-        "product_id": 17
+        "product_id": 17,
+        "product_price": 0
       }
     ]
   },
@@ -101,22 +117,26 @@
       {
         "product_name": "Schafskäse (Feta) – Kalt",
         "product_description": "With onions and oil",
-        "product_id": 18
+        "product_id": 18,
+        "product_price": 0
       },
       {
         "product_name": "Gebackener Schafskäse (Feta)",
         "product_description": "",
-        "product_id": 19
+        "product_id": 19,
+        "product_price": 0
       },
       {
         "product_name": "Saganaki Skordato",
         "product_description": "Sheep cheese baked with tomato-garlic sauce",
-        "product_id": 20
+        "product_id": 20,
+        "product_price": 0
       },
       {
         "product_name": "Käsebällchen",
         "product_description": "",
-        "product_id": 21
+        "product_id": 21,
+        "product_price": 0
       }
     ]
   },
@@ -126,17 +146,20 @@
       {
         "product_name": "Griechische Bohnensuppe",
         "product_description": "",
-        "product_id": 22
+        "product_id": 22,
+        "product_price": 0
       },
       {
         "product_name": "Hühnersuppe",
         "product_description": "",
-        "product_id": 23
+        "product_id": 23,
+        "product_price": 0
       },
       {
         "product_name": "Gulaschsuppe",
         "product_description": "",
-        "product_id": 24
+        "product_id": 24,
+        "product_price": 0
       }
     ]
   },
@@ -146,62 +169,74 @@
       {
         "product_name": "Schweinefilet",
         "product_description": "",
-        "product_id": 22
+        "product_id": 25,
+        "product_price": 0
       },
       {
         "product_name": "Schweineschnitzel Gegrilltes",
         "product_description": "",
-        "product_id": 23
+        "product_id": 26,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenbrustfilet Gegrilltes",
         "product_description": "",
-        "product_id": 24
+        "product_id": 27,
+        "product_price": 0
       },
       {
         "product_name": "Lammkotelett",
         "product_description": "",
-        "product_id": 24
+        "product_id": 28,
+        "product_price": 0
       },
       {
         "product_name": "Gyros",
         "product_description": "",
-        "product_id": 24
+        "product_id": 29,
+        "product_price": 0
       },
       {
         "product_name": "Souflaki und Gyros",
         "product_description": "",
-        "product_id": 24
+        "product_id": 30,
+        "product_price": 0
       },
       {
         "product_name": "Gyros-Pfannchen",
         "product_description": "",
-        "product_id": 24
+        "product_id": 31,
+        "product_price": 0
       },
       {
         "product_name": "Pangasiusfilet",
         "product_description": "",
-        "product_id": 24
+        "product_id": 32,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenbrustfilet",
         "product_description": "",
-        "product_id": 24
+        "product_id": 33,
+        "product_price": 0
       },
       {
         "product_name": "Schweinesteak",
         "product_description": "",
-        "product_id": 24
+        "product_id": 34,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenschnitzel",
         "product_description": "",
-        "product_id": 24
+        "product_id": 35,
+        "product_price": 0
       },
       {
         "product_name": "Rinderfilet mit großen Zwiebeln",
         "product_description": "",
-        "product_id": 24
+        "product_id": 36,
+        "product_price": 0
       }
     ]
   },
@@ -211,32 +246,38 @@
       {
         "product_name": "Souflaki",
         "product_description": "",
-        "product_id": 22
+        "product_id": 37,
+        "product_price": 0
       },
       {
         "product_name": "Gyros",
         "product_description": "",
-        "product_id": 23
+        "product_id": 38,
+        "product_price": 0
       },
       {
         "product_name": "Gyros Hausart",
         "product_description": "",
-        "product_id": 24
+        "product_id": 39,
+        "product_price": 0
       },
       {
         "product_name": "Gyros mit Kalamari",
         "product_description": "",
-        "product_id": 24
+        "product_id": 40,
+        "product_price": 0
       },
       {
         "product_name": "Bifteki überbacken",
         "product_description": "",
-        "product_id": 24
+        "product_id": 41,
+        "product_price": 0
       },
       {
         "product_name": "Bifteki",
         "product_description": "",
-        "product_id": 24
+        "product_id": 42,
+        "product_price": 0
       }
     ]
   },
@@ -246,32 +287,38 @@
       {
         "product_name": "Schweinefilet gefüllt",
         "product_description": "",
-        "product_id": 22
+        "product_id": 43,
+        "product_price": 0
       },
       {
         "product_name": "Schweinefilet",
         "product_description": "",
-        "product_id": 23
+        "product_id": 44,
+        "product_price": 0
       },
       {
         "product_name": "Schweinefilet am Spieß",
         "product_description": "",
-        "product_id": 24
+        "product_id": 45,
+        "product_price": 0
       },
       {
         "product_name": "Schweinefilet",
         "product_description": "",
-        "product_id": 24
+        "product_id": 46,
+        "product_price": 0
       },
       {
         "product_name": "Argentinisches Rinderfilet – 2 Stück (mit Kräuterbutter)",
         "product_description": "",
-        "product_id": 24
+        "product_id": 47,
+        "product_price": 0
       },
       {
         "product_name": "Argentinisches Rinderfilet – 2 Stück (mit Gorgonzolasauce)",
         "product_description": "",
-        "product_id": 24
+        "product_id": 48,
+        "product_price": 0
       }
     ]
   },
@@ -281,42 +328,50 @@
       {
         "product_name": "Rinderleber mit Röstzwiebeln",
         "product_description": "",
-        "product_id": 22
+        "product_id": 49,
+        "product_price": 0
       },
       {
         "product_name": "Schweinesteak mit Fetafüllung",
         "product_description": "",
-        "product_id": 23
+        "product_id": 50,
+        "product_price": 0
       },
       {
         "product_name": "Schweinesteak gegrillt",
         "product_description": "",
-        "product_id": 24
+        "product_id": 51,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchensteak gegrillt",
         "product_description": "",
-        "product_id": 24
+        "product_id": 52,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenschnitzel",
         "product_description": "",
-        "product_id": 24
+        "product_id": 53,
+        "product_price": 0
       },
       {
         "product_name": "Schweineschnitzel",
         "product_description": "",
-        "product_id": 24
+        "product_id": 54,
+        "product_price": 0
       },
       {
         "product_name": "Lammteller – Das Beste vom Lamm",
         "product_description": "",
-        "product_id": 24
+        "product_id": 55,
+        "product_price": 0
       },
       {
         "product_name": "Lammfilet",
         "product_description": "",
-        "product_id": 24
+        "product_id": 56,
+        "product_price": 0
       }
     ]
   },
@@ -326,32 +381,38 @@
       {
         "product_name": "Souflaki",
         "product_description": "",
-        "product_id": 22
+        "product_id": 58,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenfilet",
         "product_description": "",
-        "product_id": 23
+        "product_id": 59,
+        "product_price": 0
       },
       {
         "product_name": "Gyros Spezial",
         "product_description": "",
-        "product_id": 24
+        "product_id": 60,
+        "product_price": 0
       },
       {
         "product_name": "Susuki",
         "product_description": "",
-        "product_id": 24
+        "product_id": 61,
+        "product_price": 0
       },
       {
         "product_name": "Schweinesteak",
         "product_description": "",
-        "product_id": 24
+        "product_id": 62,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenfilet",
         "product_description": "",
-        "product_id": 24
+        "product_id": 63,
+        "product_price": 0
       }
     ]
   },
@@ -361,37 +422,44 @@
       {
         "product_name": "SYRTAKI – Teller",
         "product_description": "",
-        "product_id": 22
+        "product_id": 64,
+        "product_price": 0
       },
       {
         "product_name": "Ouzo – Teller",
         "product_description": "",
-        "product_id": 23
+        "product_id": 65,
+        "product_price": 0
       },
       {
         "product_name": "Athen – Teller",
         "product_description": "",
-        "product_id": 24
+        "product_id": 66,
+        "product_price": 0
       },
       {
         "product_name": "Filet – Teller",
         "product_description": "",
-        "product_id": 24
+        "product_id": 67,
+        "product_price": 0
       },
       {
         "product_name": "Lamm – Teller",
         "product_description": "",
-        "product_id": 24
+        "product_id": 68,
+        "product_price": 0
       },
       {
         "product_name": "Grill – Teller",
         "product_description": "",
-        "product_id": 24
+        "product_id": 69,
+        "product_price": 0
       },
       {
         "product_name": "Prevesa – Teller",
         "product_description": "",
-        "product_id": 24
+        "product_id": 70,
+        "product_price": 0
       }
     ]
   },
@@ -401,17 +469,20 @@
       {
         "product_name": "Filetplatte",
         "product_description": "",
-        "product_id": 22
+        "product_id": 71,
+        "product_price": 0
       },
       {
         "product_name": "Rinderfilet – Pfanne",
         "product_description": "",
-        "product_id": 23
+        "product_id": 72,
+        "product_price": 0
       },
       {
         "product_name": "Lammfilet – Pfanne",
         "product_description": "",
-        "product_id": 24
+        "product_id": 73,
+        "product_price": 0
       }
     ]
   },
@@ -421,32 +492,38 @@
       {
         "product_name": "Gyros – Pfanne",
         "product_description": "",
-        "product_id": 22
+        "product_id": 74,
+        "product_price": 0
       },
       {
         "product_name": "Rinderfilet – Pfanne",
         "product_description": "",
-        "product_id": 23
+        "product_id": 75,
+        "product_price": 0
       },
       {
         "product_name": "Lammfilet – Pfanne",
         "product_description": "",
-        "product_id": 24
+        "product_id": 76,
+        "product_price": 0
       },
       {
         "product_name": "Schweinefilet – Pfanne",
         "product_description": "",
-        "product_id": 24
+        "product_id": 77,
+        "product_price": 0
       },
       {
         "product_name": "Pfannengericht – Gemischt",
         "product_description": "",
-        "product_id": 24
+        "product_id": 78,
+        "product_price": 0
       },
       {
         "product_name": "Hähnchenbrustfilet – Pfanne",
         "product_description": "",
-        "product_id": 24
+        "product_id": 79,
+        "product_price": 0
       }
     ]
   },
@@ -456,12 +533,14 @@
       {
         "product_name": "Mama – Platte für 4 Personen",
         "product_description": "",
-        "product_id": 22
+        "product_id": 80,
+        "product_price": 0
       },
       {
         "product_name": "Metaxa – Platte für 2 Personen",
         "product_description": "",
-        "product_id": 23
+        "product_id": 81,
+        "product_price": 0
       }
     ]
   },
@@ -471,22 +550,26 @@
       {
         "product_name": "mit Spaghetti",
         "product_description": "",
-        "product_id": 22
+        "product_id": 82,
+        "product_price": 0
       },
       {
         "product_name": "mit Reis",
         "product_description": "",
-        "product_id": 23
+        "product_id": 83,
+        "product_price": 0
       },
       {
         "product_name": "mit dicken Bohnen",
         "product_description": "",
-        "product_id": 23
+        "product_id": 84,
+        "product_price": 0
       },
       {
         "product_name": "Stifado",
         "product_description": "",
-        "product_id": 23
+        "product_id": 85,
+        "product_price": 0
       }
     ]
   },
@@ -496,19 +579,19 @@
       {
         "product_name": "Spaghetti Bolognese",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 86,
         "product_price": "14,90 €"
       },
       {
         "product_name": "Spaghetti mit Gyros",
         "product_description": "",
-        "product_id": 23,
+        "product_id": 87,
         "product_price": "16,90 €"
       },
       {
         "product_name": "Spaghetti Spezial",
         "product_description": "",
-        "product_id": 23,
+        "product_id": 88,
         "product_price": "15,90 €"
       }
     ]
@@ -519,7 +602,7 @@
       {
         "product_name": "Vegetarische Pfanne",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 89,
         "product_price": "18,20 €"
       }
     ]
@@ -530,31 +613,31 @@
       {
         "product_name": "Garnelen (8 Stück)",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 90,
         "product_price": "23,90 €"
       },
       {
         "product_name": "Calamari",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 91,
         "product_price": "20,90 €"
       },
       {
         "product_name": "Pangasiusfilet",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 92,
         "product_price": "17,90 €"
       },
       {
         "product_name": "Frisches Lachsfilet",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 93,
         "product_price": "25,90 €"
       },
       {
         "product_name": "Fischplatte für 1 Person",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 94,
         "product_price": "25,90 €"
       }
     ]
@@ -565,67 +648,67 @@
       {
         "product_name": "Bratkartoffeln",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 95,
         "product_price": "3,40 €"
       },
       {
         "product_name": "Pommes Frites",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 96,
         "product_price": "3,40 €"
       },
       {
         "product_name": "Reis",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 97,
         "product_price": "3,00 €"
       },
       {
         "product_name": "Knoblauchkartoffeln",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 98,
         "product_price": "3,90 €"
       },
       {
         "product_name": "Kretische Kartoffeln",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 99,
         "product_price": "4,20 €"
       },
       {
         "product_name": "Kretische Kartoffeln",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 100,
         "product_price": "4,20 €"
       },
       {
         "product_name": "Dicke Bohnen",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 101,
         "product_price": "4,00 €"
       },
       {
         "product_name": "Extra Metaxa-Sauce",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 102,
         "product_price": "3,20 €"
       },
       {
         "product_name": "Extra Gyros-Sauce",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 103,
         "product_price": "2,00 €"
       },
       {
         "product_name": "Pilzsauce",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 104,
         "product_price": "2,00 €"
       },
       {
         "product_name": "Ketchup / Mayonnaise",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 105,
         "product_price": "0,50 €"
       }
     ]
@@ -636,85 +719,85 @@
       {
         "product_name": "Metaxa 5 Sterne",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 106,
         "product_price": "3,40 €"
       },
       {
         "product_name": "Metaxa 7 Sterne",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 107,
         "product_price": "3,40 €"
       },
       {
         "product_name": "Metaxa very old",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 108,
         "product_price": "3,00 €"
       },
       {
         "product_name": "Ouzo",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 109,
         "product_price": "3,90 €"
       },
       {
         "product_name": "Doppelkorn",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 110,
         "product_price": "4,20 €"
       },
       {
         "product_name": "Ramazotti",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 111,
         "product_price": "4,20 €"
       },
       {
         "product_name": "Fernet Branca",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 112,
         "product_price": "4,00 €"
       },
       {
         "product_name": "Jägermeister",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 113,
         "product_price": "3,20 €"
       },
       {
         "product_name": "Underberg",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 114,
         "product_price": "2,00 €"
       },
       {
         "product_name": "Whisky",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 115,
         "product_price": "2,00 €"
       },
       {
         "product_name": "Bacardi",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 116,
         "product_price": "0,50 €"
       },
       {
         "product_name": "Campari",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 117,
         "product_price": "0,50 €"
       },
       {
         "product_name": "Wodka",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 118,
         "product_price": "0,50 €"
       },
       {
         "product_name": "Tequila",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 119,
         "product_price": "0,50 €"
       }
     ]
@@ -725,85 +808,85 @@
       {
         "product_name": "Metaxa 5 Sterne",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 120,
         "product_price": "3,40 €"
       },
       {
         "product_name": "Metaxa 7 Sterne",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 121,
         "product_price": "3,40 €"
       },
       {
         "product_name": "Metaxa very old",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 122,
         "product_price": "3,00 €"
       },
       {
         "product_name": "Ouzo",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 123,
         "product_price": "3,90 €"
       },
       {
         "product_name": "Doppelkorn",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 124,
         "product_price": "4,20 €"
       },
       {
         "product_name": "Ramazotti",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 125,
         "product_price": "4,20 €"
       },
       {
         "product_name": "Fernet Branca",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 126,
         "product_price": "4,00 €"
       },
       {
         "product_name": "Jägermeister",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 127,
         "product_price": "3,20 €"
       },
       {
         "product_name": "Underberg",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 128,
         "product_price": "2,00 €"
       },
       {
         "product_name": "Whisky",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 129,
         "product_price": "2,00 €"
       },
       {
         "product_name": "Bacardi",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 130,
         "product_price": "0,50 €"
       },
       {
         "product_name": "Campari",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 131,
         "product_price": "0,50 €"
       },
       {
         "product_name": "Wodka",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 132,
         "product_price": "0,50 €"
       },
       {
         "product_name": "Tequila",
         "product_description": "",
-        "product_id": 22,
+        "product_id": 133,
         "product_price": "0,50 €"
       }
     ]

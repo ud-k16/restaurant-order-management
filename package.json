@@ -14,6 +14,14 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "codegenConfig": {
+    "name": "WifiPrinterSpecs",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.WifiPrinter"
+    }
+  },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
     "@react-native-async-storage/async-storage": "^2.1.2",
