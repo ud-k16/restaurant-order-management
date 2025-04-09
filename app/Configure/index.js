@@ -6,7 +6,7 @@ import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { router, useFocusEffect } from "expo-router";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -16,13 +16,23 @@ import {
   Keyboard,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
+import Dropdown from "../../src/components/DropDown";
 const Configure = () => {
-  const { tableCount, menuFileName, setState: setHomeState } = useHomeContext();
+  const {
+    tableCount,
+    menuFileName,
+    menu,
+    setState: setHomeState,
+  } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
   const { setState: setHeaders } = useHeaderContext();
   const { ip, port, setState: setWifiState } = useWifiContext();
+  const [price, setPrice] = useState({
+    product_id: null,
+    amount_per_unit: null,
+  });
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -86,6 +96,68 @@ const Configure = () => {
             Upload Menu
           </Text>
         </View>
+
+        {menu && (
+          <View style={{}}>
+            <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+              Edit Menu Prices
+            </Text>
+            <Dropdown
+              data={menu}
+              labelField="product_name"
+              valueField="product_id"
+              onChange={(id) => {
+                setPrice((prev) => ({
+                  ...prev,
+                  product_id: id,
+                }));
+              }}
+            />
+
+            {price.product_id && (
+              <TextInput
+                style={styles.textInputStyle}
+                keyboardType="numeric"
+                onChangeText={(text) => {
+                  setPrice((prev) => ({
+                    ...prev,
+                    amount_per_unit: text,
+                  }));
+                }}
+              />
+            )}
+            {price.product_id && price.amount_per_unit && (
+              <Text
+                onPress={() => {
+                  try {
+                    const findIndex = menu.findIndex(
+                      (value) => value.product_id == price.product_id
+                    );
+                    if (findIndex != -1) {
+                      setHomeState((prev) => {
+                        prev.menu[findIndex] = {
+                          ...menu[findIndex],
+                          amount_per_unit: price.amount_per_unit,
+                        };
+                        setMenu(
+                          JSON.stringify({ menu: prev.menu, menuFileName })
+                        );
+                        return {
+                          ...prev,
+                        };
+                      });
+                    }
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+              >
+                Save
+              </Text>
+            )}
+          </View>
+        )}
+
         <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
           Wifi Printer Configuration
         </Text>

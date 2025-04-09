@@ -21,7 +21,8 @@ const HomeContextProvider = ({ children }) => {
       const tableCount = await getTableCount();
       setState((prev) => ({
         ...prev,
-        menu: menu ? menu : MenuList,
+        // menu: menu ? menu : MenuList,
+        menu,
         menuFileName: menuFileName ?? "",
         tableCount: Number(tableCount),
       }));
