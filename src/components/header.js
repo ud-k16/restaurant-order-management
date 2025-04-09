@@ -14,7 +14,7 @@ const AppHeader = () => {
           ? currentTable
             ? `${currentPage} ( Table No. ${currentTable} )`
             : `${currentPage}`
-          : "  Order Management"}
+          : "Syrtaki"}
       </Text>
       <Ionicons
         name="settings-outline"

@@ -1,5 +1,5 @@
 export const Themes = {
-  primary: "#545fab",
+  primary: "#000048",
   white: "white",
   black: "black",
   red: "red",
