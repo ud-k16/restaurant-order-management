@@ -90,7 +90,7 @@ const Configure = () => {
                 menu,
                 menuFileName: fileName,
               }));
-              setMenu(JSON.stringify({ menu, menuFileName }));
+              setMenu(JSON.stringify({ menu, menuFileName: fileName }));
             }}
           >
             Upload Menu
