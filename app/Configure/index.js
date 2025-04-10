@@ -14,6 +14,7 @@ import {
   Text,
   ToastAndroid,
   Keyboard,
+  ScrollView,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import Dropdown from "../../src/components/DropDown";
@@ -55,175 +56,179 @@ const Configure = () => {
   }
   return (
     <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-          Table Number Configuration
-        </Text>
-        <View>
-          <Text>No. of Tables</Text>
-          <TextInput
-            style={styles.textInputStyle}
-            keyboardType="numeric"
-            defaultValue={tableCount?.toString()}
-            onEndEditing={(event) => {
-              setHomeState((prev) => ({
-                ...prev,
-                tableCount: Number(event.nativeEvent.text),
-              }));
-              setTableCount(event.nativeEvent.text);
-            }}
-          />
-        </View>
-        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-          Upload a Menu File
-        </Text>
-        <View>
-          <Text style={{ color: Themes.primary, fontWeight: 500 }}>
-            {menuFileName}
-          </Text>
-          <Text
-            style={styles.menuPicker}
-            onPress={async () => {
-              const { menu, fileName } = await handleFilePicker();
-              setHomeState((prev) => ({
-                ...prev,
-                menu,
-                menuFileName: fileName,
-              }));
-              setMenu(JSON.stringify({ menu, menuFileName: fileName }));
-            }}
-          >
-            Upload Menu
-          </Text>
-        </View>
-        {menu && (
+      <ScrollView>
+        <View style={styles.contentContainer}>
           <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-            Edit Menu Prices
+            Table Number Configuration
           </Text>
-        )}
-        {menu && (
-          <View style={{ rowGap: moderateScale(10) }}>
-            <View
-              style={{ flexDirection: "row", columnGap: moderateScale(10) }}
-            >
-              <Dropdown
-                data={menu.map((data) => data.dishes).flat()}
-                style={{
-                  width: moderateScale(200),
-                  justifyContent: "space-evenly",
-                }}
-                containerStyle={{
-                  height: moderateScale(200),
-                  backgroundColor: Themes.white,
-                  borderRadius: moderateScale(5),
-                }}
-                labelField="product_name"
-                valueField="product_id"
-                onChange={(id) => {
-                  setPrice((prev) => ({
-                    ...prev,
-                    product_id: id,
-                  }));
-                }}
-              />
-
-              <TextInput
-                style={styles.textInputStyle}
-                keyboardType="numeric"
-                onChangeText={(text) => {
-                  setPrice((prev) => ({
-                    ...prev,
-                    amount_per_unit: text,
-                  }));
-                }}
-              />
-            </View>
+          <View>
+            <Text>No. of Tables</Text>
+            <TextInput
+              style={styles.textInputStyle}
+              keyboardType="numeric"
+              defaultValue={tableCount?.toString()}
+              onEndEditing={(event) => {
+                setHomeState((prev) => ({
+                  ...prev,
+                  tableCount: Number(event.nativeEvent.text),
+                }));
+                setTableCount(event.nativeEvent.text);
+              }}
+            />
+          </View>
+          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+            Upload a Menu File
+          </Text>
+          <View>
+            <Text style={{ color: Themes.primary, fontWeight: 500 }}>
+              {menuFileName}
+            </Text>
             <Text
-              style={{
-                width: moderateScale(100),
-                backgroundColor: Themes.primary,
-                color: Themes.white,
-                textAlign: "center",
-                textAlignVertical: "center",
-                borderRadius: moderateScale(5),
-                width: moderateScale(60),
-                minHeight: moderateScale(30),
-              }}
-              onPress={() => {
-                try {
-                  const findIndex = menu.findIndex(
-                    (value) => value.product_id == price.product_id
-                  );
-                  if (findIndex != -1) {
-                    setHomeState((prev) => {
-                      prev.menu[findIndex] = {
-                        ...menu[findIndex],
-                        amount_per_unit: price.amount_per_unit,
-                      };
-                      setMenu(
-                        JSON.stringify({ menu: prev.menu, menuFileName })
-                      );
-                      return {
-                        ...prev,
-                      };
-                    });
-                  }
-                } catch (error) {
-                  console.log(error);
-                }
+              style={styles.menuPicker}
+              onPress={async () => {
+                const { menu, fileName } = await handleFilePicker();
+                setHomeState((prev) => ({
+                  ...prev,
+                  menu,
+                  menuFileName: fileName,
+                }));
+                setMenu(JSON.stringify({ menu, menuFileName: fileName }));
               }}
             >
-              Save
+              Upload Menu
             </Text>
           </View>
-        )}
+          {menu && (
+            <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+              Edit Menu Prices
+            </Text>
+          )}
+          {menu && (
+            <View style={{ rowGap: moderateScale(10) }}>
+              <View
+                style={{ flexDirection: "row", columnGap: moderateScale(10) }}
+              >
+                <Dropdown
+                  data={menu.map((data) => data.dishes).flat()}
+                  style={{
+                    width: moderateScale(200),
+                    justifyContent: "space-evenly",
+                  }}
+                  containerStyle={{
+                    height: moderateScale(200),
+                    backgroundColor: Themes.white,
+                    borderRadius: moderateScale(5),
+                  }}
+                  labelField="product_name"
+                  valueField="product_id"
+                  onChange={(id) => {
+                    setPrice((prev) => ({
+                      ...prev,
+                      product_id: id,
+                    }));
+                  }}
+                />
 
-        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-          Wifi Printer Configuration
-        </Text>
-        <View>
-          <Text>Enter Printer's IP Address</Text>
-          <TextInput
-            style={[styles.textInputStyle, { width: moderateScale(200) }]}
-            defaultValue={ip}
-            keyboardType="numeric"
-            onEndEditing={(event) => {
-              Keyboard.dismiss();
-              const isValid = isValidIPv4(event.nativeEvent.text);
-              isValid
-                ? setWifiState((prev) => ({
-                    ...prev,
-                    ip: event.nativeEvent.text,
-                  }))
-                : ToastAndroid.show(
-                    "Not a valid IPv4 Addrress",
-                    ToastAndroid.LONG
-                  );
-            }}
-          />
+                <TextInput
+                  style={styles.textInputStyle}
+                  keyboardType="numeric"
+                  onChangeText={(text) => {
+                    setPrice((prev) => ({
+                      ...prev,
+                      amount_per_unit: text,
+                    }));
+                  }}
+                />
+              </View>
+              <Text
+                style={styles.saveButton}
+                onPress={() => {
+                  try {
+                    const findIndex = menu.findIndex(
+                      (value) => value.product_id == price.product_id
+                    );
+                    if (findIndex != -1) {
+                      setHomeState((prev) => {
+                        prev.menu[findIndex] = {
+                          ...menu[findIndex],
+                          amount_per_unit: price.amount_per_unit,
+                        };
+                        setMenu(
+                          JSON.stringify({ menu: prev.menu, menuFileName })
+                        );
+                        return {
+                          ...prev,
+                        };
+                      });
+                    }
+                  } catch (error) {
+                    console.log(error);
+                  }
+                }}
+              >
+                Save
+              </Text>
+            </View>
+          )}
+
+          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+            Wifi Printer Configuration
+          </Text>
+          <View>
+            <Text>Enter Printer's IP Address</Text>
+            <TextInput
+              style={[
+                styles.textInputStyle,
+                {
+                  width: moderateScale(200),
+                  textAlign: "left",
+                  fontSize: moderateScale(15),
+                },
+              ]}
+              defaultValue={ip}
+              placeholder="IPv4"
+              keyboardType="numeric"
+              onEndEditing={(event) => {
+                Keyboard.dismiss();
+                const isValid = isValidIPv4(event.nativeEvent.text);
+                isValid
+                  ? setWifiState((prev) => ({
+                      ...prev,
+                      ip: event.nativeEvent.text,
+                    }))
+                  : ToastAndroid.show(
+                      "Not a valid IPv4 Addrress",
+                      ToastAndroid.LONG
+                    );
+              }}
+            />
+          </View>
+          <View>
+            <Text>Enter Printer's Port Number</Text>
+            <TextInput
+              style={[
+                styles.textInputStyle,
+                { textAlign: "left", fontSize: moderateScale(15) },
+              ]}
+              keyboardType="numeric"
+              defaultValue={port ? port.toString() : ""}
+              onEndEditing={(event) => {
+                Keyboard.dismiss();
+                const isValid = isValidPort(event.nativeEvent.text);
+                isValid
+                  ? setWifiState((prev) => ({
+                      ...prev,
+                      port: Number(event.nativeEvent.text),
+                    }))
+                  : ToastAndroid.show(
+                      "Not a valid Port Number",
+                      ToastAndroid.LONG
+                    );
+              }}
+            />
+          </View>
         </View>
-        <View>
-          <Text>Enter Printer's Port Number</Text>
-          <TextInput
-            style={styles.textInputStyle}
-            keyboardType="numeric"
-            defaultValue={port ? port.toString() : ""}
-            onEndEditing={(event) => {
-              Keyboard.dismiss();
-              const isValid = isValidPort(event.nativeEvent.text);
-              isValid
-                ? setWifiState((prev) => ({
-                    ...prev,
-                    port: Number(event.nativeEvent.text),
-                  }))
-                : ToastAndroid.show(
-                    "Not a valid Port Number",
-                    ToastAndroid.LONG
-                  );
-            }}
-          />
-        </View>
-      </View>
+      </ScrollView>
 
       <Text
         style={styles.bottomAction}
@@ -245,10 +250,20 @@ const styles = StyleSheet.create({
     padding: moderateScale(15),
     rowGap: moderateScale(15),
   },
+  saveButton: {
+    width: moderateScale(100),
+    backgroundColor: Themes.primary,
+    color: Themes.white,
+    textAlign: "center",
+    textAlignVertical: "center",
+    borderRadius: moderateScale(5),
+    width: moderateScale(60),
+    minHeight: moderateScale(30),
+  },
   displayStack: { flexDirection: "row", columnGap: moderateScale(3) },
   textInputStyle: {
     borderWidth: moderateScale(1),
-    height: moderateScale(50),
+    height: moderateScale(35),
     width: 100,
     textAlign: "center",
     borderRadius: moderateScale(5),
