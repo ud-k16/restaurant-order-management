@@ -803,91 +803,475 @@
     ]
   },
   {
-    "category": "SPIRITUOSEN",
+    "category": "LONGDRINKS (mit 4 cl Alkoholgehalt)",
     "dishes": [
       {
-        "product_name": "Metaxa 5 Sterne",
+        "product_name": "Bacardi Cola",
         "product_description": "",
         "product_id": 120,
         "product_price": "3,40 €"
       },
       {
-        "product_name": "Metaxa 7 Sterne",
+        "product_name": "Campari Orange",
         "product_description": "",
         "product_id": 121,
         "product_price": "3,40 €"
       },
       {
-        "product_name": "Metaxa very old",
+        "product_name": "Whisky Cola",
         "product_description": "",
         "product_id": 122,
         "product_price": "3,00 €"
       },
       {
-        "product_name": "Ouzo",
+        "product_name": "Metaxa Cola",
         "product_description": "",
         "product_id": 123,
         "product_price": "3,90 €"
       },
       {
-        "product_name": "Doppelkorn",
+        "product_name": "Gin Tonic",
         "product_description": "",
         "product_id": 124,
         "product_price": "4,20 €"
       },
       {
-        "product_name": "Ramazotti",
+        "product_name": "Gin Orange",
         "product_description": "",
         "product_id": 125,
         "product_price": "4,20 €"
       },
       {
-        "product_name": "Fernet Branca",
+        "product_name": "Wodka Lemon",
         "product_description": "",
         "product_id": 126,
         "product_price": "4,00 €"
       },
       {
-        "product_name": "Jägermeister",
+        "product_name": "Batida Kirsch",
         "product_description": "",
         "product_id": 127,
         "product_price": "3,20 €"
-      },
+      }
+    ]
+  },
+  {
+    "category": "APERITIFS (5 cl)",
+    "dishes": [
       {
-        "product_name": "Underberg",
+        "product_name": "Ouzo – Cocktail",
         "product_description": "",
         "product_id": 128,
         "product_price": "2,00 €"
       },
       {
-        "product_name": "Whisky",
+        "product_name": "Ouzo mit Feige",
         "product_description": "",
         "product_id": 129,
         "product_price": "2,00 €"
       },
       {
-        "product_name": "Bacardi",
+        "product_name": "Ouzo mit Eiswürfeln",
         "product_description": "",
         "product_id": 130,
         "product_price": "0,50 €"
       },
       {
-        "product_name": "Campari",
+        "product_name": "Karaffe Ouzo weiß",
         "product_description": "",
         "product_id": 131,
         "product_price": "0,50 €"
       },
       {
-        "product_name": "Wodka",
+        "product_name": "Karaffe Ouzo grün",
         "product_description": "",
         "product_id": 132,
         "product_price": "0,50 €"
       },
       {
-        "product_name": "Tequila",
+        "product_name": "Sherry",
         "product_description": "",
         "product_id": 133,
         "product_price": "0,50 €"
+      },
+      {
+        "product_name": "Martini bianco",
+        "product_description": "",
+        "product_id": 134,
+        "product_price": "0,50 €"
+      },
+      {
+        "product_name": "1 Glas Sekt Hausmarke",
+        "product_description": "",
+        "product_id": 135,
+        "product_price": "0,50 €"
+      }
+    ]
+  },
+  {
+    "category": "SEKT",
+    "dishes": [
+      {
+        "product_name": "Sekt Piccolo",
+        "product_description": "",
+        "product_id": 136,
+        "product_price": "2,00 €"
+      },
+      {
+        "product_name": "Sekt Hausmarke",
+        "product_description": "",
+        "product_id": 137,
+        "product_price": "2,00 €"
+      }
+    ]
+  },
+  {
+    "category": "COCKTAILS",
+    "dishes": [
+      {
+        "product_name": "Sportsman (alkoholfrei)",
+        "product_description": "",
+        "product_id": 138,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Coconut Kiss (alkoholfrei)",
+        "product_description": "",
+        "product_id": 139,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Big Apple (alkoholfrei)",
+        "product_description": "",
+        "product_id": 140,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Sex the Beach",
+        "product_description": "",
+        "product_id": 141,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Swimming Pool",
+        "product_description": "",
+        "product_id": 142,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Pina Colada",
+        "product_description": "",
+        "product_id": 143,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Caipirinha",
+        "product_description": "",
+        "product_id": 144,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Tequila Sunrise",
+        "product_description": "",
+        "product_id": 145,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Spritz",
+        "product_description": "",
+        "product_id": 146,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "CAMAPRI Amalfi",
+        "product_description": "",
+        "product_id": 147,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Lillet Berry",
+        "product_description": "",
+        "product_id": 148,
+        "product_price": "2,00 €"
+      }
+    ]
+  },
+  {
+    "category": "WARME GETRÄNKE",
+    "dishes": [
+      {
+        "product_name": "Tasse Kaffee",
+        "product_description": "",
+        "product_id": 149,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Espresso",
+        "product_description": "",
+        "product_id": 150,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Espresso doppelt",
+        "product_description": "",
+        "product_id": 151,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Cappuccino",
+        "product_description": "",
+        "product_id": 152,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Milchkaffee",
+        "product_description": "",
+        "product_id": 153,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Latte Macchiato",
+        "product_description": "",
+        "product_id": 154,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Glas Tee (verschiedene Sorten)",
+        "product_description": "",
+        "product_id": 155,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Glühwein",
+        "product_description": "",
+        "product_id": 156,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Griechischer Frappé",
+        "product_description": "",
+        "product_id": 157,
+        "product_price": "2,00 €"
+      }
+    ]
+  },
+  {
+    "category": "BIERE VOM FASS UND AUS DER FLASCHE",
+    "dishes": [
+      {
+        "product_name": "Bitburger Pils vom Fass",
+        "product_description": "",
+        "product_id": 158,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Bitburger Alkoholfrei",
+        "product_description": "",
+        "product_id": 159,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Köstritzer Schwarzbier",
+        "product_description": "",
+        "product_id": 160,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Köstritzer Schwarzbier",
+        "product_description": "",
+        "product_id": 161,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "ERDINGER Weißbier Kristall",
+        "product_description": "",
+        "product_id": 162,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Hefeweizen Benediktiner naturtrüb vom Fass",
+        "product_description": "",
+        "product_id": 163,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Hefeweizen Benediktiner Weißbier dunkel",
+        "product_description": "",
+        "product_id": 164,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Hefeweizen Benediktiner Weißbier alkoholfrei",
+        "product_description": "",
+        "product_id": 165,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Mischgetränke",
+        "product_description": "",
+        "product_id": 166,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Diesel",
+        "product_description": "",
+        "product_id": 167,
+        "product_price": "2,00 €"
+      }
+    ]
+  },
+  {
+    "category": "ALKOHOLFREIE GETRÄNKE",
+    "dishes": [
+      {
+        "product_name": "Coca Cola",
+        "product_description": "",
+        "product_id": 168,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Coca Cola Zero",
+        "product_description": "",
+        "product_id": 169,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Fanta",
+        "product_description": "",
+        "product_id": 170,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Sprite",
+        "product_description": "",
+        "product_id": 171,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Gerolsteiner Sprudel",
+        "product_description": "",
+        "product_id": 172,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Gerolsteiner Naturell",
+        "product_description": "",
+        "product_id": 173,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Gerolsteiner Naturell",
+        "product_description": "",
+        "product_id": 174,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Tonic Water",
+        "product_description": "",
+        "product_id": 175,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Bitter Lemon",
+        "product_description": "",
+        "product_id": 176,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Apfelschorle",
+        "product_description": "",
+        "product_id": 177,
+        "product_price": "2,00 €"
+      }
+    ]
+  },
+
+  {
+    "category": "SÄFTE",
+    "dishes": [
+      {
+        "product_name": "Apfelsaft",
+        "product_description": "",
+        "product_id": 178,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Orangensaft",
+        "product_description": "",
+        "product_id": 179,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Tomatensaft",
+        "product_description": "",
+        "product_id": 180,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Kirschsaft",
+        "product_description": "",
+        "product_id": 181,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Ananassaft",
+        "product_description": "",
+        "product_id": 182,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "Bananensaft",
+        "product_description": "",
+        "product_id": 183,
+        "product_price": "2,00 €"
+      },
+
+      {
+        "product_name": "KIBA (Kirschsaft + Bananensaft)",
+        "product_description": "",
+        "product_id": 184,
+        "product_price": "2,00 €"
       }
     ]
   }
