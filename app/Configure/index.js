@@ -183,6 +183,7 @@ const Configure = () => {
                   width: moderateScale(200),
                   textAlign: "left",
                   fontSize: moderateScale(15),
+                  paddingLeft: moderateScale(5),
                 },
               ]}
               defaultValue={ip}
@@ -208,7 +209,11 @@ const Configure = () => {
             <TextInput
               style={[
                 styles.textInputStyle,
-                { textAlign: "left", fontSize: moderateScale(15) },
+                {
+                  textAlign: "left",
+                  fontSize: moderateScale(15),
+                  paddingLeft: moderateScale(5),
+                },
               ]}
               keyboardType="numeric"
               defaultValue={port ? port.toString() : ""}
