@@ -76,7 +76,9 @@ const MenuList = () => {
                           quantity &&
                             addItemToCart({
                               tableId,
-                              amountPerUnit: value.price,
+                              amountPerUnit: Number(
+                                value.product_price.replace(",", ".")
+                              ),
                               productName: value.product_name,
                               productId: value.product_id,
                               quantity,
