@@ -6,7 +6,7 @@ import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { router, useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -15,6 +15,7 @@ import {
   ToastAndroid,
   Keyboard,
   ScrollView,
+  Platform,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import Dropdown from "../../src/components/DropDown";
@@ -54,6 +55,31 @@ const Configure = () => {
       /^([1-9]|[1-9][0-9]{1,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/;
     return portRegex.test(port);
   }
+
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      Platform.OS === "android" ? "keyboardDidShow" : "keyboardWillShow",
+      (e) => {
+        setKeyboardHeight(e.endCoordinates.height);
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      Platform.OS === "android" ? "keyboardDidHide" : "keyboardWillHide",
+      () => {
+        setKeyboardHeight(0);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
+
+  const bottomPosition = keyboardHeight > 0 ? keyboardHeight : 20;
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -236,7 +262,7 @@ const Configure = () => {
       </ScrollView>
 
       <Text
-        style={styles.bottomAction}
+        style={[styles.bottomAction, { bottom: -bottomPosition + 12 }]}
         onPress={() => {
           router.dismissAll();
         }}
