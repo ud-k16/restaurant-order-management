@@ -4,7 +4,7 @@
     "slug": "restaurant-order-management",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/android/res/mipmap-hdpi/ic_launcher_round.png",
+    "icon": "./assets/images/syrtaki.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/android/res/mipmap-hdpi/ic_launcher_round_foreground.png",
+        "foregroundImage": "./assets/images/syrtaki.png",
         "backgroundColor": "#754742"
       },
       "package": "com.udk16.restaurantordermanagement"
@@ -28,7 +28,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/android/res/mipmap-hdpi/ic_launcher_round.png",
+          "image": "./assets/images/syrtaki.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
