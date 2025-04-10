@@ -19,7 +19,7 @@
     "type": "modules",
     "jsSrcsDir": "specs",
     "android": {
-      "javaPackageName": "com.WifiPrinter"
+      "javaPackageName": "com.wifiprinter"
     }
   },
   "dependencies": {

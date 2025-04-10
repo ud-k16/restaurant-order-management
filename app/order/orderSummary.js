@@ -36,7 +36,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   }, 0);
   // table customer data
   const customer = customersData?.get(tableId);
-  console.log(customer?.customerName, customer?.serverName, ">>>>>>>>>>");
+  // console.log(customer?.customerName, customer?.serverName, ">>>>>>>>>>");
 
   // receipt
   const generateReceipt = () => {
@@ -65,7 +65,75 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
 
     return receiptInfo + itemsList;
   };
+  const generatePrintBytes = () => {
+    BillData = {
+      companyName: "Syrtaki",
+      address: "123 Main St, Anytown",
+      phone: "555-1234",
+      customer: customer?.customerName,
+      server: customer?.serverName,
+      items: orderOfTheTable,
+      total: `${subTotal}`,
+      tableId,
+      dateTime: new Date().toLocaleString(),
+    };
+    let escposString = "";
 
+    // Initialize printer
+    escposString += "\x1B\x40";
+
+    // Company Info (Centered)
+    escposString += "\x1B\x61\x01" + billData.companyName + "\n";
+    // escposString += billData.address + "\n";
+    // escposString += "Tel: " + billData.phone + "\n";
+    escposString += "Table: " + billData.tableId + "\n";
+    escposString += "Customer: " + billData.customerName + "\n";
+    escposString += "Server: " + billData.serverName + "\n";
+    escposString += "\x1B\x61\x00"; // Left alignment
+    escposString += "--------------------------------\n";
+
+    // Items
+    billData.items.forEach((item) => {
+      const formattedPrice = parseFloat(item.amountPerUnit).toFixed(2);
+      const line =
+        item.quantity +
+        "\t" +
+        item.productName +
+        " ".repeat(
+          Math.max(0, 32 - item.productName.length - formattedPrice.length)
+        ) +
+        formattedPrice +
+        "\t" +
+        `${item.quantity * item.amountPerUnit}` +
+        "\n";
+      escposString += line;
+    });
+
+    // Total
+    escposString += "--------------------------------\n";
+    escposString +=
+      "TOTAL: " +
+      " ".repeat(Math.max(0, 24 - billData.total.length)) +
+      billData.total +
+      "\n";
+    escposString += "--------------------------------\n";
+
+    // Date and Time (Right Aligned)
+    escposString += "\x1B\x61\x02" + billData.dateTime + "\n";
+    escposString += "\x1B\x61\x00"; // Left alignment
+    escposString += "\n\n\n";
+
+    // Cut paper
+    escposString += "\x1D\x56\x41\x10";
+
+    // Convert the ESC/POS string to a Buffer (which can be treated as a byte array)
+    const buffer = Buffer.from(escposString, "latin1"); // 'latin1' encoding for ESC/POS
+
+    // Convert the Buffer to a regular number array (for easier passing to Native Module)
+    const byteArray = Array.from(buffer);
+
+    return byteArray;
+  };
   return (
     <View style={styles.container}>
       {orderOfTheTable ? (
@@ -143,7 +211,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
             <Text
               style={styles.menuTextStyle}
               onPress={async () => {
-                const receipt = generateReceipt();
+                const receipt = generatePrintBytes();
                 const result = await printInWifiMode(receipt);
                 result && deleteOrder(tableId);
               }}

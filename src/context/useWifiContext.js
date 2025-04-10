@@ -28,24 +28,7 @@ const WifiContextProvider = ({ children }) => {
   const printInWifiMode = async (receipt = "") => {
     try {
       setState((prev) => ({ ...prev, isPrinting: true }));
-
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain",
-        },
-        body: receipt,
-      };
-      const url = `http://${state.ip}:${state.port}`;
-      const response = await fetchWithTimeOut({
-        url,
-        requestOptions,
-      });
-      const result = await handleResponse(response);
-      console.log(result);
-      return result;
     } catch (error) {
-      handleResponseError(error);
     } finally {
       setState((prev) => ({ ...prev, isPrinting: false }));
     }
