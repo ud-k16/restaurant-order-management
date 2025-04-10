@@ -67,7 +67,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     return receiptInfo + itemsList;
   };
   const generatePrintBytes = () => {
-    BillData = {
+    const billData = {
       companyName: "Syrtaki",
       address: "123 Main St, Anytown",
       phone: "555-1234",

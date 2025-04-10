@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNetInfo } from "@react-native-community/netinfo";
 import useHelpers from "@/src/utils/helperFunctions";
+import NativeWifiPrinter from "@/specs/NativeWifiPrinter";
 const WifiContext = createContext();
 
 const WifiContextProvider = ({ children }) => {
@@ -25,9 +26,12 @@ const WifiContextProvider = ({ children }) => {
       continueOffline: isInternetReachable && false,
     }));
   }, [isConnected, isInternetReachable]);
-  const printInWifiMode = async (receipt = "") => {
+  const printInWifiMode = async (receipt) => {
     try {
       setState((prev) => ({ ...prev, isPrinting: true }));
+      NativeWifiPrinter.printBill(state.ip, state.port, receipt, (success) => {
+        console.log(success);
+      });
     } catch (error) {
     } finally {
       setState((prev) => ({ ...prev, isPrinting: false }));

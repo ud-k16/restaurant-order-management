@@ -6,7 +6,7 @@ export interface Spec extends TurboModule {
     ipAddress: string,
     port: number,
     escposBytes: number[],
-    callback: (error: string | null, success: boolean) => void
+    callback: (success: boolean) => void
   ): void;
 }
 
