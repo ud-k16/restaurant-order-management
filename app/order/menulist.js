@@ -120,7 +120,9 @@ const MenuList = () => {
       {categoryVisible && (
         <View style={styles.categoryContainer}>
           <FlatList
-            style={{ padding: moderateScale(10) }}
+            style={{
+              padding: moderateScale(10),
+            }}
             data={menu}
             ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
             renderItem={({ item }) => (
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignSelf: "center",
     width: "80%",
-    height: "80%",
+    height: "90%",
     backgroundColor: Themes.black,
     paddingBottom: moderateScale(60),
   },
