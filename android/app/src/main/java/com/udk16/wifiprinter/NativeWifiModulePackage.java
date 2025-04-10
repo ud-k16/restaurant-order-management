@@ -14,7 +14,7 @@ public class NativeWifiModulePackage extends BaseReactPackage {
   @Override
   public NativeModule getModule(String name, ReactApplicationContext reactContext) {
     if (name.equals(NativeWifiModule.NAME)) {
-      return new NativeWifiModulePackage(reactContext);
+      return new NativeWifiModule(reactContext);
     } else {
       return null;
     }
@@ -26,9 +26,9 @@ public class NativeWifiModulePackage extends BaseReactPackage {
       @Override
       public Map<String, ReactModuleInfo> getReactModuleInfos() {
         Map<String, ReactModuleInfo> map = new HashMap<>();
-        map.put(NativeWifiModulePackage.NAME, new ReactModuleInfo(
-          NativeWifiModulePackage.NAME,       // name
-          NativeWifiModulePackage.NAME,       // className
+        map.put(NativeWifiModule.NAME, new ReactModuleInfo(
+          NativeWifiModule.NAME,       // name
+          NativeWifiModule.NAME,       // className
           false, // canOverrideExistingModule
           false, // needsEagerInit
           false, // isCXXModule

@@ -9,6 +9,7 @@ import { Themes } from "@/src/utils/themes";
 import { useWifiContext } from "@/src/context/useWifiContext";
 import useOrders from "@/src/hooks/useOrders";
 import { router } from "expo-router";
+import { Buffer } from "buffer";
 
 const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { orders } = useOrderContext();
