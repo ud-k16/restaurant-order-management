@@ -151,7 +151,7 @@ const Configure = () => {
                       setHomeState((prev) => {
                         prev.menu[findIndex] = {
                           ...menu[findIndex],
-                          amount_per_unit: price.amount_per_unit,
+                          product_price: price.amount_per_unit,
                         };
                         setMenu(
                           JSON.stringify({ menu: prev.menu, menuFileName })
