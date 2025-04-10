@@ -8,14 +8,6 @@ export interface Spec extends TurboModule {
     escposBytes: number[],
     callback: (error: string | null, success: boolean) => void
   ): void;
-  getPrinterStatus(
-    callback: (error: string | null, success: boolean) => void
-  ): void;
-  connectPrinter(
-    ipAddress: string,
-    port: string,
-    callback: (error: string | null, success: boolean) => void
-  ): void;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>("NativeWifiPrinter");
