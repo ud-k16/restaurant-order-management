@@ -3,7 +3,14 @@ import { useCustomerContext } from "@/src/context/useCustomerContext";
 import useCustomers from "@/src/hooks/useCustomers";
 import moderateScale from "@/src/utils/responsiveScale";
 import UserCard from "@/src/components/userCard";
-import { View, StyleSheet, ScrollView, Text, Modal } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  Modal,
+  ToastAndroid,
+} from "react-native";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
 import { useWifiContext } from "@/src/context/useWifiContext";
@@ -214,7 +221,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
               onPress={async () => {
                 const receipt = generatePrintBytes();
                 const result = await printInWifiMode(receipt);
-                result && deleteOrder(tableId);
+                result
+                  ? deleteOrder(tableId)
+                  : ToastAndroid.show("unable to print", ToastAndroid.LONG);
               }}
             >
               {isPrinting ? "Printing........." : "Print Receipt"}

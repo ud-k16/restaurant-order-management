@@ -12,7 +12,7 @@ const WifiContextProvider = ({ children }) => {
 
   const [state, setState] = useState({
     ip: "",
-    port: null,
+    port: 9100,
     isPrinting: false,
     isConnected: false,
     isInternetReachable: false,
@@ -28,11 +28,17 @@ const WifiContextProvider = ({ children }) => {
   }, [isConnected, isInternetReachable]);
   const printInWifiMode = async (receipt) => {
     try {
+      console.log(receipt);
+
       setState((prev) => ({ ...prev, isPrinting: true }));
-      NativeWifiPrinter.printBill(state.ip, state.port, receipt, (success) => {
-        console.log(success);
-      });
+      const response = await NativeWifiPrinter.printBill(
+        state.ip,
+        state.port,
+        receipt
+      );
+      return response;
     } catch (error) {
+      console.log(error);
     } finally {
       setState((prev) => ({ ...prev, isPrinting: false }));
     }
