@@ -29,18 +29,25 @@ const WifiContextProvider = ({ children }) => {
   const printInWifiMode = async (receipt) => {
     try {
       console.log(receipt);
-
+      let timeOutId;
       setState((prev) => ({ ...prev, isPrinting: true }));
-      const response = await NativeWifiPrinter.printBill(
-        state.ip,
-        state.port,
-        receipt
-      );
-      return response;
+      NativeWifiPrinter.printBill(state.ip, state.port, receipt, (result) => {
+        console.log(result);
+        if (timeOutId) {
+          clearTimeout(timeOutId);
+        }
+        setState((prev) => ({ ...prev, isPrinting: false }));
+      });
     } catch (error) {
       console.log(error);
-    } finally {
+      if (timeOutId) {
+        clearTimeout(timeOutId);
+      }
       setState((prev) => ({ ...prev, isPrinting: false }));
+    } finally {
+      timeOutId = setTimeout(() => {
+        setState((prev) => ({ ...prev, isPrinting: false }));
+      }, 1003);
     }
   };
   return (
