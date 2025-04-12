@@ -90,8 +90,7 @@ const MenuList = () => {
                         productDescription={value.product_description}
                         key={index}
                         onAdd={(quantity) => {
-                          console.log(value.product_price, ">>>>>>>>>>>>>>>");
-
+                          // console.log(value.product_price, ">>>>>>>>>>>>>>>");
                           quantity &&
                             addItemToCart({
                               tableId,
@@ -140,7 +139,8 @@ const MenuList = () => {
         <View style={styles.categoryContainer}>
           <FlatList
             style={{
-              padding: moderateScale(10),
+              paddingHorizontal: moderateScale(10),
+              // paddingBottom: moderateScale(60),
             }}
             data={menu}
             ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
