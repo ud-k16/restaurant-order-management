@@ -90,7 +90,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       customer: customer?.customerName,
       server: customer?.serverName,
       items: orderOfTheTable,
-      total: `${subTotal}`,
+      total: `${subTotal.toFixed(2).replace(".", ",")}`,
       tableId,
       dateTime: new Date().toLocaleString(),
     };
@@ -111,9 +111,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
 
     // Items
     billData.items.forEach((item) => {
-      const formattedPrice = parseFloat(
-        item.quantity * item.amountPerUnit
-      ).toFixed(2);
+      const formattedPrice = parseFloat(item.quantity * item.amountPerUnit)
+        .toFixed(2)
+        .replace(".", ",");
       const line =
         item.quantity +
         "\t" +
