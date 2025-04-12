@@ -102,7 +102,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
 
     // Items
     billData.items.forEach((item) => {
-      const formattedPrice = parseFloat(item.amountPerUnit).toFixed(2);
+      const formattedPrice = parseFloat(
+        item.quantity * item.amountPerUnit
+      ).toFixed(2);
       const line =
         item.quantity +
         "\t" +
@@ -111,8 +113,6 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           Math.max(0, 32 - item.productName.length - formattedPrice.length)
         ) +
         formattedPrice +
-        "\t" +
-        `${item.quantity * item.amountPerUnit}` +
         "\n";
       escposString += line;
     });
