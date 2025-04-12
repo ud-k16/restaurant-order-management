@@ -236,13 +236,20 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           {!!ip && !!port ? (
             <Text
               style={styles.menuTextStyle}
-              onPress={async () => {
-                const receipt = generatePrintBytes();
-                const result = await printInWifiMode(receipt);
-                result
-                  ? deleteOrder(tableId)
-                  : ToastAndroid.show("unable to print", ToastAndroid.LONG);
-              }}
+              onPress={
+                isPrinting
+                  ? null
+                  : async () => {
+                      const receipt = generatePrintBytes();
+                      const result = await printInWifiMode(receipt);
+                      result
+                        ? deleteOrder(tableId)
+                        : ToastAndroid.show(
+                            "unable to print",
+                            ToastAndroid.LONG
+                          );
+                    }
+              }
             >
               {isPrinting ? "Printing........." : "Print Receipt"}
             </Text>
