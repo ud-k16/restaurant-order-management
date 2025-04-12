@@ -160,6 +160,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.displayStack}>
             <Text style={{ flex: 2 }}>Item Description</Text>
             <Text style={{ flex: 0.5 }}>Qty</Text>
+            <Text style={{ flex: 0.5 }}>Price</Text>
           </View>
           <View style={styles.lineStyle}></View>
 
@@ -168,14 +169,17 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
               <View style={styles.displayStack} key={index}>
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
                 <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
+                <Text style={{ flex: 0.5 }}>
+                  {product.quantity * product.amountPerUnit}
+                </Text>
               </View>
             );
           })}
 
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
-            <Text style={{ flex: 2 }}>Total Quantity </Text>
-            <Text style={{ flex: 0.5 }}>{quantityCount}</Text>
+            <Text style={{ flex: 2 }}>Total</Text>
+            <Text style={{ flex: 0.4 }}>{subTotal}</Text>
           </View>
           <View style={styles.lineStyle}></View>
           {(!customer?.customerName || !customer?.serverName) && (

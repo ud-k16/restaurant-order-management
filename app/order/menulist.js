@@ -90,10 +90,14 @@ const MenuList = () => {
                         productDescription={value.product_description}
                         key={index}
                         onAdd={(quantity) => {
+                          console.log(value.product_price, ">>>>>>>>>>>>>>>");
+
                           quantity &&
                             addItemToCart({
                               tableId,
-                              amountPerUnit: Number(value.product_price),
+                              amountPerUnit: Number(
+                                value.product_price?.replace(",", ".")
+                              ),
                               productName: value.product_name,
                               productId: value.product_id,
                               quantity,
