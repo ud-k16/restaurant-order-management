@@ -124,7 +124,7 @@ const Configure = () => {
               Upload Menu
             </Text>
           </View>
-          {menu && (
+          {/* {menu && (
             <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
               Edit Menu Prices
             </Text>
@@ -191,7 +191,7 @@ const Configure = () => {
                 Save
               </Text>
             </View>
-          )}
+          )} */}
 
           <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
             Wifi Printer Configuration
