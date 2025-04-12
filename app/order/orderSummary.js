@@ -180,7 +180,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
                 <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
                 <Text style={{ flex: 0.5 }}>
-                  {product.quantity * product.amountPerUnit}
+                  {(product.quantity * product.amountPerUnit)
+                    .toFixed(2)
+                    .replace(".", ",")}
                 </Text>
               </View>
             );
@@ -189,7 +191,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 2 }}>Total</Text>
-            <Text style={{ flex: 0.4 }}>€ {subTotal}</Text>
+            <Text style={{ flex: 0.4 }}>
+              € {subTotal.toFixed(2).replace(".", ",")}
+            </Text>
           </View>
           <View style={styles.lineStyle}></View>
           {(!customer?.customerName || !customer?.serverName) && (
