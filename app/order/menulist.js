@@ -30,6 +30,7 @@ const MenuList = () => {
   // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
   const { menu } = useHomeContext();
+  const itemHeights = useRef({});
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -49,6 +50,14 @@ const MenuList = () => {
   }, []);
   // ==================================================
 
+  const getItemLayout = (data, index) => {
+    let offset = 0;
+    for (let i = 0; i < index; i++) {
+      offset += itemHeights.current[i] || 0; // Use stored heights
+    }
+    return { length: itemHeights.current[index] || 0, offset, index };
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -56,11 +65,19 @@ const MenuList = () => {
           <EmptyContent content={"No Menu- upload Menu file in Settings"} />
         }
         ref={flatlistRef}
+        onScrollToIndexFailed={() => {
+          console.log("unable to scroll");
+        }}
         data={menu}
-        renderItem={({ item }) => {
+        getItemLayout={getItemLayout}
+        renderItem={({ item, index }) => {
           const { category, dishes } = item;
           return (
-            <View>
+            <View
+              onLayout={(event) => {
+                itemHeights.current[index] = event.nativeEvent.layout.height;
+              }}
+            >
               <ScrollView>
                 <Text style={styles.categoryHeading}>{category}</Text>
                 <View style={styles.itemContainer}>
