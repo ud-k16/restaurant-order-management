@@ -36,6 +36,15 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   // calculation of sub total of all itemes present
   const subTotal = orderOfTheTable?.reduce((subTotal, product) => {
     const amount = product.quantity * product.amountPerUnit;
+    console.log(
+      product.productName,
+      "\t",
+      product.quantity,
+      "\t",
+      product.amountPerUnit,
+      "\t",
+      amount
+    );
     return subTotal + amount;
   }, 0);
   // quantity count
