@@ -122,6 +122,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     escposString +=
       "TOTAL: " +
       " ".repeat(Math.max(0, 24 - billData.total.length)) +
+      "€" +
       billData.total +
       "\n";
     escposString += "--------------------------------\n";
@@ -179,7 +180,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 2 }}>Total</Text>
-            <Text style={{ flex: 0.4 }}>{subTotal}</Text>
+            <Text style={{ flex: 0.4 }}>€ {subTotal}</Text>
           </View>
           <View style={styles.lineStyle}></View>
           {(!customer?.customerName || !customer?.serverName) && (
