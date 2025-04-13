@@ -64,12 +64,13 @@ const MenuList = () => {
         ListEmptyComponent={
           <EmptyContent content={"No Menu- upload Menu file in Settings"} />
         }
+        initialNumToRender={menu ? menu.length : 0}
         ref={flatlistRef}
         onScrollToIndexFailed={() => {
           console.log("unable to scroll");
         }}
         data={menu}
-        getItemLayout={getItemLayout}
+        // getItemLayout={getItemLayout}
         renderItem={({ item, index }) => {
           const { category, dishes } = item;
           return (
@@ -144,13 +145,15 @@ const MenuList = () => {
             }}
             data={menu}
             ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Pressable
                 onPress={() => {
+                  console.log(index);
+
                   toggleCategoryVisibility();
                   if (flatlistRef?.current)
-                    flatlistRef.current.scrollToItem({
-                      item,
+                    flatlistRef.current.scrollToIndex({
+                      index,
                       animated: true,
                     });
                   else console.log("unable to scroll to index");
