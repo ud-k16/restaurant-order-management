@@ -214,18 +214,8 @@ const Configure = () => {
               defaultValue={ip}
               placeholder="IPv4"
               keyboardType="numeric"
-              onEndEditing={(event) => {
-                Keyboard.dismiss();
-                const isValid = isValidIPv4(event.nativeEvent.text);
-                isValid
-                  ? setWifiState((prev) => ({
-                      ...prev,
-                      ip: event.nativeEvent.text,
-                    }))
-                  : ToastAndroid.show(
-                      "Not a valid IPv4 Addrress",
-                      ToastAndroid.LONG
-                    );
+              onChangeText={(text) => {
+                setPrinterIp(text);
               }}
             />
           </View>
@@ -242,22 +232,36 @@ const Configure = () => {
               ]}
               keyboardType="numeric"
               defaultValue={port ? port.toString() : ""}
-              onEndEditing={(event) => {
-                Keyboard.dismiss();
-                const isValid = isValidPort(event.nativeEvent.text);
-                isValid
-                  ? setWifiState((prev) => ({
-                      ...prev,
-                      port: Number(event.nativeEvent.text),
-                    }))
-                  : ToastAndroid.show(
-                      "Not a valid Port Number",
-                      ToastAndroid.LONG
-                    );
+              onChangeText={(text) => {
+                setPrinterPort(text);
               }}
             />
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              Keyboard.dismiss();
+              const isValidIp = isValidIPv4(printerIp);
+              isValidIp
+                ? setWifiState((prev) => ({
+                    ...prev,
+                    ip: printerIp,
+                  }))
+                : ToastAndroid.show(
+                    "Not a valid IPv4 Addrress",
+                    ToastAndroid.LONG
+                  );
+              const isValid = isValidPort(printerPort);
+              isValid
+                ? setWifiState((prev) => ({
+                    ...prev,
+                    port: Number(printerPort),
+                  }))
+                : ToastAndroid.show(
+                    "Not a valid Port Number",
+                    ToastAndroid.LONG
+                  );
+            }}
+          >
             <Text style={styles.saveButton}>Save</Text>
           </TouchableOpacity>
         </View>
