@@ -15,16 +15,19 @@ const HomeContextProvider = ({ children }) => {
   const { getItem: getTableCount } = useAsyncStorage("tableCount");
   const fetchTableAndMenuAvailable = async () => {
     try {
+      let availableMenu = null;
       const menuDetail = await getMenu();
-      const { menu, menuFileName } = menuDetail && JSON.parse(menuDetail);
+      console.log(menuDetail);
+      if (menuDetail) availableMenu = JSON.parse(menuDetail);
+
       const tableCount = await getTableCount();
-      console.log(menu, menuDetail, "<<<<<<");
+      console.log(availableMenu?.menuFileName, "<<<<<<");
 
       setState((prev) => ({
         ...prev,
-        menu: menu ? menu : MenuList,
+        menu: availableMenu?.menu ? availableMenu?.menu : MenuList,
         // menu,
-        menuFileName: menuFileName ?? "No File",
+        menuFileName: availableMenu?.menuFileName ?? "No File",
         tableCount: Number(tableCount),
       }));
     } catch (error) {
