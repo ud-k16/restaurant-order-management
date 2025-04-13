@@ -235,6 +235,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
                   : async () => {
                       const receipt = generatePrintBytes();
                       const result = await printInWifiMode(receipt);
+                      result && deleteOrder(tableId);
                     }
               }
             >
