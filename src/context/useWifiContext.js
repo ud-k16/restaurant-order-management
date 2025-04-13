@@ -32,18 +32,20 @@ const WifiContextProvider = ({ children }) => {
       let timeOutId;
 
       setState((prev) => ({ ...prev, isPrinting: true }));
-      NativeWifiPrinter.printBill(state.ip, state.port, receipt, (result) => {
-        console.log(result.success);
-        result.success
-          ? ToastAndroid.show("Print sucessful", ToastAndroid.LONG)
-          : ToastAndroid.show("unable to print", ToastAndroid.LONG);
-
-        // clearing timeout if any
-        if (timeOutId) {
-          clearTimeout(timeOutId);
-        }
-        // setting printing to false
-        setState((prev) => ({ ...prev, isPrinting: false }));
+      return new Promise((resolve, reject) => {
+        NativeWifiPrinter.printBill(state.ip, state.port, receipt, (result) => {
+          console.log(result.success);
+          result.success
+            ? ToastAndroid.show("Print sucessful", ToastAndroid.LONG)
+            : ToastAndroid.show("unable to print", ToastAndroid.LONG);
+          result.success ? resolve(true) : reject(false);
+          // clearing timeout if any
+          if (timeOutId) {
+            clearTimeout(timeOutId);
+          }
+          // setting printing to false
+          setState((prev) => ({ ...prev, isPrinting: false }));
+        });
       });
     } catch (error) {
       console.log(error);
@@ -56,7 +58,7 @@ const WifiContextProvider = ({ children }) => {
     } finally {
       timeOutId = setTimeout(() => {
         setState((prev) => ({ ...prev, isPrinting: false }));
-      }, 1003);
+      }, 10003);
     }
   };
   return (
