@@ -3,14 +3,7 @@ import { useCustomerContext } from "@/src/context/useCustomerContext";
 import useCustomers from "@/src/hooks/useCustomers";
 import moderateScale from "@/src/utils/responsiveScale";
 import UserCard from "@/src/components/userCard";
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  Modal,
-  ToastAndroid,
-} from "react-native";
+import { View, StyleSheet, ScrollView, Text, Modal } from "react-native";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
 import { useWifiContext } from "@/src/context/useWifiContext";
@@ -104,7 +97,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     // escposString += billData.address + "\n";
     // escposString += "Tel: " + billData.phone + "\n";
     escposString += "Table: " + billData.tableId + "\n";
-    escposString += "Customer: " + billData.customerName + "\n";
+    escposString += "Customer: " + billData.customer + "\n";
     escposString += "Server: " + billData.serverName + "\n";
     escposString += "\x1B\x61\x00"; // Left alignment
     escposString += "--------------------------------\n";
@@ -242,12 +235,6 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
                   : async () => {
                       const receipt = generatePrintBytes();
                       const result = await printInWifiMode(receipt);
-                      result
-                        ? deleteOrder(tableId)
-                        : ToastAndroid.show(
-                            "unable to print",
-                            ToastAndroid.LONG
-                          );
                     }
               }
             >
