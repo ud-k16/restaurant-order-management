@@ -16,6 +16,7 @@ import {
   Keyboard,
   ScrollView,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import Dropdown from "../../src/components/DropDown";
@@ -35,6 +36,8 @@ const Configure = () => {
     product_id: null,
     amount_per_unit: null,
   });
+  const [printerIp, setPrinterIp] = useState("");
+  const [printerPort, setPrinterPort] = useState(port);
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -254,6 +257,9 @@ const Configure = () => {
               }}
             />
           </View>
+          <TouchableOpacity>
+            <Text style={styles.saveButton}>Save</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
 
