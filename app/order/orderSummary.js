@@ -87,6 +87,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       tableId,
       dateTime: new Date().toLocaleString(),
     };
+    console.log(`${subTotal.toFixed(2).replace(".", ",")}`, "<<<<<<<<<<<<<<");
+
+    // variable to store escpos code
     let escposString = "";
 
     // Initialize printer
@@ -122,9 +125,8 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     // Total
     escposString += "--------------------------------\n";
     escposString +=
-      "TOTAL: " +
+      "TOTAL (EURO) " +
       " ".repeat(Math.max(0, 24 - billData.total.length)) +
-      "€" +
       billData.total +
       "\n";
     escposString += "--------------------------------\n";

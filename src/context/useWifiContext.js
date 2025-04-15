@@ -30,7 +30,7 @@ const WifiContextProvider = ({ children }) => {
     try {
       // console.log(receipt);
       let timeOutId;
-
+      console.log(receipt);
       setState((prev) => ({ ...prev, isPrinting: true }));
       return new Promise((resolve, reject) => {
         NativeWifiPrinter.printBill(state.ip, state.port, receipt, (result) => {
