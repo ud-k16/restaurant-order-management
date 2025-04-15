@@ -9,23 +9,42 @@ import {
 } from "react-native";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import moderateScale from "@/src/utils/responsiveScale";
+import { Themes } from "@/src/utils/themes";
 
 const ProductEdit = ({ productId, product, hideModal }) => {
   const [price, setPrice] = useState({ euro: "", cent: "" });
   const { menuFileName, menu, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
+  console.log(product);
+
   const onEditConfirm = () => {
     try {
-      const findIndex = menu.findIndex(
-        (value) => value.product_id == productId
-      );
-      if (findIndex != -1) {
+      let foundProduct;
+      const menuIndex = menu.findIndex((data) => {
+        const items = data.dishes;
+        foundProduct = items.find((item) => item.product_id == productId);
+        return !!foundProduct;
+      });
+
+      //   console.log("at index", menuIndex);
+
+      if (menuIndex != -1) {
         setHomeState((prev) => {
-          prev.menu[findIndex] = {
-            ...menu[findIndex],
-            product_price: `${price.euro},${price.cent}`,
+          //   console.log("before,", prev.menu[menuIndex]);
+          prev.menu[menuIndex] = {
+            category: prev.menu[menuIndex].category,
+            dishes: [
+              ...prev.menu[menuIndex].dishes.filter(
+                (item) => item.product_id != productId
+              ),
+              {
+                ...foundProduct,
+                product_price: `${price.euro},${price.cent}`,
+              },
+            ],
           };
           setMenu(JSON.stringify({ menu: prev.menu, menuFileName }));
+          //   console.log("after,", prev.menu[menuIndex]);
           return {
             ...prev,
           };
@@ -52,6 +71,33 @@ const ProductEdit = ({ productId, product, hideModal }) => {
           }}
         />
       </View>
+      <View>
+        <Text>Item Price</Text>
+        <View style={styles.displayStack2}>
+          <TextInput
+            style={styles.textInputPrice}
+            keyboardType="numeric"
+            placeholder="euro"
+            onChangeText={(text) => {
+              setPrice((prev) => ({
+                ...prev,
+                euro: text,
+              }));
+            }}
+          />
+          <TextInput
+            style={styles.textInputPrice}
+            keyboardType="numeric"
+            placeholder="cents"
+            onChangeText={(text) => {
+              setPrice((prev) => ({
+                ...prev,
+                cent: text,
+              }));
+            }}
+          />
+        </View>
+      </View>
       <View style={styles.displayStack}>
         <TouchableOpacity>
           <Text style={styles.saveButton} onPress={hideModal}>
@@ -76,6 +122,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+    height: moderateScale(70),
+  },
+  displayStack2: {
+    alignItems: "center",
+    flexDirection: "row",
   },
   textInput: {
     width: moderateScale(200),
@@ -84,6 +135,20 @@ const styles = StyleSheet.create({
     paddingLeft: moderateScale(5),
     borderWidth: moderateScale(1),
     height: moderateScale(50),
+  },
+  textInputPrice: {
+    width: moderateScale(150),
+    paddingLeft: moderateScale(5),
+    borderWidth: moderateScale(1),
+    height: moderateScale(50),
+  },
+  saveButton: {
+    width: moderateScale(100),
+    backgroundColor: Themes.primary,
+    color: Themes.white,
+    textAlign: "center",
+    textAlignVertical: "center",
+    borderRadius: moderateScale(5),
   },
 });
 export default ProductEdit;

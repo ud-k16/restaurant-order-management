@@ -31,8 +31,6 @@ const Dropdown = ({
   valueField = "",
   icon,
 }) => {
-  console.log(data);
-
   const isIcon = React.isValidElement(icon);
   const [show, setShow] = useState(false);
   const [selected, setSelected] = useState("");
