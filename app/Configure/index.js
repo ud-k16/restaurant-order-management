@@ -17,9 +17,12 @@ import {
   ScrollView,
   Platform,
   TouchableOpacity,
+  Modal,
 } from "react-native";
 import Entypo from "@expo/vector-icons/Entypo";
 import Dropdown from "../../src/components/DropDown";
+import ProductEdit from "../edit/ProductEdit";
+import { AntDesign } from "@expo/vector-icons";
 const Configure = () => {
   const {
     tableCount,
@@ -31,13 +34,17 @@ const Configure = () => {
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
   const { setState: setHeaders } = useHeaderContext();
+  // wifi printer variables
   const { ip, port, setState: setWifiState } = useWifiContext();
-  const [price, setPrice] = useState({
-    product_id: null,
-    amount_per_unit: null,
-  });
   const [printerIp, setPrinterIp] = useState("");
   const [printerPort, setPrinterPort] = useState(port);
+  // edit item price variables
+  // ------------------------
+  const [editProductId, setEditProductId] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
+  // =======================
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -80,7 +87,7 @@ const Configure = () => {
       keyboardDidHideListener.remove();
     };
   }, []);
-
+  // for hiding bottom action bar when keyboard opens
   const bottomPosition = keyboardHeight > 0 ? keyboardHeight : 20;
 
   return (
@@ -127,74 +134,6 @@ const Configure = () => {
               Upload Menu
             </Text>
           </View>
-          {/* {menu && (
-            <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-              Edit Menu Prices
-            </Text>
-          )}
-          {menu && (
-            <View style={{ rowGap: moderateScale(10) }}>
-              <View
-                style={{ flexDirection: "row", columnGap: moderateScale(10) }}
-              >
-                <Dropdown
-                  data={menu.map((data) => data.dishes).flat()}
-                  style={{
-                    width: moderateScale(200),
-                    justifyContent: "space-evenly",
-                  }}
-                  containerStyle={styles.textInputStyle}
-                  labelField="product_name"
-                  valueField="product_id"
-                  onChange={(id) => {
-                    setPrice((prev) => ({
-                      ...prev,
-                      product_id: id,
-                    }));
-                  }}
-                />
-
-                <TextInput
-                  style={styles.textInputStyle}
-                  keyboardType="numeric"
-                  onChangeText={(text) => {
-                    setPrice((prev) => ({
-                      ...prev,
-                      amount_per_unit: text,
-                    }));
-                  }}
-                />
-              </View>
-              <Text
-                style={styles.saveButton}
-                onPress={() => {
-                  try {
-                    const findIndex = menu.findIndex(
-                      (value) => value.product_id == price.product_id
-                    );
-                    if (findIndex != -1) {
-                      setHomeState((prev) => {
-                        prev.menu[findIndex] = {
-                          ...menu[findIndex],
-                          product_price: price.amount_per_unit,
-                        };
-                        setMenu(
-                          JSON.stringify({ menu: prev.menu, menuFileName })
-                        );
-                        return {
-                          ...prev,
-                        };
-                      });
-                    }
-                  } catch (error) {
-                    console.log(error);
-                  }
-                }}
-              >
-                Save
-              </Text>
-            </View>
-          )} */}
 
           <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
             Wifi Printer Configuration
@@ -265,6 +204,37 @@ const Configure = () => {
             <Text style={styles.saveButton}>Save</Text>
           </TouchableOpacity>
         </View>
+        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+          Edit Product
+        </Text>
+        <Dropdown
+          data={menu.map((data) => data.dishes).flat()}
+          style={{
+            width: moderateScale(200),
+            justifyContent: "space-evenly",
+          }}
+          containerStyle={{ height: moderateScale(150) }}
+          labelField="product_name"
+          valueField="product_id"
+          onChange={(id) => {
+            setEditProductId(id);
+            showModal();
+          }}
+        />
+        {modalVisible && (
+          <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
+            <View style={styles.modalHeader}>
+              <AntDesign
+                name="close"
+                size={24}
+                color={Themes.white}
+                onPress={hideModal}
+                style={{ alignSelf: "flex-end" }}
+              />
+            </View>
+            <ProductEdit productId={editProductId} hideModal={hideModal} />
+          </Modal>
+        )}
       </ScrollView>
 
       <Text
@@ -315,6 +285,16 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.backDrop,
     color: Themes.white,
     width: moderateScale(200),
+  },
+  modalConatainer: {
+    backgroundColor: Themes.white,
+  },
+  modalHeader: {
+    backgroundColor: Themes.primary,
+    height: moderateScale(50),
+    elevation: 6,
+    justifyContent: "center",
+    paddingHorizontal: moderateScale(10),
   },
   bottomAction: {
     height: moderateScale(50),
