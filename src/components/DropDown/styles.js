@@ -31,5 +31,6 @@ export const styles = StyleSheet.create({
   labelContainerStyle: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingHorizontal: 5,
   },
 });

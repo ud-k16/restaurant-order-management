@@ -166,7 +166,11 @@ const Configure = () => {
                 width: moderateScale(200),
                 justifyContent: "space-evenly",
               }}
-              containerStyle={{ height: moderateScale(150) }}
+              containerStyle={{
+                height: moderateScale(250),
+                backgroundColor: Themes.white,
+                borderRadius: moderateScale(5),
+              }}
               labelField="product_name"
               valueField="product_id"
               onChange={(id) => {
