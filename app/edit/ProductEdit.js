@@ -100,7 +100,18 @@ const ProductEdit = ({ productId, product, hideModal }) => {
       </View>
       <View style={styles.displayStack}>
         <TouchableOpacity>
-          <Text style={styles.saveButton} onPress={hideModal}>
+          <Text
+            style={[
+              styles.saveButton,
+              {
+                color: Themes.primary,
+                backgroundColor: Themes.white,
+                borderColor: Themes.primary,
+                borderWidth: moderateScale(2),
+              },
+            ]}
+            onPress={hideModal}
+          >
             Cancel
           </Text>
         </TouchableOpacity>
@@ -120,7 +131,7 @@ const styles = StyleSheet.create({
   },
   displayStack: {
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    columnGap: moderateScale(25),
     alignItems: "center",
     height: moderateScale(70),
   },
@@ -149,6 +160,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     borderRadius: moderateScale(5),
+    height: moderateScale(40),
   },
 });
 export default ProductEdit;
