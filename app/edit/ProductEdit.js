@@ -17,9 +17,22 @@ const ProductEdit = ({ productId, product, hideModal }) => {
   const { menuFileName, menu, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
   console.log(product);
+  const validateCents = (cents) => {
+    console.log(">>>>>>>", cents);
+
+    const regex = /^\d{2}$/; // Exactly two digits
+    return regex.test(cents);
+  };
 
   const onEditConfirm = () => {
     try {
+      if (!validateCents(price.cent ? price.cent : "00")) {
+        ToastAndroid.show("Enter valid cent", ToastAndroid.LONG);
+        return;
+      } else if (!price.euro) {
+        ToastAndroid.show("Enter amount", ToastAndroid.LONG);
+        return;
+      }
       let foundProduct;
       const menuIndex = menu.findIndex((data) => {
         const items = data.dishes;
@@ -38,7 +51,9 @@ const ProductEdit = ({ productId, product, hideModal }) => {
               ),
               {
                 ...foundProduct,
-                product_price: `${price.euro},${price.cent}`,
+                product_price: `${price.euro},${
+                  price.cent ? price.cent : "00"
+                }`,
               },
             ],
           };
