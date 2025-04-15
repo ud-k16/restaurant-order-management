@@ -27,8 +27,6 @@ const ProductEdit = ({ productId, product, hideModal }) => {
         return !!foundProduct;
       });
 
-      //   console.log("at index", menuIndex);
-
       if (menuIndex != -1) {
         setHomeState((prev) => {
           //   console.log("before,", prev.menu[menuIndex]);

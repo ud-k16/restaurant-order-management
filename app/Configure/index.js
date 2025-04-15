@@ -135,7 +135,46 @@ const Configure = () => {
               Upload Menu
             </Text>
           </View>
-
+          {modalVisible && (
+            <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
+              <View style={styles.modalHeader}>
+                <AntDesign
+                  name="close"
+                  size={24}
+                  color={Themes.white}
+                  onPress={hideModal}
+                  style={{ alignSelf: "flex-end" }}
+                />
+              </View>
+              <ProductEdit
+                productId={editProductId}
+                hideModal={hideModal}
+                product={products.find(
+                  (item) => item.product_id == editProductId
+                )}
+              />
+            </Modal>
+          )}
+          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+            Edit Product
+          </Text>
+          <View>
+            <Text>Select items to edit</Text>
+            <Dropdown
+              data={products}
+              style={{
+                width: moderateScale(200),
+                justifyContent: "space-evenly",
+              }}
+              containerStyle={{ height: moderateScale(150) }}
+              labelField="product_name"
+              valueField="product_id"
+              onChange={(id) => {
+                setEditProductId(id);
+                showModal();
+              }}
+            />
+          </View>
           <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
             Wifi Printer Configuration
           </Text>
@@ -207,48 +246,7 @@ const Configure = () => {
           >
             <Text style={styles.saveButton}>Save</Text>
           </TouchableOpacity>
-          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-            Edit Product
-          </Text>
-          <View>
-            <Text>Select items to edit</Text>
-            <Dropdown
-              data={products}
-              style={{
-                width: moderateScale(200),
-                justifyContent: "space-evenly",
-              }}
-              containerStyle={{ height: moderateScale(150) }}
-              labelField="product_name"
-              valueField="product_id"
-              onChange={(id) => {
-                setEditProductId(id);
-                showModal();
-              }}
-            />
-          </View>
         </View>
-
-        {modalVisible && (
-          <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
-            <View style={styles.modalHeader}>
-              <AntDesign
-                name="close"
-                size={24}
-                color={Themes.white}
-                onPress={hideModal}
-                style={{ alignSelf: "flex-end" }}
-              />
-            </View>
-            <ProductEdit
-              productId={editProductId}
-              hideModal={hideModal}
-              product={products.find(
-                (item) => item.product_id == editProductId
-              )}
-            />
-          </Modal>
-        )}
       </ScrollView>
 
       <Text
