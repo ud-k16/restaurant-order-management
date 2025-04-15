@@ -10,7 +10,7 @@ import {
 import { useHomeContext } from "@/src/context/useHomeContext";
 import moderateScale from "@/src/utils/responsiveScale";
 
-const ProductEdit = ({ productId, productName, hideModal }) => {
+const ProductEdit = ({ productId, product, hideModal }) => {
   const [price, setPrice] = useState({ euro: "", cent: "" });
   const { menuFileName, menu, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
@@ -43,7 +43,7 @@ const ProductEdit = ({ productId, productName, hideModal }) => {
           style={styles.textInput}
           editable={false}
           keyboardType="numeric"
-          defaultValue={productName}
+          defaultValue={product?.product_name}
           onChangeText={(text) => {
             setPrice((prev) => ({
               ...prev,

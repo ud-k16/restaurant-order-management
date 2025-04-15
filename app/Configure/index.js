@@ -240,10 +240,9 @@ const Configure = () => {
             <ProductEdit
               productId={editProductId}
               hideModal={hideModal}
-              productName={
-                products.find((item) => item.product_id == editProductId)
-                  .product_name
-              }
+              product={products.find(
+                (item) => item.product_id == editProductId
+              )}
             />
           </Modal>
         )}
