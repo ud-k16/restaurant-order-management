@@ -101,7 +101,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     // escposString += "Tel: " + billData.phone + "\n";
     escposString += "Table: " + billData.tableId + "\n";
     escposString += "Customer: " + billData.customer + "\n";
-    escposString += "Server: " + billData.serverName + "\n";
+    escposString += "Server: " + billData.server + "\n";
     escposString += "\x1B\x61\x00"; // Left alignment
     escposString += "--------------------------------\n";
 
