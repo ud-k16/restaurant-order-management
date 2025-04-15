@@ -183,9 +183,9 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
 
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
-            <Text style={{ flex: 2 }}>Total</Text>
+            <Text style={{ flex: 2 }}>Total €</Text>
             <Text style={{ flex: 0.4 }}>
-              € {subTotal.toFixed(2).replace(".", ",")}
+              {subTotal.toFixed(2).replace(".", ",")}
             </Text>
           </View>
           <View style={styles.lineStyle}></View>
