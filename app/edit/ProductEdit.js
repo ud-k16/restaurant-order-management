@@ -76,14 +76,10 @@ const ProductEdit = ({ productId, product, hideModal }) => {
         <TextInput
           style={styles.textInput}
           editable={false}
-          keyboardType="numeric"
+          numberOfLines={1}
+          selection={0}
           defaultValue={product?.product_name}
-          onChangeText={(text) => {
-            setPrice((prev) => ({
-              ...prev,
-              euro: text,
-            }));
-          }}
+          onChangeText={(text) => {}}
         />
       </View>
       <View>
