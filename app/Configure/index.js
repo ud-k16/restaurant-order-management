@@ -190,8 +190,8 @@ const Configure = () => {
                     "Not a valid IPv4 Addrress",
                     ToastAndroid.LONG
                   );
-              const isValid = isValidPort(printerPort);
-              isValid
+              const isValidPortNumber = isValidPort(printerPort);
+              isValidPortNumber
                 ? setWifiState((prev) => ({
                     ...prev,
                     port: Number(printerPort),
@@ -200,6 +200,9 @@ const Configure = () => {
                     "Not a valid Port Number",
                     ToastAndroid.LONG
                   );
+              isValidIp &&
+                isValidPortNumber &&
+                ToastAndroid.show("wifi settings updated", ToastAndroid.LONG);
             }}
           >
             <Text style={styles.saveButton}>Save</Text>
