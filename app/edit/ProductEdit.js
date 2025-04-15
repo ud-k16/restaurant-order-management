@@ -1,8 +1,16 @@
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { useState } from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  TextInput,
+} from "react-native";
 import { useHomeContext } from "@/src/context/useHomeContext";
-const ProductEdit = ({ productId, hideModal }) => {
+import moderateScale from "@/src/utils/responsiveScale";
+
+const ProductEdit = ({ productId, productName, hideModal }) => {
   const [price, setPrice] = useState({ euro: "", cent: "" });
   const { menuFileName, menu, setState: setHomeState } = useHomeContext();
   const { setItem: setMenu } = useAsyncStorage("menu");
@@ -29,6 +37,21 @@ const ProductEdit = ({ productId, hideModal }) => {
   };
   return (
     <View style={styles.container}>
+      <View>
+        <Text>Item Name</Text>
+        <TextInput
+          style={styles.textInput}
+          editable={false}
+          keyboardType="numeric"
+          defaultValue={productName}
+          onChangeText={(text) => {
+            setPrice((prev) => ({
+              ...prev,
+              euro: text,
+            }));
+          }}
+        />
+      </View>
       <View style={styles.displayStack}>
         <TouchableOpacity>
           <Text style={styles.saveButton} onPress={hideModal}>
@@ -47,11 +70,20 @@ const ProductEdit = ({ productId, hideModal }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: moderateScale(10),
   },
   displayStack: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
+  },
+  textInput: {
+    width: moderateScale(200),
+    textAlign: "left",
+    fontSize: moderateScale(15),
+    paddingLeft: moderateScale(5),
+    borderWidth: moderateScale(1),
+    height: moderateScale(50),
   },
 });
 export default ProductEdit;

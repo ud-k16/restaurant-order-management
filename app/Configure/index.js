@@ -30,6 +30,7 @@ const Configure = () => {
     menu,
     setState: setHomeState,
   } = useHomeContext();
+  const products = menu.map((data) => data.dishes).flat();
   const { setItem: setMenu } = useAsyncStorage("menu");
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
@@ -203,24 +204,28 @@ const Configure = () => {
           >
             <Text style={styles.saveButton}>Save</Text>
           </TouchableOpacity>
+          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+            Edit Product
+          </Text>
+          <View>
+            <Text>Select items to edit</Text>
+            <Dropdown
+              data={products}
+              style={{
+                width: moderateScale(200),
+                justifyContent: "space-evenly",
+              }}
+              containerStyle={{ height: moderateScale(150) }}
+              labelField="product_name"
+              valueField="product_id"
+              onChange={(id) => {
+                setEditProductId(id);
+                showModal();
+              }}
+            />
+          </View>
         </View>
-        <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
-          Edit Product
-        </Text>
-        <Dropdown
-          data={menu.map((data) => data.dishes).flat()}
-          style={{
-            width: moderateScale(200),
-            justifyContent: "space-evenly",
-          }}
-          containerStyle={{ height: moderateScale(150) }}
-          labelField="product_name"
-          valueField="product_id"
-          onChange={(id) => {
-            setEditProductId(id);
-            showModal();
-          }}
-        />
+
         {modalVisible && (
           <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
             <View style={styles.modalHeader}>
@@ -232,7 +237,14 @@ const Configure = () => {
                 style={{ alignSelf: "flex-end" }}
               />
             </View>
-            <ProductEdit productId={editProductId} hideModal={hideModal} />
+            <ProductEdit
+              productId={editProductId}
+              hideModal={hideModal}
+              productName={
+                products.find((item) => item.product_id == editProductId)
+                  .product_name
+              }
+            />
           </Modal>
         )}
       </ScrollView>
