@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  ToastAndroid,
 } from "react-native";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import moderateScale from "@/src/utils/responsiveScale";
@@ -49,6 +50,7 @@ const ProductEdit = ({ productId, product, hideModal }) => {
             ...prev,
           };
         });
+        ToastAndroid.show("Price Updated", ToastAndroid.LONG);
       }
     } catch (error) {
       console.log(error);
