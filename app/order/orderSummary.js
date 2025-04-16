@@ -10,9 +10,11 @@ import { useWifiContext } from "@/src/context/useWifiContext";
 import useOrders from "@/src/hooks/useOrders";
 import { router } from "expo-router";
 import { Buffer } from "buffer";
+import { useHomeContext } from "@/src/context/useHomeContext";
 
 const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { orders } = useOrderContext();
+  const { menu } = useHomeContext();
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
   const { isPrinting, printInWifiMode, ip, port } = useWifiContext();
@@ -24,12 +26,18 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
     hideCustomerModal,
     showCustomerModal,
   } = useCustomers();
+  const products = menu.map((data) => data.dishes).flat();
   // get orders of the selected table
   const orderOfTheTable = orders.get(tableId);
   // calculation of sub total of all itemes present
   const subTotal = orderOfTheTable?.reduce((subTotal, product) => {
-    const amount = product.quantity * product.amountPerUnit;
+    const productPrice = products.find(
+      (value) => value.product_id == product.productId
+    )?.product_price;
+    const amount = product.quantity * Number(productPrice.replace(",", "."));
     console.log(
+      productPrice,
+      product.productId,
       product.productName,
       "\t",
       product.quantity,
@@ -107,7 +115,12 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
 
     // Items
     billData.items.forEach((item) => {
-      const formattedPrice = parseFloat(item.quantity * item.amountPerUnit)
+      const productPrice = products.find(
+        (value) => value.product_id == item.productId
+      )?.product_price;
+      const formattedPrice = parseFloat(
+        item.quantity * Number(productPrice.replace(",", "."))
+      )
         .toFixed(2)
         .replace(".", ",");
       const line =
@@ -170,12 +183,17 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.lineStyle}></View>
 
           {orderOfTheTable.map((product, index) => {
+            const productPrice = products.find(
+              (value) => value.product_id == product.productId
+            )?.product_price;
             return (
               <View style={styles.displayStack} key={index}>
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
                 <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
                 <Text style={{ flex: 0.5 }}>
-                  {(product.quantity * product.amountPerUnit)
+                  {parseFloat(
+                    product.quantity * Number(productPrice.replace(",", "."))
+                  )
                     .toFixed(2)
                     .replace(".", ",")}
                 </Text>
