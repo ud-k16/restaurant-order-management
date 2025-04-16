@@ -95,7 +95,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       tableId,
       dateTime: new Date().toLocaleString(),
     };
-    console.log(`${subTotal.toFixed(2).replace(".", ",")}`, "<<<<<<<<<<<<<<");
+    // console.log(`${subTotal.toFixed(2).replace(".", ",")}`, "<<<<<<<<<<<<<<");
 
     // variable to store escpos code
     let escposString = "";

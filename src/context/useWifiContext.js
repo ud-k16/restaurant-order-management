@@ -28,7 +28,7 @@ const WifiContextProvider = ({ children }) => {
   }, [isConnected, isInternetReachable]);
   const printInWifiMode = async (receipt) => {
     try {
-      // console.log(receipt);
+      console.log(receipt);
       let timeOutId;
       console.log(receipt);
       setState((prev) => ({ ...prev, isPrinting: true }));
