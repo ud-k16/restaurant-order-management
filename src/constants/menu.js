@@ -1193,13 +1193,6 @@ export const MenuList = [
       {
         product_name: "Gerolsteiner Naturell",
         product_description: "",
-        product_id: 173,
-        product_price: "2,00",
-      },
-
-      {
-        product_name: "Gerolsteiner Naturell",
-        product_description: "",
         product_id: 174,
         product_price: "2,00",
       },
