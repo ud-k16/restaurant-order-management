@@ -6,12 +6,17 @@ import { useHomeContext } from "@/src/context/useHomeContext";
 import moderateScale from "@/src/utils/responsiveScale";
 import ItemCard from "@/src/components/itemCard";
 import { ScrollView } from "react-native";
+import Fuse from "fuse.js";
+import useOrders from "@/src/hooks/useOrders";
 
 const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const { menu } = useHomeContext();
+  const { addItemToCart } = useOrders();
+  const products = menu?.map((data) => data.dishes).flat();
+
   function customDebounce(func, delay) {
     let timeoutId;
 
@@ -30,9 +35,27 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   };
 
   const updateDebouncedText = (text) => {
-    console.log("Updating debounced text:", text);
+    // console.log("Updating debounced text:", text);
     setDebouncedText(text);
     // You can perform your API call or other delayed logic here
+    const options = {
+      // includeScore: true,
+      threshold: 0.5,
+      keys: [
+        "product_name",
+        "category",
+        "product_description",
+        "product_price",
+      ],
+    };
+
+    const fuse = new Fuse(products, options);
+
+    // Search for a fuzzy match
+    const result = fuse.search(text);
+
+    // console.log(result.map((data) => data.item));
+    setSearchResult(result.map((data) => data.item));
   };
 
   // Create a debounced version of the updateDebouncedText function
@@ -41,10 +64,39 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   return (
     <View style={styles.container}>
       <View style={styles.searchBarContainer}>
-        <TextInput onChangeText={handleInputChange} style={{ flex: 1 }} />
+        <TextInput
+          onChangeText={handleInputChange}
+          style={{ flex: 1 }}
+          autoFocus
+        />
         <EvilIcons name="search" size={24} color="black" />
       </View>
-      <ScrollView></ScrollView>
+      <ScrollView>
+        {searchResult.length > 0 &&
+          searchResult.map((product, index) => {
+            return (
+              <ItemCard
+                tableId={tableId}
+                productId={product.product_id}
+                productName={product.product_name}
+                productDescription={product.product_description}
+                key={index}
+                onAdd={(quantity) => {
+                  quantity &&
+                    addItemToCart({
+                      tableId,
+                      amountPerUnit: Number(
+                        product.product_price?.replace(",", ".")
+                      ),
+                      productName: product.product_name,
+                      productId: product.product_id,
+                      quantity,
+                    });
+                }}
+              />
+            );
+          })}
+      </ScrollView>
     </View>
   );
 };
