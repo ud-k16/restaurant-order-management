@@ -190,10 +190,20 @@ const useOrders = () => {
       return { ...prev };
     });
   };
+
+  const resetOrder = () => {
+    // clear entire cart
+    setCurrentOrders((prev) => {
+      prev.orders = new Map();
+      return { ...prev };
+    });
+  };
+
   useEffect(() => {}, []);
   return {
     ...state,
     deleteOrder,
+    resetOrder,
     activeTableId,
     addItemToCart,
     incrementQuantityInCart,

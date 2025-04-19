@@ -1,6 +1,7 @@
 import { useHeaderContext } from "@/src/context/useHeaderContext";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import { useWifiContext } from "@/src/context/useWifiContext";
+import useOrders from "@/src/hooks/useOrders";
 import useHelpers from "@/src/utils/helperFunctions";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
@@ -31,6 +32,7 @@ const Configure = () => {
     setState: setHomeState,
   } = useHomeContext();
   const products = menu.map((data) => data.dishes).flat();
+  const { resetOrder } = useOrders();
   const { setItem: setMenu } = useAsyncStorage("menu");
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
   const { handleFilePicker } = useHelpers();
@@ -110,6 +112,7 @@ const Configure = () => {
                   tableCount: Number(event.nativeEvent.text),
                 }));
                 setTableCount(event.nativeEvent.text);
+                resetOrder();
               }}
             />
           </View>
@@ -189,9 +192,7 @@ const Configure = () => {
                 styles.textInputStyle,
                 {
                   width: moderateScale(200),
-                  textAlign: "left",
                   fontSize: moderateScale(15),
-                  paddingLeft: moderateScale(5),
                 },
               ]}
               defaultValue={ip}
@@ -208,9 +209,7 @@ const Configure = () => {
               style={[
                 styles.textInputStyle,
                 {
-                  textAlign: "left",
                   fontSize: moderateScale(15),
-                  paddingLeft: moderateScale(5),
                 },
               ]}
               keyboardType="numeric"
@@ -288,9 +287,10 @@ const styles = StyleSheet.create({
     borderWidth: moderateScale(1),
     height: moderateScale(35),
     width: 100,
-    textAlign: "center",
+    textAlign: "left",
     borderRadius: moderateScale(5),
     fontSize: moderateScale(20),
+    paddingLeft: moderateScale(5),
   },
   menuPicker: {
     borderWidth: moderateScale(2),
