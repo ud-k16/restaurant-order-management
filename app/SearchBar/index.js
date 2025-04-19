@@ -8,6 +8,7 @@ import ItemCard from "@/src/components/itemCard";
 import { ScrollView } from "react-native";
 import Fuse from "fuse.js";
 import useOrders from "@/src/hooks/useOrders";
+import EmptyContent from "@/app/EmptyContent";
 
 const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
@@ -72,7 +73,7 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
         <EvilIcons name="search" size={24} color="black" />
       </View>
       <ScrollView contentContainerStyle={styles.itemContainer}>
-        {searchResult.length > 0 &&
+        {searchResult.length > 0 ? (
           searchResult.map((product, index) => {
             return (
               <ItemCard
@@ -95,7 +96,10 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
                 }}
               />
             );
-          })}
+          })
+        ) : (
+          <EmptyContent content={"No Result Found"} />
+        )}
       </ScrollView>
     </View>
   );
