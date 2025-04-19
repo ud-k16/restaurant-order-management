@@ -124,7 +124,7 @@ const MenuList = () => {
           style={{ flex: 1 }}
           placeholder="Search dishes"
         />
-        <EvilIcons name="search" size={24} color="black" />
+        <EvilIcons name="search" size={30} color={Themes.primary} />
       </Pressable>
       {modalVisible && (
         <Modal style={styles.modalConatainer} onRequestClose={hideModal}>

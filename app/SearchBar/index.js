@@ -5,10 +5,12 @@ import { useState } from "react";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import moderateScale from "@/src/utils/responsiveScale";
 import ItemCard from "@/src/components/itemCard";
+import { ScrollView } from "react-native";
 
 const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
   const { menu } = useHomeContext();
   function customDebounce(func, delay) {
     let timeoutId;
@@ -38,16 +40,24 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <TextInput onChangeText={handleInputChange} />
+      <View style={styles.searchBarContainer}>
+        <TextInput onChangeText={handleInputChange} style={{ flex: 1 }} />
         <EvilIcons name="search" size={24} color="black" />
       </View>
+      <ScrollView></ScrollView>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  searchBarContainer: {
+    paddingHorizontal: moderateScale(20),
+    height: moderateScale(40),
+    borderWidth: moderateScale(1),
+    flexDirection: "row",
+    alignItems: "center",
   },
   textInputContainer: {},
 });
