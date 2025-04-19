@@ -26,11 +26,11 @@ const MenuList = () => {
   const toggleCategoryVisibility = () => setCategoryVisible((prev) => !prev);
   // ================================================
   const { addItemToCart, deleteCart, activeTableId } = useOrders();
+  const { menu } = useHomeContext();
   // for setting Table name in Header
   // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
-  const { menu } = useHomeContext();
-  const itemHeights = useRef({});
+  // Header Title set happening on  screen focus
   useFocusEffect(
     useCallback(() => {
       setHeaders({
@@ -50,13 +50,62 @@ const MenuList = () => {
   }, []);
   // ==================================================
 
-  const getItemLayout = (data, index) => {
-    let offset = 0;
-    for (let i = 0; i < index; i++) {
-      offset += itemHeights.current[i] || 0; // Use stored heights
-    }
-    return { length: itemHeights.current[index] || 0, offset, index };
+  // render Menu [category and respective dishes]
+  const renderMenu = ({ item, index }) => {
+    const { category, dishes } = item;
+    return (
+      <View>
+        <ScrollView>
+          <Text style={styles.categoryHeading}>{category}</Text>
+          <View style={styles.itemContainer}>
+            {dishes.map((value, index) => {
+              return (
+                <ItemCard
+                  tableId={tableId}
+                  productId={value.product_id}
+                  productName={value.product_name}
+                  productDescription={value.product_description}
+                  key={index}
+                  onAdd={(quantity) => {
+                    // console.log(value.product_price, ">>>>>>>>>>>>>>>");
+                    quantity &&
+                      addItemToCart({
+                        tableId,
+                        amountPerUnit: Number(
+                          value.product_price?.replace(",", ".")
+                        ),
+                        productName: value.product_name,
+                        productId: value.product_id,
+                        quantity,
+                      });
+                  }}
+                />
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
+    );
   };
+
+  // render Menu Category alone with link to it in the menu list display
+  const renderCategoryLink = ({ item, index }) => (
+    <Pressable
+      onPress={() => {
+        console.log(index);
+
+        toggleCategoryVisibility();
+        if (flatlistRef?.current)
+          flatlistRef.current.scrollToIndex({
+            index,
+            animated: true,
+          });
+        else console.log("unable to scroll to index");
+      }}
+    >
+      <Text style={styles.categoryTextStyle}>{item.category}</Text>
+    </Pressable>
+  );
 
   return (
     <View style={styles.container}>
@@ -70,47 +119,7 @@ const MenuList = () => {
           console.log("unable to scroll");
         }}
         data={menu}
-        // getItemLayout={getItemLayout}
-        renderItem={({ item, index }) => {
-          const { category, dishes } = item;
-          return (
-            <View
-              onLayout={(event) => {
-                itemHeights.current[index] = event.nativeEvent.layout.height;
-              }}
-            >
-              <ScrollView>
-                <Text style={styles.categoryHeading}>{category}</Text>
-                <View style={styles.itemContainer}>
-                  {dishes.map((value, index) => {
-                    return (
-                      <ItemCard
-                        tableId={tableId}
-                        productId={value.product_id}
-                        productName={value.product_name}
-                        productDescription={value.product_description}
-                        key={index}
-                        onAdd={(quantity) => {
-                          // console.log(value.product_price, ">>>>>>>>>>>>>>>");
-                          quantity &&
-                            addItemToCart({
-                              tableId,
-                              amountPerUnit: Number(
-                                value.product_price?.replace(",", ".")
-                              ),
-                              productName: value.product_name,
-                              productId: value.product_id,
-                              quantity,
-                            });
-                        }}
-                      />
-                    );
-                  })}
-                </View>
-              </ScrollView>
-            </View>
-          );
-        }}
+        renderItem={renderMenu}
       />
       {menu && (
         <View style={styles.bottomBar}>
@@ -141,27 +150,10 @@ const MenuList = () => {
           <FlatList
             style={{
               paddingHorizontal: moderateScale(10),
-              // paddingBottom: moderateScale(60),
             }}
             data={menu}
             ItemSeparatorComponent={<View style={styles.dividerLine}></View>}
-            renderItem={({ item, index }) => (
-              <Pressable
-                onPress={() => {
-                  console.log(index);
-
-                  toggleCategoryVisibility();
-                  if (flatlistRef?.current)
-                    flatlistRef.current.scrollToIndex({
-                      index,
-                      animated: true,
-                    });
-                  else console.log("unable to scroll to index");
-                }}
-              >
-                <Text style={styles.categoryTextStyle}>{item.category}</Text>
-              </Pressable>
-            )}
+            renderItem={renderCategoryLink}
           />
         </View>
       )}
