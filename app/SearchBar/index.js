@@ -67,11 +67,11 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
         <TextInput
           onChangeText={handleInputChange}
           style={{ flex: 1 }}
-          autoFocus
+          placeholder="Search dishes"
         />
         <EvilIcons name="search" size={24} color="black" />
       </View>
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.itemContainer}>
         {searchResult.length > 0 &&
           searchResult.map((product, index) => {
             return (
@@ -111,6 +111,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  textInputContainer: {},
+  itemContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    rowGap: moderateScale(15),
+    paddingHorizontal: moderateScale(20),
+    marginBottom: moderateScale(5),
+    marginTop: moderateScale(10),
+  },
 });
 export default SearchMenuItems;
