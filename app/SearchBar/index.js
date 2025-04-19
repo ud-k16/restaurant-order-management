@@ -3,7 +3,10 @@ import { View, StyleSheet } from "react-native";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { useState } from "react";
 import { useHomeContext } from "@/src/context/useHomeContext";
-const SearchMenuItems = () => {
+import moderateScale from "@/src/utils/responsiveScale";
+import ItemCard from "@/src/components/itemCard";
+
+const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
   const { menu } = useHomeContext();

@@ -17,8 +17,17 @@ import { useGlobalSearchParams } from "expo-router/build/hooks";
 import { Link, useFocusEffect } from "expo-router";
 import { useHeaderContext } from "@/src/context/useHeaderContext";
 import { useHomeContext } from "@/src/context/useHomeContext";
+import SearchMenuItems from "../SearchBar";
+import { Modal } from "react-native";
+import { EvilIcons } from "@expo/vector-icons";
+import { TextInput } from "react-native";
 const MenuList = () => {
   const { tableId } = useGlobalSearchParams();
+  // searchbar visible logic
+  const [modalVisible, setModalVisible] = useState(false);
+  const showModal = () => setModalVisible(true);
+  const hideModal = () => setModalVisible(false);
+  // ==============================
   // showing list of menu Category logic variables
   // ---------------------------------------------
   const [categoryVisible, setCategoryVisible] = useState(false);
@@ -109,6 +118,28 @@ const MenuList = () => {
 
   return (
     <View style={styles.container}>
+      <Pressable onPress={showModal} style={styles.searchBarContainer}>
+        <TextInput
+          editable={false}
+          style={{ flex: 1 }}
+          placeholder="Search dishes"
+        />
+        <EvilIcons name="search" size={24} color="black" />
+      </Pressable>
+      {modalVisible && (
+        <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
+          <View style={styles.modalHeader}>
+            <AntDesign
+              name="close"
+              size={24}
+              color={Themes.white}
+              onPress={hideModal}
+              style={{ alignSelf: "flex-end" }}
+            />
+          </View>
+          <SearchMenuItems tableId={tableId} hideModal={hideModal} />
+        </Modal>
+      )}
       <FlatList
         ListEmptyComponent={
           <EmptyContent content={"No Menu- upload Menu file in Settings"} />
@@ -197,6 +228,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: Themes.primary,
   },
+  searchBarContainer: {
+    paddingHorizontal: moderateScale(20),
+    height: moderateScale(40),
+    borderWidth: moderateScale(1),
+    flexDirection: "row",
+    alignItems: "center",
+  },
   itemContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -236,6 +274,16 @@ const styles = StyleSheet.create({
     width: moderateScale(60),
     alignItems: "center",
     justifyContent: "center",
+  },
+  modalConatainer: {
+    backgroundColor: Themes.white,
+  },
+  modalHeader: {
+    backgroundColor: Themes.primary,
+    height: moderateScale(50),
+    elevation: 6,
+    justifyContent: "center",
+    paddingHorizontal: moderateScale(10),
   },
 });
 export default MenuList;
