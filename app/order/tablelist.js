@@ -58,14 +58,15 @@ const TableList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: moderateScale(10),
   },
   scrollViewContainer: {
     flexGrow: 1,
     paddingVertical: moderateScale(20),
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-evenly",
-    rowGap: moderateScale(30),
+    rowGap: moderateScale(20),
+    justifyContent: "space-between",
   },
   modalConatainer: {
     backgroundColor: Themes.white,
