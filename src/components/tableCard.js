@@ -5,14 +5,26 @@ import { Link } from "expo-router";
 import { useOrderContext } from "../context/useOrderContext";
 const TableCard = ({ tableId, onLongPress = () => {} }) => {
   const { orders } = useOrderContext();
+  const isDining = orders.has(tableId);
   return (
     <Link
       href={{ pathname: "/order/menulist", params: { tableId } }}
       onLongPress={onLongPress}
     >
-      <View style={styles.container}>
-        <Text style={styles.textStyle}>{tableId}</Text>
-        <Text>{orders.has(tableId) && "Dining"}</Text>
+      <View style={[styles.container, isDining && styles.onDining]}>
+        <Text
+          style={[
+            styles.textStyle,
+            isDining && { color: styles.onDining.color },
+          ]}
+        >
+          {tableId}
+        </Text>
+        {isDining && (
+          <Text style={[isDining && { color: styles.onDining.color }]}>
+            {"Dine-in"}
+          </Text>
+        )}
       </View>
     </Link>
   );
@@ -21,15 +33,19 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    width: moderateScale(160),
-    height: moderateScale(80),
+    width: moderateScale(80),
+    height: moderateScale(60),
     elevation: 6,
     backgroundColor: Themes.white,
     borderWidth: moderateScale(1),
     borderColor: Themes.primary,
   },
+  onDining: {
+    backgroundColor: Themes.primary,
+    color: Themes.white,
+  },
   textStyle: {
-    fontSize: moderateScale(20),
+    fontSize: moderateScale(16),
     fontWeight: 600,
     textTransform: "uppercase",
     color: Themes.primary,
