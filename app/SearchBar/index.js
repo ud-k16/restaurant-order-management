@@ -1,7 +1,7 @@
 import { TextInput } from "react-native";
 import { View, StyleSheet } from "react-native";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import moderateScale from "@/src/utils/responsiveScale";
 import ItemCard from "@/src/components/itemCard";
@@ -17,6 +17,7 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   const { menu } = useHomeContext();
   const { addItemToCart } = useOrders();
   const products = menu?.map((data) => data.dishes).flat();
+  const searchBarRef = useRef();
 
   function customDebounce(func, delay) {
     let timeoutId;
@@ -58,8 +59,18 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   };
 
   // Create a debounced version of the updateDebouncedText function
-  const debouncedUpdate = customDebounce(updateDebouncedText, 100); // Adjust delay as needed
+  const debouncedUpdate = customDebounce(updateDebouncedText, 10); // Adjust delay as needed
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (searchBarRef) {
+        searchBarRef.current.focus();
+        console.log("yes reference", searchBarRef.current.focus());
+      } else {
+        console.log("No reference");
+      }
+    }, 100);
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.searchBarContainer}>
@@ -68,7 +79,8 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
           value={inputText}
           style={{ flex: 1, height: "100%" }}
           placeholder="Search dishes"
-          autoFocus={true}
+          ref={searchBarRef}
+          // autoFocus={true}
           caretHidden={false}
           cursorColor={Themes.primary}
         />
