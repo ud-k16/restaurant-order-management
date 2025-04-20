@@ -9,10 +9,10 @@ import { ScrollView } from "react-native";
 import Fuse from "fuse.js";
 import useOrders from "@/src/hooks/useOrders";
 import EmptyContent from "@/app/EmptyContent";
+import { Themes } from "@/src/utils/themes";
 
 const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
-  const [debouncedText, setDebouncedText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const { menu } = useHomeContext();
   const { addItemToCart } = useOrders();
@@ -36,8 +36,6 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   };
 
   const updateDebouncedText = (text) => {
-    // console.log("Updating debounced text:", text);
-    setDebouncedText(text);
     // You can perform your API call or other delayed logic here
     const options = {
       // includeScore: true,
@@ -60,15 +58,19 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   };
 
   // Create a debounced version of the updateDebouncedText function
-  const debouncedUpdate = customDebounce(updateDebouncedText, 500); // Adjust delay as needed
+  const debouncedUpdate = customDebounce(updateDebouncedText, 100); // Adjust delay as needed
 
   return (
     <View style={styles.container}>
       <View style={styles.searchBarContainer}>
         <TextInput
           onChangeText={handleInputChange}
-          style={{ flex: 1 }}
+          value={inputText}
+          style={{ flex: 1, height: "100%" }}
           placeholder="Search dishes"
+          autoFocus={true}
+          caretHidden={false}
+          cursorColor={Themes.primary}
         />
         <EvilIcons name="search" size={24} color="black" />
       </View>
@@ -121,8 +123,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     rowGap: moderateScale(15),
     paddingHorizontal: moderateScale(20),
-    marginBottom: moderateScale(5),
-    marginTop: moderateScale(10),
   },
 });
 export default SearchMenuItems;
