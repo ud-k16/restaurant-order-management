@@ -36,7 +36,7 @@ const MenuList = () => {
   // ================================================
   const { addItemToCart, deleteCart, activeTableId } = useOrders();
   const { menu } = useHomeContext();
-  const memoMenu = useMemo(() => menu, [menu]);
+
   // for setting Table name in Header
   // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
@@ -154,7 +154,7 @@ const MenuList = () => {
         onScrollToIndexFailed={() => {
           console.log("unable to scroll");
         }}
-        data={memoMenu}
+        data={menu}
         renderItem={renderMenu}
       />
       {menu && (
