@@ -11,7 +11,7 @@ import {
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Themes } from "@/src/utils/themes";
 import EmptyContent from "@/app/EmptyContent";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useOrders from "@/src/hooks/useOrders";
 import { useGlobalSearchParams } from "expo-router/build/hooks";
 import { Link, useFocusEffect } from "expo-router";
@@ -36,6 +36,7 @@ const MenuList = () => {
   // ================================================
   const { addItemToCart, deleteCart, activeTableId } = useOrders();
   const { menu } = useHomeContext();
+  const memoMenu = useMemo(() => menu, [menu]);
   // for setting Table name in Header
   // --------------------------------
   const { setState: setHeaders } = useHeaderContext();
@@ -56,6 +57,10 @@ const MenuList = () => {
   // --------------------------------
   useEffect(() => {
     activeTableId(tableId);
+
+    return () => {
+      console.log("umnounting menu list");
+    };
   }, []);
   // ==================================================
 
@@ -149,7 +154,7 @@ const MenuList = () => {
         onScrollToIndexFailed={() => {
           console.log("unable to scroll");
         }}
-        data={menu}
+        data={memoMenu}
         renderItem={renderMenu}
       />
       {menu && (

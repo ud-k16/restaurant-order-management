@@ -175,9 +175,9 @@ const useOrders = () => {
         orders.set(tableId, cart);
       }
       // after successful placement
-      router.navigate("/orderStatus/successful");
+      router.replace("/orderStatus/successful");
     } catch (error) {
-      router.navigate("/orderStatus/failure");
+      router.replace("/orderStatus/failure");
     } finally {
       deleteCart();
     }
