@@ -10,6 +10,8 @@ import Fuse from "fuse.js";
 import useOrders from "@/src/hooks/useOrders";
 import EmptyContent from "@/app/EmptyContent";
 import { Themes } from "@/src/utils/themes";
+import { Link, router } from "expo-router";
+import { Text } from "react-native";
 
 const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
@@ -80,7 +82,6 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
           style={{ flex: 1, height: "100%" }}
           placeholder="Search dishes"
           ref={searchBarRef}
-          // autoFocus={true}
           caretHidden={false}
           cursorColor={Themes.primary}
         />
@@ -115,6 +116,28 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
           <EmptyContent content={"No Result Found"} />
         )}
       </ScrollView>
+      <View style={styles.bottomBar}>
+        <Text
+          style={{ color: Themes.white, fontSize: moderateScale(16) }}
+          onPress={() => {
+            router.back();
+          }}
+        >
+          Go To Menu
+        </Text>
+
+        <Link
+          style={{ color: Themes.white, fontSize: moderateScale(16) }}
+          href={{
+            pathname: "/order/cartSummary",
+            params: {
+              tableId,
+            },
+          }}
+        >
+          View Orders
+        </Link>
+      </View>
     </View>
   );
 };
@@ -135,6 +158,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     rowGap: moderateScale(15),
     paddingHorizontal: moderateScale(20),
+  },
+  bottomBar: {
+    backgroundColor: Themes.primary,
+    paddingVertical: moderateScale(5),
+    height: moderateScale(40),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: moderateScale(10),
+    zIndex: 1000,
   },
 });
 export default SearchMenuItems;
