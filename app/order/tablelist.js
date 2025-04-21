@@ -7,14 +7,18 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import OrderSummary from "@/app/order/orderSummary";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import EmptyContent from "../EmptyContent";
+import Loader from "../Loader";
 
 const TableList = () => {
+  const [loaderVisible, setLoaderVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [currentTable, setCurrentTable] = useState("");
   const [tableNames, setTableNames] = useState([]);
   const { tableCount } = useHomeContext();
   const showModal = () => setModalVisible(true);
   const hideModal = () => setModalVisible(false);
+  const hideLoader = () => setLoaderVisible(false);
+  const showLoader = () => setLoaderVisible(true);
 
   useEffect(() => {
     let tNames = [];
@@ -25,6 +29,7 @@ const TableList = () => {
   }, [tableCount]);
   if (!tableCount)
     return <EmptyContent content="Configure Number Of Tables in Settings" />;
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
@@ -34,7 +39,13 @@ const TableList = () => {
             showModal();
           };
           return (
-            <TableCard tableId={value} key={index} onLongPress={onLongPress} />
+            <TableCard
+              tableId={value}
+              key={index}
+              onLongPress={onLongPress}
+              showLoader={showLoader}
+              hideLoader={hideLoader}
+            />
           );
         })}
       </ScrollView>
@@ -52,13 +63,13 @@ const TableList = () => {
           <OrderSummary tableId={currentTable} hideModal={hideModal} />
         </Modal>
       )}
+      {loaderVisible && <Loader />}
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: moderateScale(10),
   },
   scrollViewContainer: {
     flexGrow: 1,
@@ -66,6 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     rowGap: moderateScale(20),
+    paddingHorizontal: moderateScale(10),
     justifyContent: "space-between",
   },
   modalConatainer: {

@@ -4,7 +4,12 @@ import { Themes } from "@/src/utils/themes";
 import { Link } from "expo-router";
 import { useOrderContext } from "../context/useOrderContext";
 import { useState } from "react";
-const TableCard = ({ tableId, onLongPress = () => {} }) => {
+const TableCard = ({
+  tableId,
+  onLongPress = () => {},
+  showLoader = () => {},
+  hideLoader = () => {},
+}) => {
   const [isTablePressed, setIsTablePressed] = useState(false);
   const { orders } = useOrderContext();
   const isDining = orders.has(tableId);
@@ -14,9 +19,11 @@ const TableCard = ({ tableId, onLongPress = () => {} }) => {
       onLongPress={onLongPress}
       onPressIn={() => {
         setIsTablePressed(true);
+        showLoader();
       }}
       onPressOut={() => {
         setIsTablePressed(false);
+        hideLoader();
       }}
     >
       <View
@@ -25,7 +32,7 @@ const TableCard = ({ tableId, onLongPress = () => {} }) => {
           isDining && styles.onDining,
           isTablePressed && {
             opacity: 0.7,
-            backgroundColor: Themes.backDrop,
+            // backgroundColor: Themes.backDrop,
             borderWidth: 0,
           },
         ]}

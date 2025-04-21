@@ -3,5 +3,5 @@ export const Themes = {
   white: "white",
   black: "black",
   red: "red",
-  backDrop: "rgba(111, 116, 143,0.5)",
+  backDrop: "rgba(252, 252, 252,0.7)",
 };
