@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignSelf: "center",
     zIndex: 100,
-    backgroundColor: Themes.backDrop,
+    // backgroundColor: Themes.backDrop,
     justifyContent: "center",
   },
   activityIndicatorStyle: {},
