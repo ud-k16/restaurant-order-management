@@ -31,7 +31,8 @@ const TableCard = ({
           styles.container,
           isDining && styles.onDining,
           isTablePressed && {
-            borderWidth: isDining ? 1 : 0,
+            borderWidth: isDining ? moderateScale(2) : 0,
+            backgroundColor: Themes.white,
           },
         ]}
       >
@@ -39,7 +40,7 @@ const TableCard = ({
           style={[
             styles.textStyle,
             isDining && { color: styles.onDining.color },
-            // isTablePressed && { color: Themes.primary },
+            isTablePressed && { color: Themes.primary },
           ]}
         >
           {tableId}
@@ -48,7 +49,7 @@ const TableCard = ({
           <Text
             style={[
               isDining && { color: styles.onDining.color },
-              // isTablePressed && { color: Themes.primary },
+              isTablePressed && { color: Themes.primary },
             ]}
           >
             {"Dine-in"}
