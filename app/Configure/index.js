@@ -126,13 +126,15 @@ const Configure = () => {
             <Text
               style={styles.menuPicker}
               onPress={async () => {
-                const { menu, fileName } = await handleFilePicker();
-                setHomeState((prev) => ({
-                  ...prev,
-                  menu,
-                  menuFileName: fileName,
-                }));
-                setMenu(JSON.stringify({ menu, menuFileName: fileName }));
+                try {
+                  const { menu, fileName } = await handleFilePicker();
+                  setHomeState((prev) => ({
+                    ...prev,
+                    menu,
+                    menuFileName: fileName,
+                  }));
+                  setMenu(JSON.stringify({ menu, menuFileName: fileName }));
+                } catch (error) {}
               }}
             >
               Upload Menu
