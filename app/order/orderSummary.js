@@ -178,7 +178,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.displayStack}>
             <Text style={{ flex: 2 }}>Item Description</Text>
             <Text style={{ flex: 0.5 }}>Qty</Text>
-            <Text style={{ flex: 0.5 }}>Price</Text>
+            <Text style={{ flex: 0.5, textAlign: "right" }}>Price</Text>
           </View>
           <View style={styles.lineStyle}></View>
 
@@ -190,7 +190,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
               <View style={styles.displayStack} key={index}>
                 <Text style={{ flex: 2 }}>{product.productName}</Text>
                 <Text style={{ flex: 0.5 }}>{product.quantity}</Text>
-                <Text style={{ flex: 0.5 }}>
+                <Text style={{ flex: 0.5, textAlign: "right" }}>
                   {parseFloat(
                     product.quantity * Number(productPrice.replace(",", "."))
                   )
@@ -204,7 +204,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           <View style={styles.lineStyle}></View>
           <View style={styles.displayStack}>
             <Text style={{ flex: 2 }}>Total €</Text>
-            <Text style={{ flex: 0.4 }}>
+            <Text style={{ flex: 0.4, textAlign: "right" }}>
               {subTotal.toFixed(2).replace(".", ",")}
             </Text>
           </View>
