@@ -31,9 +31,7 @@ const TableCard = ({
           styles.container,
           isDining && styles.onDining,
           isTablePressed && {
-            opacity: 0.7,
-            // backgroundColor: Themes.backDrop,
-            borderWidth: 0,
+            borderWidth: isDining ? 1 : 0,
           },
         ]}
       >
@@ -41,12 +39,18 @@ const TableCard = ({
           style={[
             styles.textStyle,
             isDining && { color: styles.onDining.color },
+            // isTablePressed && { color: Themes.primary },
           ]}
         >
           {tableId}
         </Text>
         {isDining && (
-          <Text style={[isDining && { color: styles.onDining.color }]}>
+          <Text
+            style={[
+              isDining && { color: styles.onDining.color },
+              // isTablePressed && { color: Themes.primary },
+            ]}
+          >
             {"Dine-in"}
           </Text>
         )}
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
     height: moderateScale(60),
     elevation: 6,
     backgroundColor: Themes.white,
-    borderWidth: moderateScale(1),
+    borderWidth: moderateScale(2),
     borderColor: Themes.primary,
   },
   onDining: {
