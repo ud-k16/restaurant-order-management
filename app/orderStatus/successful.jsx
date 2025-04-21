@@ -11,8 +11,8 @@ const Successful = () => {
       <Pressable
         style={styles.backButton}
         onPress={() => {
-          // router.dismissAll();
-          router.dismiss();
+          router.dismissAll();
+          // router.dismiss();
           // router.replace("./order/tablelist");
         }}
       >
