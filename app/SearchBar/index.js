@@ -17,7 +17,7 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const { menu } = useHomeContext();
-  const { addItemToCart } = useOrders();
+  const { addItemToCart, deleteCart } = useOrders();
   const products = menu?.map((data) => data.dishes).flat();
   const searchBarRef = useRef();
 
@@ -120,10 +120,10 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
         <Text
           style={{ color: Themes.white, fontSize: moderateScale(16) }}
           onPress={() => {
-            router.back();
+            deleteCart();
           }}
         >
-          Go To Menu
+          Clear Menu
         </Text>
 
         <Link
