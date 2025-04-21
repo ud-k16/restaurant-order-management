@@ -3,15 +3,33 @@ import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import { Link } from "expo-router";
 import { useOrderContext } from "../context/useOrderContext";
+import { useState } from "react";
 const TableCard = ({ tableId, onLongPress = () => {} }) => {
+  const [isTablePressed, setIsTablePressed] = useState(false);
   const { orders } = useOrderContext();
   const isDining = orders.has(tableId);
   return (
     <Link
       href={{ pathname: "/order/menulist", params: { tableId } }}
       onLongPress={onLongPress}
+      onPressIn={() => {
+        setIsTablePressed(true);
+      }}
+      onPressOut={() => {
+        setIsTablePressed(false);
+      }}
     >
-      <View style={[styles.container, isDining && styles.onDining]}>
+      <View
+        style={[
+          styles.container,
+          isDining && styles.onDining,
+          isTablePressed && {
+            opacity: 0.7,
+            backgroundColor: Themes.backDrop,
+            borderWidth: 0,
+          },
+        ]}
+      >
         <Text
           style={[
             styles.textStyle,
