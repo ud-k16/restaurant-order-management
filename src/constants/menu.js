@@ -988,9 +988,15 @@ export const MenuList = [
         product_id: 145,
         product_price: "2,00",
       },
+      {
+        product_name: "Cuba Libre",
+        product_description: "",
+        product_id: 1466,
+        product_price: "2,00",
+      },
 
       {
-        product_name: "Spritz",
+        product_name: "Aperol Spritz",
         product_description: "",
         product_id: 146,
         product_price: "2,00",
@@ -1007,6 +1013,12 @@ export const MenuList = [
         product_name: "Lillet Berry",
         product_description: "",
         product_id: 148,
+        product_price: "2,00",
+      },
+      {
+        product_name: "Mojito",
+        product_description: "",
+        product_id: 1449,
         product_price: "2,00",
       },
     ],
@@ -1138,14 +1150,14 @@ export const MenuList = [
       },
 
       {
-        product_name: "Mischgetränke",
+        product_name: "Alsterwasser (Bier+Sprite)",
         product_description: "",
         product_id: 166,
         product_price: "2,00",
       },
 
       {
-        product_name: "Diesel",
+        product_name: "Diesel (Bier+Cola)",
         product_description: "",
         product_id: 167,
         product_price: "2,00",
@@ -1191,6 +1203,13 @@ export const MenuList = [
       },
 
       {
+        product_name: "Gerolsteiner Medium",
+        product_description: "",
+        product_id: 173,
+        product_price: "2,00",
+      },
+
+      {
         product_name: "Gerolsteiner Naturell",
         product_description: "",
         product_id: 174,
@@ -1212,7 +1231,7 @@ export const MenuList = [
       },
 
       {
-        product_name: "Apfelschorle",
+        product_name: "Apfelschorle (Apfelsaft+Mineralwasser)",
         product_description: "",
         product_id: 177,
         product_price: "2,00",
@@ -1269,6 +1288,98 @@ export const MenuList = [
         product_name: "KIBA (Kirschsaft + Bananensaft)",
         product_description: "",
         product_id: 184,
+        product_price: "2,00",
+      },
+    ],
+  },
+  {
+    category: "OFFENE ROTWEINE AUS GRIECHENLAND",
+    dishes: [
+      {
+        product_name: "Roditis",
+        product_description: "",
+        product_id: 185,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Demestika",
+        product_description: "",
+        product_id: 186,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Makedonikos",
+        product_description: "",
+        product_id: 187,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Imiglykos",
+        product_description: "",
+        product_id: 188,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Mavrodophne",
+        product_description: "",
+        product_id: 189,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Lambrusco",
+        product_description: "",
+        product_id: 190,
+        product_price: "2,00",
+      },
+    ],
+  },
+  {
+    category: "OFFENE WeibWEINE AUS GRIECHENLAND",
+    dishes: [
+      {
+        product_name: "Retsina",
+        product_description: "",
+        product_id: 191,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Demestika",
+        product_description: "",
+        product_id: 192,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Makedonikos",
+        product_description: "",
+        product_id: 193,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Imiglykos",
+        product_description: "",
+        product_id: 194,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Samos",
+        product_description: "",
+        product_id: 195,
+        product_price: "2,00",
+      },
+
+      {
+        product_name: "Malamantina",
+        product_description: "",
+        product_id: 196,
         product_price: "2,00",
       },
     ],

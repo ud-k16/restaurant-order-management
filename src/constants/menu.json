@@ -1274,5 +1274,97 @@
         "product_price": "2,00"
       }
     ]
+  },
+  {
+    "category": "OFFENE ROTWEINE AUS GRIECHENLAND",
+    "dishes": [
+      {
+        "product_name": "Roditis",
+        "product_description": "",
+        "product_id": 185,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Demestika",
+        "product_description": "",
+        "product_id": 186,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Makedonikos",
+        "product_description": "",
+        "product_id": 187,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Imiglykos",
+        "product_description": "",
+        "product_id": 188,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Mavrodophne",
+        "product_description": "",
+        "product_id": 189,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Lambrusco",
+        "product_description": "",
+        "product_id": 190,
+        "product_price": "2,00"
+      }
+    ]
+  },
+  {
+    "category": "OFFENE WeibWEINE AUS GRIECHENLAND",
+    "dishes": [
+      {
+        "product_name": "Retsina",
+        "product_description": "",
+        "product_id": 191,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Demestika",
+        "product_description": "",
+        "product_id": 192,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Makedonikos",
+        "product_description": "",
+        "product_id": 193,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Imiglykos",
+        "product_description": "",
+        "product_id": 194,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Samos",
+        "product_description": "",
+        "product_id": 195,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Malamantina",
+        "product_description": "",
+        "product_id": 196,
+        "product_price": "2,00"
+      }
+    ]
   }
 ]
