@@ -985,7 +985,14 @@
       },
 
       {
-        "product_name": "Spritz",
+        "product_name": "Cuba Libre",
+        "product_description": "",
+        "product_id": 1466,
+        "product_price": "2,00"
+      },
+
+      {
+        "product_name": "Aperol Spritz",
         "product_description": "",
         "product_id": 146,
         "product_price": "2,00"
@@ -1002,6 +1009,12 @@
         "product_name": "Lillet Berry",
         "product_description": "",
         "product_id": 148,
+        "product_price": "2,00"
+      },
+      {
+        "product_name": "Mojito",
+        "product_description": "",
+        "product_id": 1449,
         "product_price": "2,00"
       }
     ]
@@ -1186,7 +1199,7 @@
       },
 
       {
-        "product_name": "Gerolsteiner Naturell",
+        "product_name": "Gerolsteiner Medium",
         "product_description": "",
         "product_id": 173,
         "product_price": "2,00"
