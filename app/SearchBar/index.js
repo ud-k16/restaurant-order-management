@@ -9,12 +9,14 @@ import { ScrollView } from "react-native";
 import Fuse from "fuse.js";
 import useOrders from "@/src/hooks/useOrders";
 import EmptyContent from "@/app/EmptyContent";
+import Loader from "@/app/Loader";
 import { Themes } from "@/src/utils/themes";
 import { Link, router } from "expo-router";
 import { Text } from "react-native";
 
 const SearchMenuItems = ({ tableId, hideModal }) => {
   const [inputText, setInputText] = useState("");
+  const [loading, setLoading] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const { menu } = useHomeContext();
   const { addItemToCart, deleteCart } = useOrders();
@@ -34,30 +36,36 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
   }
 
   const handleInputChange = (text) => {
+    setLoading(true);
     setInputText(text);
     debouncedUpdate(text); // Call the debounced function
   };
 
   const updateDebouncedText = (text) => {
-    // You can perform your API call or other delayed logic here
-    const options = {
-      // includeScore: true,
-      threshold: 0.5,
-      keys: [
-        "product_name",
-        "category",
-        "product_description",
-        "product_price",
-      ],
-    };
+    try {
+      // You can perform your API call or other delayed logic here
+      const options = {
+        // includeScore: true,
+        threshold: 0.5,
+        keys: [
+          "product_name",
+          "category",
+          "product_description",
+          "product_price",
+        ],
+      };
 
-    const fuse = new Fuse(products, options);
+      const fuse = new Fuse(products, options);
 
-    // Search for a fuzzy match
-    const result = fuse.search(text);
+      // Search for a fuzzy match
+      const result = fuse.search(text);
 
-    // console.log(result.map((data) => data.item));
-    setSearchResult(result.map((data) => data.item));
+      // console.log(result.map((data) => data.item));
+      setSearchResult(result.map((data) => data.item));
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Create a debounced version of the updateDebouncedText function
@@ -93,7 +101,9 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
           flex: 2,
         }}
       >
-        {searchResult.length > 0 ? (
+        {loading ? (
+          <Loader />
+        ) : searchResult.length > 0 ? (
           searchResult.map((product, index) => {
             return (
               <ItemCard
