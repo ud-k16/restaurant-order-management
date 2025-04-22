@@ -90,7 +90,7 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
       <ScrollView
         contentContainerStyle={styles.itemContainer}
         style={{
-          marginVertical: moderateScale(5),
+          flex: 2,
         }}
       >
         {searchResult.length > 0 ? (
@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     rowGap: moderateScale(15),
     paddingHorizontal: moderateScale(20),
+    paddingVertical: moderateScale(20),
   },
   bottomBar: {
     backgroundColor: Themes.primary,
