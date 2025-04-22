@@ -87,7 +87,12 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
         />
         <EvilIcons name="search" size={24} color="black" />
       </View>
-      <ScrollView contentContainerStyle={styles.itemContainer}>
+      <ScrollView
+        contentContainerStyle={styles.itemContainer}
+        style={{
+          marginVertical: moderateScale(5),
+        }}
+      >
         {searchResult.length > 0 ? (
           searchResult.map((product, index) => {
             return (
