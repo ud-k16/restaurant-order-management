@@ -85,7 +85,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   };
   const generatePrintBytes = () => {
     const billData = {
-      companyName: "Syrtaki",
+      companyName: "Order Management App",
       address: "123 Main St, Anytown",
       phone: "555-1234",
       customer: customer?.customerName ?? "Guest",
