@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     borderRadius: moderateScale(5),
     height: moderateScale(30),
-    backgroundColor: Themes.backDrop,
+    backgroundColor: Themes.primary,
     color: Themes.white,
     width: moderateScale(200),
   },
