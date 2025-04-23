@@ -102,7 +102,14 @@ const SearchMenuItems = ({ tableId, hideModal }) => {
         }}
       >
         {loading ? (
-          <Loader />
+          <View
+            style={{
+              marginTop: moderateScale(10),
+              flex: 1,
+            }}
+          >
+            <Loader />
+          </View>
         ) : searchResult.length > 0 ? (
           searchResult.map((product, index) => {
             return (
