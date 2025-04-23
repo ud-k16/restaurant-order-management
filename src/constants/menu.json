@@ -983,7 +983,6 @@
         "product_id": 145,
         "product_price": "2,00"
       },
-
       {
         "product_name": "Cuba Libre",
         "product_description": "",
@@ -1146,14 +1145,14 @@
       },
 
       {
-        "product_name": "Mischgetränke",
+        "product_name": "Alsterwasser (Bier+Sprite)",
         "product_description": "",
         "product_id": 166,
         "product_price": "2,00"
       },
 
       {
-        "product_name": "Diesel",
+        "product_name": "Diesel (Bier+Cola)",
         "product_description": "",
         "product_id": 167,
         "product_price": "2,00"
@@ -1227,7 +1226,7 @@
       },
 
       {
-        "product_name": "Apfelschorle",
+        "product_name": "Apfelschorle (Apfelsaft+Mineralwasser)",
         "product_description": "",
         "product_id": 177,
         "product_price": "2,00"
