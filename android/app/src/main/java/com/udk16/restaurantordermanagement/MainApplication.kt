@@ -17,6 +17,7 @@ import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
 
 import com.udk16.wifiprinter.NativeWifiModulePackage
+import com.udk16.bluetoothprinter.NativeBluetoothModulePackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -26,6 +27,7 @@ class MainApplication : Application(), ReactApplication {
           override fun getPackages(): List<ReactPackage> {
             val packages = PackageList(this).packages.apply{
                add(NativeWifiModulePackage())
+               add(NativeBluetoothModulePackage())
             }
             // Packages that cannot be autolinked yet can be added manually here, for example:
             // packages.add(new MyReactNativePackage());

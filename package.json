@@ -15,11 +15,11 @@
     "preset": "jest-expo"
   },
   "codegenConfig": {
-    "name": "WifiPrinterSpecs",
+    "name": "PrinterSpecs",
     "type": "modules",
     "jsSrcsDir": "specs",
     "android": {
-      "javaPackageName": "com.wifiprinter"
+      "javaPackageName": "com.printer"
     }
   },
   "dependencies": {

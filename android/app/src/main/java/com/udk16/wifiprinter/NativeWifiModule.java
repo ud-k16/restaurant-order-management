@@ -2,7 +2,7 @@ package com.udk16.wifiprinter;
 
 import android.content.Context;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.wifiprinter.NativeWifiPrinterSpec;
+import com.printer.NativeWifiPrinterSpec;
 import com.facebook.react.bridge.ReadableArray;
 import android.util.Log;
 import java.io.IOException;
