@@ -27,6 +27,9 @@ import android.companion.BluetoothDeviceFilter;
 import android.companion.AssociationRequest;
 import android.os.Bundle;
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;  // Import BluetoothAdapter
+import android.bluetooth.BluetoothDevice; // Import BluetoothDevice
+import java.util.Set; 
 
 class NativeBluetoothModule extends NativeBluetoothConnectionSpec{
 public static final String NAME = "NativeBluetoothConnection";
@@ -86,7 +89,28 @@ private static final int SELECT_DEVICE_REQUEST_CODE = 123;
             Log.e("MainActivity", "Failed to send intent");
         }
     }
-
+@Override
+protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    Toast.makeText(getReactApplicationContext(),
+                resultCode, Toast.LENGTH_SHORT)
+                .show();
+    if (resultCode != Activity.RESULT_OK) {
+         Toast.makeText(getReactApplicationContext(),
+                resultCode, Toast.LENGTH_SHORT)
+                .show();
+        return;
+    }
+    if (requestCode == SELECT_DEVICE_REQUEST_CODE && data != null) {
+        BluetoothDevice deviceToPair =
+data.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE);
+        if (deviceToPair != null) {
+            deviceToPair.createBond();
+            // Continue to interact with the paired device.
+        }
+    } else {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+}
     @Override
     public void onAssociationCreated(AssociationInfo associationInfo) {
         // An association is created.
