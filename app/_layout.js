@@ -6,25 +6,28 @@ import WifiContextProvider from "../src/context/useWifiContext";
 import CustomerContextProvider from "../src/context/useCustomerContext";
 import ErrorContextProvider from "../src/context/useErrorContext";
 import HomeContextProvider from "../src/context/useHomeContext";
+import BlueToothContextProvider from "../src/context/useBluetoothContext";
 
 export default function RootLayout() {
   return (
     <ErrorContextProvider>
-      <WifiContextProvider>
-        <HeaderContextProvider>
-          <OrderContextProvider>
-            <CustomerContextProvider>
-              <HomeContextProvider>
-                <Stack
-                  screenOptions={{
-                    header: () => <AppHeader />,
-                  }}
-                />
-              </HomeContextProvider>
-            </CustomerContextProvider>
-          </OrderContextProvider>
-        </HeaderContextProvider>
-      </WifiContextProvider>
+      <BlueToothContextProvider>
+        <WifiContextProvider>
+          <HeaderContextProvider>
+            <OrderContextProvider>
+              <CustomerContextProvider>
+                <HomeContextProvider>
+                  <Stack
+                    screenOptions={{
+                      header: () => <AppHeader />,
+                    }}
+                  />
+                </HomeContextProvider>
+              </CustomerContextProvider>
+            </OrderContextProvider>
+          </HeaderContextProvider>
+        </WifiContextProvider>
+      </BlueToothContextProvider>
     </ErrorContextProvider>
   );
 }
