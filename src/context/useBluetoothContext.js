@@ -8,9 +8,14 @@ const BluetoothProvider = ({ children }) => {
   const [state, setState] = useState({
     isPrinting: false,
   });
-
+  const getPairedBluetoothDevices = async () => {
+    const result = await NativeBluetoothConnection.getPairedDevices();
+    console.log(result);
+  };
   return (
-    <Bluetooth.Provider value={{ ...state, setState }}>
+    <Bluetooth.Provider
+      value={{ ...state, setState, getPairedBluetoothDevices }}
+    >
       {children}
     </Bluetooth.Provider>
   );

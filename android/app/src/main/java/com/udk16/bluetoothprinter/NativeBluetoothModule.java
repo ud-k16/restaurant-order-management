@@ -44,82 +44,38 @@ private static final int SELECT_DEVICE_REQUEST_CODE = 123;
   public String getName() {
     return NAME;
   }
+  @Override
+public void getPairedDevices(Promise promise){
+     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null) {
+            promise.reject("BLUETOOTH_UNAVAILABLE", "Bluetooth is not supported on this device.");
+            return;
+        }
+
+        if (!bluetoothAdapter.isEnabled()) {
+            promise.reject("BLUETOOTH_DISABLED", "Bluetooth is disabled.");
+            return;
+        }
+
+        Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+        if (pairedDevices.size() > 0) {
+            // Convert the set of BluetoothDevice objects to a JSON array
+            // to pass back to React Native.
+            StringBuilder deviceList = new StringBuilder();
+            for (BluetoothDevice device : pairedDevices) {
+                deviceList.append(device.getName()).append(":").append(device.getAddress()).append(",");
+            }
+             if (deviceList.length() > 0) {
+                deviceList.deleteCharAt(deviceList.length() - 1); // Remove the last comma
+             }
+            promise.resolve(deviceList.toString());
+        } else {
+            promise.resolve(""); // Return empty string if no devices are paired
+        }
+    }
 
    @Override
    public void printEscPos(String macAddress, String uuid, ReadableArray commands, Promise promise){   
-
-     Activity currentActivity = getCurrentActivity(); 
-        BluetoothDeviceFilter deviceFilter = new BluetoothDeviceFilter.Builder()
-        // Match only Bluetooth devices whose name matches the pattern.
-        // .setNamePattern(Pattern.compile("My device"))
-        // Match only Bluetooth devices whose service UUID matches this pattern.
-        // .addServiceUuid(new ParcelUuid(new UUID(0x123abcL, -1L)), null)
-        .build();
-
-
-        AssociationRequest pairingRequest = new AssociationRequest.Builder()
-        // Find only devices that match this request filter.
-        .addDeviceFilter(deviceFilter)
-        // Stop scanning as soon as one device matching the filter is found.
-        // .setSingleDevice(true)
-        .build();
-
-        // Socket socket = null;
-        // OutputStream outputStream = null;
-        CompanionDeviceManager deviceManager =
-        (CompanionDeviceManager) reactContext.getSystemService(Context.COMPANION_DEVICE_SERVICE);
-
-        Executor executor = new Executor() {
-            @Override
-            public void execute(Runnable runnable) {
-                runnable.run();
-            }
-        };
-        deviceManager.associate(pairingRequest,executor, new CompanionDeviceManager.Callback() {
-     
-    // Called when a device is found. Launch the IntentSender so the user can
-    // select the device they want to pair with.
-    @Override
-    public void onDeviceFound(IntentSender chooserLauncher) {
-        try {
-           currentActivity.startIntentSenderForResult(
-                    chooserLauncher, SELECT_DEVICE_REQUEST_CODE, null, 0, 0, 0
-            );
-        } catch (IntentSender.SendIntentException e) {
-            Log.e("MainActivity", "Failed to send intent");
-        }
-    }
-@Override
-protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    Toast.makeText(getReactApplicationContext(),
-                resultCode, Toast.LENGTH_SHORT)
-                .show();
-    if (resultCode != Activity.RESULT_OK) {
-         Toast.makeText(getReactApplicationContext(),
-                resultCode, Toast.LENGTH_SHORT)
-                .show();
-        return;
-    }
-    if (requestCode == SELECT_DEVICE_REQUEST_CODE && data != null) {
-        BluetoothDevice deviceToPair =
-data.getParcelableExtra(CompanionDeviceManager.EXTRA_DEVICE);
-        if (deviceToPair != null) {
-            deviceToPair.createBond();
-            // Continue to interact with the paired device.
-        }
-    } else {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-}
-    @Override
-    public void onAssociationCreated(AssociationInfo associationInfo) {
-        // An association is created.
-    }
-
-    @Override
-    public void onFailure(CharSequence errorMessage) {
-        // To handle the failure.
-    }});
     
     }
 }

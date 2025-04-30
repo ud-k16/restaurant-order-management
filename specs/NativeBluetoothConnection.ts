@@ -15,6 +15,13 @@ export interface Spec extends TurboModule {
     uuid: string,
     commands: number[]
   ): Promise<string>;
+
+  /**
+   * gets the paired bluetooth devices list.
+   *
+   * @return A Promise that resolves with a list of Paired devices or empty string.
+   */
+  getPairedDevices(): Promise<string>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>(

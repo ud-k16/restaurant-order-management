@@ -6,6 +6,7 @@ const HomeContext = createContext();
 const HomeContextProvider = ({ children }) => {
   const [state, setState] = useState({
     isLoading: true,
+    bluetooth: true,
     menu: null,
     menuFileName: "",
     tableCount: null,

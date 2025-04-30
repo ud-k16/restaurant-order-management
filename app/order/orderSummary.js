@@ -14,7 +14,7 @@ import { useHomeContext } from "@/src/context/useHomeContext";
 
 const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { orders } = useOrderContext();
-  const { menu } = useHomeContext();
+  const { menu, bluetooth } = useHomeContext();
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
   const { isPrinting, printInWifiMode, ip, port } = useWifiContext();
