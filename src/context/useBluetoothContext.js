@@ -59,10 +59,26 @@ const BluetoothContextProvider = ({ children }) => {
       }));
     }
   };
-  const printInBluetoothMode = async (receipt) => {
-    console.log("print in bluetooth model");
-
-    const result = await getPairedBluetoothDevices();
+  const printInBluetoothMode = async (device, receipt) => {
+    console.log("print in bluetooth model", device);
+    setState((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
+    try {
+      const deviceListString = await NativeBluetoothConnection.printEscPos(
+        device.mac,
+        "",
+        receipt
+      );
+    } catch (error) {
+      console.log("Bluetooth error", error);
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
+    }
   };
   return (
     <BluetoothContext.Provider

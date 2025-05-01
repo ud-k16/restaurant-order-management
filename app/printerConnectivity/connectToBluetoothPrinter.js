@@ -6,11 +6,14 @@ import { useEffect } from "react";
 import { Text } from "react-native";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
+import { useGlobalSearchParams } from "expo-router";
 const BluetoothPrintScreen = () => {
+  const { tableId, receipt } = useGlobalSearchParams();
   const {
     isLoading,
     pairedDevices = [],
     getPairedBluetoothDevices,
+    printInBluetoothMode,
   } = useBluetoothContext();
 
   useEffect(() => {
@@ -25,7 +28,12 @@ const BluetoothPrintScreen = () => {
           <View>
             {pairedDevices?.map((device, index) => {
               return (
-                <TouchableOpacity key={index}>
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    printInBluetoothMode(device, receipt);
+                  }}
+                >
                   <Text style={styles.deviceCard}>{device.deviceName}</Text>
                 </TouchableOpacity>
               );
