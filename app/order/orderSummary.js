@@ -11,6 +11,7 @@ import useOrders from "@/src/hooks/useOrders";
 import { router } from "expo-router";
 import { Buffer } from "buffer";
 import { useHomeContext } from "@/src/context/useHomeContext";
+import { useBluetoothContext } from "@/src/context/useBluetoothContext";
 
 const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { orders } = useOrderContext();
@@ -18,6 +19,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
   const { isPrinting, printInWifiMode, ip, port } = useWifiContext();
+  const { printInBluetoothMode } = useBluetoothContext();
   const {
     customerModelVisible,
     validationError,
@@ -246,7 +248,22 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
           >
             Delete Order
           </Text>
-          {!!ip && !!port ? (
+          {bluetooth ? (
+            <Text
+              style={styles.menuTextStyle}
+              onPress={
+                isPrinting
+                  ? null
+                  : async () => {
+                      const receipt = generatePrintBytes();
+                      const result = await printInBluetoothMode(receipt);
+                      result && deleteOrder(tableId);
+                    }
+              }
+            >
+              Print Receipt
+            </Text>
+          ) : !!ip && !!port ? (
             <Text
               style={styles.menuTextStyle}
               onPress={
