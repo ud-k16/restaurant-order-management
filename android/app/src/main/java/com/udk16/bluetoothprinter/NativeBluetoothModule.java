@@ -119,13 +119,10 @@ public void getPairedDevices(Promise promise){
             bluetoothSocket.connect();
             connectedDevice = device;
             outputStream = bluetoothSocket.getOutputStream();
-            // promise.resolve(device.getName());
             if (outputStream == null) {
             promise.reject("NotConnected", "Not connected to a Bluetooth device.");
             return;
             }
-
-       
             // byte[] data = android.util.Base64.decode(base64EncodedData, android.util.Base64.DEFAULT);
             // outputStream.write(data);
             outputStream.write(printData);

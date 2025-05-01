@@ -31,7 +31,7 @@ const Configure = () => {
     menu,
     setState: setHomeState,
   } = useHomeContext();
-  const products = menu.map((data) => data.dishes).flat();
+  const products = menu?.map((data) => data.dishes).flat();
   const { resetOrder } = useOrders();
   const { setItem: setMenu } = useAsyncStorage("menu");
   const { setItem: setTableCount } = useAsyncStorage("tableCount");
