@@ -66,13 +66,17 @@ const BluetoothContextProvider = ({ children }) => {
       isLoading: true,
     }));
     try {
-      const deviceListString = await NativeBluetoothConnection.printEscPos(
+      const isPrinted = await NativeBluetoothConnection.printEscPos(
         device.mac,
         "",
         receipt
       );
+      if (isPrinted) {
+        ToastAndroid.show("Receipt printed", ToastAndroid.LONG);
+      }
     } catch (error) {
       console.log("Bluetooth error", error);
+      ToastAndroid.show(error.message, ToastAndroid.LONG);
     } finally {
       setState((prev) => ({
         ...prev,
