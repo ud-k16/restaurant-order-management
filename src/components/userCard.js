@@ -75,7 +75,7 @@ const UserCard = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Themes.backDrop,
+    // backgroundColor: Themes.black,
     justifyContent: "center",
   },
   errorText: {
@@ -88,12 +88,16 @@ const styles = StyleSheet.create({
     width: "80%",
     alignSelf: "center",
     backgroundColor: Themes.white,
+    borderRadius: moderateScale(5),
+    borderWidth: moderateScale(2),
+
     // rowGap: moderateScale(30),
   },
   textInputStyle: {
     borderBottomWidth: moderateScale(2),
     width: "90%",
     alignSelf: "center",
+    marginVertical: moderateScale(10),
   },
   displayStack1: {
     flexDirection: "row",
