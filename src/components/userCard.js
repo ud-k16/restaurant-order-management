@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: moderateScale(2),
     width: "90%",
     alignSelf: "center",
-    marginVertical: moderateScale(10),
+    marginTop: moderateScale(10),
   },
   displayStack1: {
     flexDirection: "row",
