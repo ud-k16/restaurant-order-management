@@ -261,6 +261,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
                           "/printerConnectivity/connectToBluetoothPrinter",
                         params: { tableId, receipt: JSON.stringify(receipt) },
                       });
+                      hideModal();
                     }
               }
             >
