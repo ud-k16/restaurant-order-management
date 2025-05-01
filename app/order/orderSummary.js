@@ -256,8 +256,11 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
                   ? null
                   : async () => {
                       const receipt = generatePrintBytes();
-                      const result = await printInBluetoothMode(receipt);
-                      result && deleteOrder(tableId);
+                      router.navigate({
+                        pathname:
+                          "/printerConnectivity/connectToBluetoothPrinter",
+                        params: { tableId, receipt },
+                      });
                     }
               }
             >

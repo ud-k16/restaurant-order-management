@@ -7,15 +7,56 @@ const BluetoothContext = createContext();
 const BluetoothContextProvider = ({ children }) => {
   const [state, setState] = useState({
     isPrinting: false,
+    isLoading: true,
+    pairedDevices: [],
   });
-  const getPairedBluetoothDevices = async () => {
-    console.log("getPairedBluetoothDevices");
+  const splitNameAndMAC = (str, separator) => {
+    const index = str.indexOf(separator);
+    if (index === -1) {
+      return {};
+    }
+    return {
+      deviceName: str.slice(0, index),
+      mac: str.slice(index + separator.length),
+    };
+  };
+  const parsePairedDevices = (devicesList) => {
     try {
-      const result = await NativeBluetoothConnection.getPairedDevices();
-      console.log("result", result);
-      return result;
+      let devices = [],
+        tempStore;
+      if (devicesList) {
+        tempStore = devicesList.split(",");
+        for (const device of tempStore) {
+          devices.push(splitNameAndMAC(device, ":"));
+        }
+      }
+      return devices;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getPairedBluetoothDevices = async () => {
+    // console.log("getPairedBluetoothDevices function invoked");
+    setState((prev) => ({
+      ...prev,
+      isLoading: true,
+    }));
+    try {
+      const deviceListString =
+        await NativeBluetoothConnection.getPairedDevices();
+      const devicesResult = parsePairedDevices(deviceListString);
+      setState((prev) => ({
+        ...prev,
+        pairedDevices: devicesResult,
+      }));
+      // return result;
     } catch (error) {
       console.log("Bluetooth error", error);
+    } finally {
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
     }
   };
   const printInBluetoothMode = async (receipt) => {
