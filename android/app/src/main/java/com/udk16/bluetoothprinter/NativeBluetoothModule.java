@@ -7,29 +7,39 @@ import com.facebook.react.bridge.ReadableArray;
 import android.util.Log;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
-import java.net.Socket;
+// import java.lang.reflect.Method;
+// import java.net.InetAddress;
+// import java.net.InetSocketAddress;
+// import java.net.UnknownHostException;
+// import java.net.Socket;
 import android.widget.Toast;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.Callback;
+// import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableMap;
-import android.companion.CompanionDeviceManager;
-import java.util.concurrent.Executor;
+// import android.companion.CompanionDeviceManager;
+// import java.util.concurrent.Executor;
 import java.util.Map;
 import java.util.HashMap;
-import android.content.IntentSender;
-import android.companion.AssociationInfo;
-import java.lang.CharSequence;
-import android.companion.BluetoothDeviceFilter;
-import android.companion.AssociationRequest;
+// import android.content.IntentSender;
+import androidx.core.app.ActivityCompat;
+// import android.companion.AssociationInfo;
+// import java.lang.CharSequence;
+// import android.companion.BluetoothDeviceFilter;
+// import android.companion.AssociationRequest;
 import android.os.Bundle;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;  // Import BluetoothAdapter
 import android.bluetooth.BluetoothDevice; // Import BluetoothDevice
+import android.bluetooth.BluetoothSocket;
+// import android.content.BroadcastReceiver;
 import java.util.Set; 
+import java.util.UUID;
+import android.Manifest;
+import android.os.Build;
+import android.content.Intent;
+// import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 
 class NativeBluetoothModule extends NativeBluetoothConnectionSpec{
 public static final String NAME = "NativeBluetoothConnection";
@@ -106,30 +116,24 @@ public void getPairedDevices(Promise promise){
                 }
             }
             bluetoothSocket = device.createRfcommSocketToServiceRecord(PRINTER_UUID);
-            // bluetoothAdapter.cancelDiscovery(); // Stop scanning to conserve resources
-
             bluetoothSocket.connect();
             connectedDevice = device;
             outputStream = bluetoothSocket.getOutputStream();
             // promise.resolve(device.getName());
-            // sendEvent("onBluetoothConnected", null);
             if (outputStream == null) {
             promise.reject("NotConnected", "Not connected to a Bluetooth device.");
             return;
-        }
+            }
 
-        try {
+       
             // byte[] data = android.util.Base64.decode(base64EncodedData, android.util.Base64.DEFAULT);
             // outputStream.write(data);
             outputStream.write(printData);
             promise.resolve(true);
-        } catch (IOException e) {
-            Log.e(TAG, "Error writing to device", e);
-            promise.reject("WriteFailed", "Failed to write data to the device: " + e.getMessage());
             closeConnection();
         }
 
-        } catch (IOException e) {
+         catch (IOException e) {
             Log.e(TAG, "Error connecting to device", e);
             promise.reject("ConnectionFailed", "Failed to connect to the device: " + e.getMessage());
             closeConnection();
