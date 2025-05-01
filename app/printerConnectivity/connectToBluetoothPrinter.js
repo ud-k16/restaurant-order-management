@@ -1,9 +1,11 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useBluetoothContext } from "@/src/context/useBluetoothContext";
 import Loader from "@/app/Loader";
 import EmptyContent from "@/app/EmptyContent";
 import { useEffect } from "react";
 import { Text } from "react-native";
+import moderateScale from "@/src/utils/responsiveScale";
+import { Themes } from "@/src/utils/themes";
 const BluetoothPrintScreen = () => {
   const {
     isLoading,
@@ -17,11 +19,16 @@ const BluetoothPrintScreen = () => {
 
   const ListDevices = () => {
     return (
-      <View>
+      <View style={styles.devicesContainer}>
+        <Text style={styles.headingText}>Select Printer</Text>
         {pairedDevices.length > 0 ? (
           <View>
             {pairedDevices?.map((device, index) => {
-              return <Text key={index}>{device.deviceName}</Text>;
+              return (
+                <TouchableOpacity key={index}>
+                  <Text style={styles.deviceCard}>{device.deviceName}</Text>
+                </TouchableOpacity>
+              );
             })}
           </View>
         ) : (
@@ -39,6 +46,21 @@ const BluetoothPrintScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  devicesContainer: {
+    paddingHorizontal: moderateScale(15),
+  },
+  headingText: {
+    fontSize: moderateScale(20),
+    color: Themes.primary,
+    // marginBottom: moderateScale(10),
+    textAlign: "center",
+  },
+  deviceCard: {
+    height: moderateScale(50),
+    textAlignVertical: "center",
+    fontSize: moderateScale(16),
+    borderBottomWidth: moderateScale(1),
   },
 });
 export default BluetoothPrintScreen;
