@@ -31,7 +31,8 @@ const BluetoothPrintScreen = () => {
                 <TouchableOpacity
                   key={index}
                   onPress={() => {
-                    printInBluetoothMode(device, receipt);
+                    const parsedReceipt = JSON.parse(receipt);
+                    printInBluetoothMode(device, parsedReceipt);
                   }}
                 >
                   <Text style={styles.deviceCard}>{device.deviceName}</Text>

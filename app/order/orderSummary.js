@@ -259,7 +259,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
                       router.navigate({
                         pathname:
                           "/printerConnectivity/connectToBluetoothPrinter",
-                        params: { tableId, receipt },
+                        params: { tableId, receipt: JSON.stringify(receipt) },
                       });
                     }
               }

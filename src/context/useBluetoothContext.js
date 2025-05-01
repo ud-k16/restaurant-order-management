@@ -60,7 +60,7 @@ const BluetoothContextProvider = ({ children }) => {
     }
   };
   const printInBluetoothMode = async (device, receipt) => {
-    console.log("print in bluetooth model", device);
+    console.log("print in bluetooth model", device, receipt);
     setState((prev) => ({
       ...prev,
       isLoading: true,
