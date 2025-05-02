@@ -58,33 +58,6 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const customer = customersData?.get(tableId);
   // console.log(customer?.customerName, customer?.serverName, ">>>>>>>>>>");
 
-  // receipt
-  const generateReceipt = () => {
-    let receiptInfo = "",
-      itemsList = "",
-      totalInfo = "";
-    receiptInfo =
-      "RECEIPT\n" +
-      `Date: ${new Date().toDateString()}\n` +
-      `Customer: ${customer?.customerName}\n` +
-      `Server: ${customer?.serverName}\n` +
-      `Time: ${new Date().toLocaleTimeString()}\n` +
-      `Table: ${tableId}\n` +
-      `----------------------------------------------\n` +
-      `Qty\tItem Description\t\t\t\t\n` +
-      `----------------------------------------------\n`;
-    for (const product of orderOfTheTable) {
-      itemsList =
-        itemsList + `${product.quantity}\t${product.productName}\t\t\t\t\n`;
-    }
-    totalInfo =
-      `----------------------------------------------\n` +
-      `Total\t\t\t\t\t\t\t\t\t\t\t\t${subTotal}\n` +
-      `----------------------------------------------\n`;
-    console.log(receiptInfo + itemsList);
-
-    return receiptInfo + itemsList;
-  };
   const generatePrintBytes = () => {
     const billData = {
       companyName: "Order Management App",
