@@ -16,16 +16,33 @@ const OrderList = () => {
         const hideModal = () => setModalVisible(false);
         const toggleVisibility = () => setModalVisible((prev) => !prev);
         return (
-          <ScrollView key={index}>
-            <Pressable style={styles.orderCard} onPress={toggleVisibility}>
-              <Text style={styles.orderHeadingText}>{data[0]}</Text>
-              {modalVisible ? (
-                <MaterialIcons name="arrow-drop-up" size={24} color="black" />
-              ) : (
-                <MaterialIcons name="arrow-drop-down" size={24} color="black" />
+          <View key={index}>
+            <ScrollView>
+              <Pressable style={styles.orderCard} onPress={toggleVisibility}>
+                <Text style={styles.orderHeadingText}>{data[0]}</Text>
+                {modalVisible ? (
+                  <MaterialIcons name="arrow-drop-up" size={24} color="black" />
+                ) : (
+                  <MaterialIcons
+                    name="arrow-drop-down"
+                    size={24}
+                    color="black"
+                  />
+                )}
+              </Pressable>
+              {modalVisible && (
+                <View>
+                  {data[1].map((product, index) => {
+                    return (
+                      <View key={index}>
+                        <Text>{product.productName}</Text>
+                      </View>
+                    );
+                  })}
+                </View>
               )}
-            </Pressable>
-          </ScrollView>
+            </ScrollView>
+          </View>
         );
       })}
     </View>
