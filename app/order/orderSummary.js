@@ -13,7 +13,11 @@ import { Buffer } from "buffer";
 import { useHomeContext } from "@/src/context/useHomeContext";
 import { useBluetoothContext } from "@/src/context/useBluetoothContext";
 
-const OrderSummary = ({ tableId, hideModal = () => {} }) => {
+const OrderSummary = ({
+  tableId,
+  hideModal = () => {},
+  hideDelete = false,
+}) => {
   const { orders } = useOrderContext();
   const { menu, bluetooth } = useHomeContext();
   const { customersData } = useCustomerContext();
@@ -247,14 +251,16 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       )}
       {orderOfTheTable && (
         <View style={styles.bottomAction}>
-          <Text
-            onPress={() => {
-              deleteOrder(tableId);
-            }}
-            style={styles.menuTextStyle}
-          >
-            Delete Order
-          </Text>
+          {!hideDelete && (
+            <Text
+              onPress={() => {
+                deleteOrder(tableId);
+              }}
+              style={styles.menuTextStyle}
+            >
+              Delete Order
+            </Text>
+          )}
           {bluetooth ? (
             <Text
               style={styles.menuTextStyle}

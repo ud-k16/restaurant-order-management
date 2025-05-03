@@ -37,7 +37,9 @@ const OrderList = () => {
                     />
                   )}
                 </Pressable>
-                {modalVisible && <OrderSummary tableId={data[0]} />}
+                {modalVisible && (
+                  <OrderSummary tableId={data[0]} hideDelete={true} />
+                )}
               </View>
             );
           })}
