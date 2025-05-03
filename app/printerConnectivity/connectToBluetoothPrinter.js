@@ -7,7 +7,7 @@ import { Text } from "react-native";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
 import useOrders from "@/src/hooks/useOrders";
-import { useGlobalSearchParams } from "expo-router";
+import { router, useGlobalSearchParams } from "expo-router";
 const BluetoothPrintScreen = () => {
   const { tableId, receipt } = useGlobalSearchParams();
   const {
@@ -40,6 +40,7 @@ const BluetoothPrintScreen = () => {
                   );
                   if (result) {
                     deleteOrder(tableId);
+                    router.back();
                   }
                 }}
               >
