@@ -11,14 +11,14 @@ const OrderList = () => {
 
   return (
     <View style={styles.container}>
-      {orderAvailable.map((data, index) => {
-        const [modalVisible, setModalVisible] = useState(false);
-        const showModal = () => setModalVisible(true);
-        const hideModal = () => setModalVisible(false);
-        const toggleVisibility = () => setModalVisible((prev) => !prev);
-        return (
-          <View key={index}>
-            <ScrollView>
+      <ScrollView>
+        {orderAvailable.map((data, index) => {
+          const [modalVisible, setModalVisible] = useState(false);
+          const showModal = () => setModalVisible(true);
+          const hideModal = () => setModalVisible(false);
+          const toggleVisibility = () => setModalVisible((prev) => !prev);
+          return (
+            <View key={index}>
               <Pressable style={styles.orderCard} onPress={toggleVisibility}>
                 <Text style={styles.orderHeadingText}>{data[0]}</Text>
                 {modalVisible ? (
@@ -43,10 +43,11 @@ const OrderList = () => {
                 // </View>
                 <OrderSummary tableId={data[0]} />
               )}
-            </ScrollView>
-          </View>
-        );
-      })}
+              {/* </ScrollView> */}
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 };
