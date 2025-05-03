@@ -51,6 +51,7 @@ const OrderList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: moderateScale(10),
   },
   orderCard: {
     height: moderateScale(50),
