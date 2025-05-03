@@ -1,6 +1,7 @@
 import { View, StyleSheet, ScrollView, Pressable } from "react-native";
 import { useOrderContext } from "@/src/context/useOrderContext";
 import moderateScale from "@/src/utils/responsiveScale";
+import OrderSummary from "@/app/order/orderSummary";
 import { Text } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useState } from "react";
@@ -31,15 +32,16 @@ const OrderList = () => {
                 )}
               </Pressable>
               {modalVisible && (
-                <View>
-                  {data[1].map((product, index) => {
-                    return (
-                      <View key={index}>
-                        <Text>{product.productName}</Text>
-                      </View>
-                    );
-                  })}
-                </View>
+                // <View>
+                //   {data[1].map((product, index) => {
+                //     return (
+                //       <View key={index}>
+                //         <Text>{product.productName}</Text>
+                //       </View>
+                //     );
+                //   })}
+                // </View>
+                <OrderSummary tableId={data[0]} />
               )}
             </ScrollView>
           </View>
