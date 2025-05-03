@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Text } from "react-native";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
+import useOrders from "@/src/hooks/useOrders";
 import { useGlobalSearchParams } from "expo-router";
 const BluetoothPrintScreen = () => {
   const { tableId, receipt } = useGlobalSearchParams();
@@ -15,6 +16,7 @@ const BluetoothPrintScreen = () => {
     getPairedBluetoothDevices,
     printInBluetoothMode,
   } = useBluetoothContext();
+  const { deleteOrder } = useOrders();
 
   useEffect(() => {
     getPairedBluetoothDevices();
@@ -30,9 +32,15 @@ const BluetoothPrintScreen = () => {
             return (
               <TouchableOpacity
                 key={index}
-                onPress={() => {
+                onPress={async () => {
                   const parsedReceipt = JSON.parse(receipt);
-                  printInBluetoothMode(device, parsedReceipt);
+                  const result = await printInBluetoothMode(
+                    device,
+                    parsedReceipt
+                  );
+                  if (result) {
+                    deleteOrder(tableId);
+                  }
                 }}
               >
                 <Text style={styles.deviceCard}>{device.deviceName}</Text>

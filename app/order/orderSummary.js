@@ -19,7 +19,7 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
   const { customersData } = useCustomerContext();
   const { deleteOrder } = useOrders();
   const { isPrinting, printInWifiMode, ip, port } = useWifiContext();
-  const { printInBluetoothMode } = useBluetoothContext();
+
   const {
     customerModelVisible,
     validationError,

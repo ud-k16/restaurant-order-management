@@ -74,6 +74,7 @@ const BluetoothContextProvider = ({ children }) => {
       );
       if (isPrinted) {
         ToastAndroid.show("Receipt printed", ToastAndroid.LONG);
+        return true;
       }
     } catch (error) {
       console.log("Bluetooth error", error);
