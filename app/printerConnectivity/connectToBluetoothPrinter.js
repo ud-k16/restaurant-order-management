@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useBluetoothContext } from "@/src/context/useBluetoothContext";
 import Loader from "@/app/Loader";
 import EmptyContent from "@/app/EmptyContent";
@@ -48,7 +48,9 @@ const BluetoothPrintScreen = () => {
       {isLoading ? (
         <Loader />
       ) : pairedDevices.length > 0 ? (
-        <ListDevices />
+        <ScrollView>
+          <ListDevices />
+        </ScrollView>
       ) : (
         <EmptyContent content={"No Paired Devices"} />
       )}
