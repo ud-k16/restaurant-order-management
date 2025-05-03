@@ -5,25 +5,43 @@ import EmptyContent from "@/app/EmptyContent";
 import OrderSummary from "@/app/order/orderSummary";
 import { Text } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useState } from "react";
+import { useState, useCallback } from "react"; // Import useCallback
+
 const OrderList = () => {
   const { orders } = useOrderContext();
-  const orderAvailable = Array.from(orders.entries());
+  const orderAvailable = Array.from(orders?.entries());
+  const [visibleModals, setVisibleModals] = useState({}); // State to track visibility
+
+  const toggleVisibility = useCallback((tableId) => {
+    setVisibleModals((prev) => ({
+      ...prev,
+      [tableId]: !prev[tableId],
+    }));
+  }, []);
+
+  const hideModal = useCallback((tableId) => {
+    setVisibleModals((prev) => ({
+      ...prev,
+      [tableId]: false,
+    }));
+  }, []);
 
   return (
     <View style={styles.container}>
-      {orderAvailable.length > 0 ? (
+      {orderAvailable?.length > 0 ? (
         <ScrollView>
           {orderAvailable.map((data, index) => {
-            const [modalVisible, setModalVisible] = useState(false);
-            const showModal = () => setModalVisible(true);
-            const hideModal = () => setModalVisible(false);
-            const toggleVisibility = () => setModalVisible((prev) => !prev);
+            const tableId = data[0];
+            const isModalVisible = visibleModals[tableId] || false;
+
             return (
               <View key={index}>
-                <Pressable style={styles.orderCard} onPress={toggleVisibility}>
-                  <Text style={styles.orderHeadingText}>{data[0]}</Text>
-                  {modalVisible ? (
+                <Pressable
+                  style={styles.orderCard}
+                  onPress={() => toggleVisibility(tableId)}
+                >
+                  <Text style={styles.orderHeadingText}>{tableId}</Text>
+                  {isModalVisible ? (
                     <MaterialIcons
                       name="arrow-drop-up"
                       size={24}
@@ -37,8 +55,12 @@ const OrderList = () => {
                     />
                   )}
                 </Pressable>
-                {modalVisible && (
-                  <OrderSummary tableId={data[0]} hideDelete={true} />
+                {isModalVisible && (
+                  <OrderSummary
+                    tableId={tableId}
+                    hideDelete={false}
+                    hideModal={() => hideModal(tableId)}
+                  />
                 )}
               </View>
             );
@@ -50,6 +72,7 @@ const OrderList = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -63,9 +86,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   orderHeadingText: {
-    // textAlignVertical: "center",
     fontSize: moderateScale(16),
-    // textAlign: "center",
   },
 });
+
 export default OrderList;
