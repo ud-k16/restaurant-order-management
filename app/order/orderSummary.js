@@ -70,67 +70,101 @@ const OrderSummary = ({ tableId, hideModal = () => {} }) => {
       tableId,
       dateTime: new Date().toLocaleString(),
     };
-    // console.log(`${subTotal.toFixed(2).replace(".", ",")}`, "<<<<<<<<<<<<<<");
 
-    // variable to store escpos code
     let escposString = "";
 
     // Initialize printer
     escposString += "\x1B\x40";
 
-    // Company Info (Centered)
-    escposString += "\x1B\x61\x01" + billData.companyName + "\n";
+    // Company Info (Centered, Larger Font for Name)
+    escposString += "\x1B\x61\x01"; // Center alignment
+    escposString += "\x1B\x21\x18"; // Double height and width font
+    escposString += billData.companyName + "\n";
+    escposString += "\x1B\x21\x00"; // Reset font size
     // escposString += billData.address + "\n";
     // escposString += "Tel: " + billData.phone + "\n";
     escposString += "Table: " + billData.tableId + "\n";
     escposString += "Customer: " + billData.customer + "\n";
     escposString += "Server: " + billData.server + "\n";
     escposString += "\x1B\x61\x00"; // Left alignment
-    escposString += "--------------------------------\n";
+    escposString +=
+      "------------------------------------------------------------------------------\n"; // 82 hyphens
 
-    // Items
+    // Items (Adjusted for 80mm paper)
     billData.items.forEach((item) => {
       const productPrice = products.find(
         (value) => value.product_id == item.productId
       )?.product_price;
       const formattedPrice = parseFloat(
-        item.quantity * Number(productPrice.replace(",", "."))
+        item.quantity * Number(productPrice?.replace(",", ".") || "0") // Handle potential undefined
       )
         .toFixed(2)
         .replace(".", ",");
-      const line =
-        item.quantity +
-        "\t" +
-        item.productName +
-        " ".repeat(
-          Math.max(0, 32 - item.productName.length - formattedPrice.length)
-        ) +
-        formattedPrice +
-        "\n";
-      escposString += line;
+
+      // Adjust product name length and spacing
+      const quantityStr = item.quantity.toString().padEnd(4); // Quantity with spacing
+      const priceStr = formattedPrice.padStart(10); // Price aligned to the right
+
+      let productName = item.productName;
+      const maxProductNameLength = 80 - 4 - 10 - 6; // 80 (total) - qty - space - price - space
+
+      if (productName.length > maxProductNameLength) {
+        escposString +=
+          quantityStr +
+          " " +
+          productName.substring(0, maxProductNameLength) +
+          " ... " +
+          priceStr +
+          "\n";
+        // If needed, break down the product name into multiple lines
+        let remainingName = productName.substring(maxProductNameLength);
+        while (remainingName.length > maxProductNameLength) {
+          escposString +=
+            "     " +
+            remainingName.substring(0, maxProductNameLength) +
+            " ... " +
+            "".padStart(10) +
+            "\n";
+          remainingName = remainingName.substring(maxProductNameLength);
+        }
+        if (remainingName.length > 0) {
+          escposString +=
+            "     " +
+            remainingName.padEnd(maxProductNameLength + 5) +
+            priceStr +
+            "\n";
+        }
+      } else {
+        const padding = " ".repeat(
+          Math.max(0, maxProductNameLength - productName.length)
+        );
+        escposString +=
+          quantityStr + " " + productName + padding + " " + priceStr + "\n";
+      }
     });
 
     // Total
-    escposString += "--------------------------------\n";
     escposString +=
-      "TOTAL (EURO) " +
-      " ".repeat(Math.max(0, 24 - billData.total.length)) +
-      billData.total +
-      "\n";
-    escposString += "--------------------------------\n";
+      "------------------------------------------------------------------------------\n";
+    escposString += "\x1B\x45\x01"; // Bold on
+    escposString +=
+      "TOTAL (EURO)".padEnd(60) + billData.total.padStart(22) + "\n";
+    escposString += "\x1B\x45\x00"; // Bold off
+    escposString +=
+      "------------------------------------------------------------------------------\n";
 
     // Date and Time (Right Aligned)
     escposString += "\x1B\x61\x02" + billData.dateTime + "\n";
     escposString += "\x1B\x61\x00"; // Left alignment
     escposString += "\n\n\n";
 
-    // Cut paper
-    escposString += "\x1D\x56\x41\x10";
+    // Cut paper (Adjusted for full cut)
+    escposString += "\x1D\x56\x41\x40"; // Full cut
 
-    // Convert the ESC/POS string to a Buffer (which can be treated as a byte array)
-    const buffer = Buffer.from(escposString, "latin1"); // 'latin1' encoding for ESC/POS
+    // Convert the ESC/POS string to a Buffer
+    const buffer = Buffer.from(escposString, "latin1");
 
-    // Convert the Buffer to a regular number array (for easier passing to Native Module)
+    // Convert the Buffer to a regular number array
     const byteArray = Array.from(buffer);
 
     return byteArray;
