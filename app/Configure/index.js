@@ -145,12 +145,19 @@ const Configure = () => {
           <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
             Select Printer Mode
           </Text>
-          <CustomSwitch
-            value={bluetooth}
-            onValueChange={(value) =>
-              setHomeState((prev) => ({ ...prev, bluetooth: value }))
-            }
-          />
+          <View style={{ flexDirection: "row" }}>
+            <Text style={{ flex: 0.7 }}>
+              {bluetooth
+                ? "Bluetooth Mode On, disabling it will enable wifi mode"
+                : "Wifi Mode On, enabling it will make Bluetooth mode"}
+            </Text>
+            <CustomSwitch
+              value={bluetooth}
+              onValueChange={(value) =>
+                setHomeState((prev) => ({ ...prev, bluetooth: value }))
+              }
+            />
+          </View>
           {modalVisible && (
             <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
               <View style={styles.modalHeader}>
