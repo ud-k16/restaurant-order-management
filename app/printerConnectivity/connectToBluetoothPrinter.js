@@ -1,8 +1,15 @@
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  ToastAndroid,
+  RefreshControl,
+} from "react-native";
 import { useBluetoothContext } from "@/src/context/useBluetoothContext";
 import Loader from "@/app/Loader";
 import EmptyContent from "@/app/EmptyContent";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Text } from "react-native";
 import moderateScale from "@/src/utils/responsiveScale";
 import { Themes } from "@/src/utils/themes";
@@ -17,7 +24,17 @@ const BluetoothPrintScreen = () => {
     printInBluetoothMode,
   } = useBluetoothContext();
   const { deleteOrder } = useOrders();
-
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await getPairedBluetoothDevices();
+    } catch (error) {
+      ToastAndroid.show(error.toString(), ToastAndroid.LONG);
+    } finally {
+      setRefreshing(false);
+    }
+  }, []);
   useEffect(() => {
     getPairedBluetoothDevices();
   }, []);
@@ -54,14 +71,20 @@ const BluetoothPrintScreen = () => {
   };
   return (
     <View style={styles.container}>
-      {isLoading ? (
+      {isLoading && !refreshing ? (
         <Loader />
-      ) : pairedDevices.length > 0 ? (
-        <ScrollView>
-          <ListDevices />
-        </ScrollView>
       ) : (
-        <EmptyContent content={"No Paired Devices"} />
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          {pairedDevices.length > 0 ? (
+            <ListDevices />
+          ) : (
+            <EmptyContent content={"No Paired Devices"} />
+          )}
+        </ScrollView>
       )}
     </View>
   );
