@@ -24,11 +24,13 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Dropdown from "../../src/components/DropDown";
 import ProductEdit from "../edit/ProductEdit";
 import { AntDesign } from "@expo/vector-icons";
+import CustomSwitch from "@/src/components/customSwitch";
 const Configure = () => {
   const {
     tableCount,
     menuFileName,
     menu,
+    bluetooth,
     setState: setHomeState,
   } = useHomeContext();
   const products = menu?.map((data) => data.dishes).flat();
@@ -140,6 +142,15 @@ const Configure = () => {
               Upload Menu
             </Text>
           </View>
+          <Text style={{ fontWeight: 600, fontSize: moderateScale(20) }}>
+            Select Printer Mode
+          </Text>
+          <CustomSwitch
+            value={bluetooth}
+            onValueChange={(value) =>
+              setHomeState((prev) => ({ ...prev, bluetooth: value }))
+            }
+          />
           {modalVisible && (
             <Modal style={styles.modalConatainer} onRequestClose={hideModal}>
               <View style={styles.modalHeader}>
