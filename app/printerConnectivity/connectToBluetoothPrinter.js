@@ -24,31 +24,34 @@ const BluetoothPrintScreen = () => {
     return (
       <View style={styles.devicesContainer}>
         <Text style={styles.headingText}>Select Printer</Text>
-        {pairedDevices.length > 0 ? (
-          <View>
-            {pairedDevices?.map((device, index) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => {
-                    const parsedReceipt = JSON.parse(receipt);
-                    printInBluetoothMode(device, parsedReceipt);
-                  }}
-                >
-                  <Text style={styles.deviceCard}>{device.deviceName}</Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        ) : (
-          <EmptyContent />
-        )}
+
+        <View>
+          {pairedDevices?.map((device, index) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  const parsedReceipt = JSON.parse(receipt);
+                  printInBluetoothMode(device, parsedReceipt);
+                }}
+              >
+                <Text style={styles.deviceCard}>{device.deviceName}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </View>
     );
   };
   return (
     <View style={styles.container}>
-      {isLoading ? <Loader /> : <ListDevices />}
+      {isLoading ? (
+        <Loader />
+      ) : pairedDevices.length > 0 ? (
+        <ListDevices />
+      ) : (
+        <EmptyContent content={"No Paired Devices"} />
+      )}
     </View>
   );
 };

@@ -52,6 +52,7 @@ const BluetoothContextProvider = ({ children }) => {
       // return result;
     } catch (error) {
       console.log("Bluetooth error", error);
+      ToastAndroid.show(error.message, ToastAndroid.LONG);
     } finally {
       setState((prev) => ({
         ...prev,
